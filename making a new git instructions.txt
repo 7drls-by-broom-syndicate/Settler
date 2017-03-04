@@ -1,0 +1,9 @@
+i made a new git project on git website called settler using gitignore profile unity
+i made a new folder on c called settler
+i used git desktop app to clone the new git project into the c drive settler folder
+i used winmerge to compare my old gitignore from skater with my new one from settler and put in things i thought should be there
+i went into unity loaded skater and exported the assets
+i temp renamed the settler folder inside the settler folder (sic) something else
+i made a new unity project called settler and selected the settler folder (top one) to put it in. unity made a settler folder inside it
+i copied the .gitignore and stuff from the renamed settler directory into the one unity made
+i manually copied projectsettings/inputmanager.asset from skater to settler

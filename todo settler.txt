@@ -1,0 +1,55 @@
+notes for 7drl 2017 civrl
+
+
+(ice)
+tundra (boreal forest)
+taiga
+	mink/ermine,
+temperate rainforest
+temperate seasonal forest
+woodland/scrubland
+temperate grassland/cold desert
+tropical rainforest
+	black pepper, vanilla, tropical plants->medicine
+savanna
+subtropical forest
+
+
+project with old civ map gen:
+C:\Users\graspee\Documents\Visual Studio 2013\Projects\bepangod
+
+stage 1
+you generate a map. the map has tiles on for things like mountains, lakes, rivers,
+grass, hills.
+every tile has 3 stats: gold, production and food. as city grows, cover more tiles. each turn gold from tiles goes to you, production shared between producing elements of city, food helps growth of city border
+
+stage 2
+you place resources. these are mostly (totally?) determined by the type of tile.
+some tile types always have that resource, eg forest has wood, mountain has stone, others
+are randomly on that type of tile or not eg oranges. only one type of resource per tile?
+maybe special trumps always? as in diamonds on mountain replace stone?
+
+stage 3
+you place building level stuff. goodie huts (hero to join you, money, city seed, attack up, def up tokens, maybe one use stuff like hp potions)
+natural wonders. build a gift shop improvement on one and get extra money per turn
+initial barbarian camps. these can be attacked but don't directly attack you back but if 
+you're attacking one they are more likely to spit out units. as your city grows more barbarians appear? one shop. one warp gate. make sure they are reachable.
+
+stage 4 
+wandering monsters added
+
+city growth
+grows by one square every time you have enough food. pick one random tile in the next circular growth ring outwards. when all full, go on to next ring.
+
+Goal of the game:
+Buy presents for Broom's Bristleday! There is one present per level. 10 levels. there's always one shop on the map and the top item it sells, say for 1,000,000 gold is something broom wants, like a toy sailing boat. after you buy the present you have to exit the level via the warp gate
+
+things you could sneakily add to skater so they are ready for 7drl:
+menu choose screen (for shops)
+particle system
+
+
+roads to build manually between cities? sounds like a fun activity but what would it 
+do in the game?
+
+maybe have independent cities in the game and they demand luxury goods. you have to build a road between your city that has that good in its influence range

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ff3898873e10fe94580ef775b9587fad
+timeCreated: 1457615467
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - wednesdayfont: {instanceID: 0}
+  - sprites: {instanceID: 0}
+  - titlescreen: {instanceID: 0}
+  - titlescreen2: {instanceID: 0}
+  - particle: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
