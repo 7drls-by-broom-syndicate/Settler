@@ -91,3 +91,30 @@ buildings improvements generic resource exploitation
 buildings barbarian camp
 buildings barbarian citadel
 buildings city state
+units player scout
+units enemy scout
+units player clubber
+units enemy clubber
+units player spearman
+units enemy spearman
+units player knight
+units enemy knight
+units player pikeman
+units enemy pikeman
+units player mounted clubber
+units enemy mounted clubber
+units player mounted knight
+units enemy mounted knight
+units player
+units barbarian champion
+units barbarian lord
+units player hero broom
+units player hero moop
+units player hero torkin spider
+units player hero reginald marsby
+units player hero chickadee monserat
+units player hero benzedrene the ESR
+units player hero creepy salado
+units player hero doctor barnabee
+units player hero pango pangolin
+units player trader
