@@ -47,3 +47,30 @@ base_tile coastal_water 3
 base_tile ocean 1
 base_tile ocean 2
 base_tile ocean 3
+yield production 1
+yield production 2
+yield production 3
+yield production 4
+yield gold 1
+yield gold 2
+yield gold 3
+yield gold 4
+yield food 1
+yield food 2
+yield food 3
+yield food 4
+resource leather
+resource orange
+resource sheep
+resource coffee
+resource gems
+resource oil
+resource copper
+resource silver
+resource gold
+resource tropical plants
+resource fish
+resource iron
+resource horses
+resource honey
+
