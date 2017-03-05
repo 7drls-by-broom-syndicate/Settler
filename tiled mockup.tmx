@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="50" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="e" tilewidth="16" tileheight="16">
+  <image source="settler tiles.png" width="784" height="16"/>
+ </tileset>
+ <layer name="background" width="80" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2NFqwkAQheG58KKWtqi0xYiKipYqhb7/2zULO3icThpNxcjsufjZeBP0Y3YjGYjI4E6TO/gO0fvuub5//7X8vm5cRL+t08rJu89DQ09Okf0+wG6XvdZ1m3/4vRTkh3Zd5m+YQ79ns0b324m/f9ctfkPx/ewMRvbD/bvNZuqmefdBu0fx568EP5y9FJ57bfOH6QyiWyn7F+dw5XSOX4nP30+nudM0V8H1a0Oj3BiuI/sd6vbgt6hb5nWR/ZLbDOxSb9nrPa/6OXlNwC66nzd/6mbnD2cQzayfLbLf3qxNfhWsMznds+ho924Jfgfx50/XqVPb+af7eBzcT1PH5LWU4+yl60p+n4F27vQcLG3+Lnn+2vOvaf70+aGOUf34/qq7H9+f9uOn84T7284Y/f72885IdaRfNz/OH/1u4ecZnmsXwe9a7t5/k9KNLvHjjDHGGGOMMcYYY4wxxhhjjDHGWNn9AAQ8l2k=
+  </data>
+ </layer>
+ <layer name="hills/mountains" width="80" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt11EKgCAQBcBF73/n+jYVUwrKGejDhQIfLmsRAMAd6Xxyo54Gan9W5lLLafTdmW98VYrrWemtc+yRy9NavblTz66SIfzTTj1cm8HRWLfuf7X6TnN6Zv/mR32vvX+J8v4nQwB4j/m6ToYAAAAAAAAAAN9zAKNcAG0=
+  </data>
+ </layer>
+ <layer name="trees" width="80" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1q0KwzAYhtG4ioqJiomKiYmJ3f/9jUACIfvK/kQ7cg68xFSEh4qkBPB/pr0vcFC3suq68d2U4oZzWXVqNoKoX9Qw6jen536Zfq/N3dkbpV/2TT/gf6x7X+CA7t2qS1lrTXHDc1lrKRvBO/3W5txq2FrSOA2jftkv/182Qruqb5f1/QCA/UVvbD6jHwAAAAAAAAAAI3kA0igHfg==
+  </data>
+ </layer>
+</map>
