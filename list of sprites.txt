@@ -73,4 +73,21 @@ resource fish
 resource iron
 resource horses
 resource honey
-
+buildings city
+buildings factory
+buildings trading post
+buildings barracks
+buildings market
+buildings allotments
+buildings guard post
+buildings armourer
+buildings blacksmith
+buildings port and docks
+buildings teleporter
+buildings town hall
+buildings improvements farm
+buildings improvements mine
+buildings improvements generic resource exploitation
+buildings barbarian camp
+buildings barbarian citadel
+buildings city state
