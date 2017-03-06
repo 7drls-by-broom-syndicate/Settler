@@ -381,7 +381,17 @@ public partial class Game : MonoBehaviour
                             //    }
                             //}
                             //else {
-                                DrawSprite(screenx, screeny, (int)map.displaychar.AtGet(xx, yy));
+
+                            //draw the base tile, biome or sea
+
+                            DrawSprite(screenx, screeny, (int)map.displaychar.AtGet(xx, yy));
+
+                            //draw hill,mountain,trees
+
+                            if (map.mountain[xx, yy]) DrawSprite(screenx, screeny, (int)Etilesprite.MOUNTAIN_OVERLAY);
+                            else if(map.hill[xx, yy]) DrawSprite(screenx, screeny, (int)Etilesprite.HILL_OVERLAY);
+
+                            if(map.tree[xx, yy]) DrawSprite(screenx, screeny,(int)map.treechar[xx,yy]);
                             //}
                             //blood layer
                             //if (map.bloodgrid[xx, yy] != null)

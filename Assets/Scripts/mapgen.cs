@@ -588,6 +588,8 @@ public void genlevelsettlerstyle()
         float r = lil.randf(-1000, 1000);
         float r2 = lil.randf(-1000, 1000);
         float r3 = lil.randf(-1000, 1000);
+        float r4 = lil.randf(-1000, 1000);
+        float r5 = lil.randf(-1000, 1000);
 
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
@@ -605,6 +607,9 @@ public void genlevelsettlerstyle()
                 float noise_temperature = SimplexNoise.Noise.Generate(xcoord * 5, ycoord * 3, r2);
                 float noise_moisture=SimplexNoise.Noise.Generate(xcoord*5,ycoord*3,r3);
 
+                float noise_hill = SimplexNoise.Noise.Generate(xcoord * 8, ycoord * 8, r4);
+                float noise_tree = SimplexNoise.Noise.Generate(xcoord * 8, ycoord * 8, r5);
+
                 double actualtemp = 1.0 - (  (Math.Abs(y - 25.0))/12.5   );//should be in range -1 at top and bottom to +1 in middle
 
                 noise_temperature = (float)actualtemp-(noise_temperature/4); //adjust temp map by lattitude
@@ -612,36 +617,48 @@ public void genlevelsettlerstyle()
 
                 Ebiometype bt = Biomes.classify(noise_temperature, noise_moisture);
 
+                
+
                 switch (bt) {
                     case Ebiometype.polar:
                         displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1+biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_POLAR_TREE_OVERLAY;
                         break;
                     case Ebiometype.tundra:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TUNDRA_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_TUNDRA_TREE_OVERLAY;
                         break;
                     case Ebiometype.taiga:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TAIGA_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_TAIGA_TREE_OVERLAY;
                         break;
                     case Ebiometype.alpine:
                         displaychar[x, y] = Etilesprite.BASE_TILE_ALPINE_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_ALPINE_TREE_OVERLAY;
                         break;
                     case Ebiometype.mediterranean:
                         displaychar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_TREE_OVERLAY;
                         break;
                     case Ebiometype.prairie:
                         displaychar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_TREE_OVERLAY;
                         break;
                     case Ebiometype.temperate_forest:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_TREE_OVERLAY;
                         break;
                     case Ebiometype.desert:
                         displaychar[x, y] = Etilesprite.BASE_TILE_DESERT_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_DESERT_TREE_OVERLAY;
                         break;
                     case Ebiometype.savanna:
                         displaychar[x, y] = Etilesprite.BASE_TILE_SAVANNA_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_SAVANNA_TREE_OVERLAY;
                         break;
                     case Ebiometype.tropical_rainforest:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_1 + biometilerandom();
+                        treechar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_TREE_OVERLAY;
                         break;
 
                 }
@@ -660,7 +677,7 @@ public void genlevelsettlerstyle()
                 //    displaychar[x, y] = Etilesprite.BASE_TILE_DESERT_1;
                 //}
 
-                
+
                 if (noise_height < 0)
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_OCEAN_1;
@@ -669,13 +686,17 @@ public void genlevelsettlerstyle()
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_COASTAL_WATER_1;
                 }
-                else if (noise_height >0.9)
+                else
                 {
-                    //mountain
+
+                    if (noise_tree > 0.7) tree[x, y] = true;
+
+
+                    if (noise_height > 0.9) mountain[x, y] = true;                    
+                    else if (noise_hill > 0.7) hill[x, y] = true;
                 }
 
-               
-
+                
 
             }
 

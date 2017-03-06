@@ -257,6 +257,20 @@ namespace SimplexNoise {
               138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180 
             };
 
+        public static void randomiez()
+        {
+            for (int f = 0; f < 256; f++)
+            {
+                int temp = perm[f];
+                int which = lil.randi(0, 255);
+
+                perm[f] = perm[which];
+                perm[which] = (byte)temp;
+            }
+
+            for (int f = 0; f < 256; f++) perm[f + 256] = perm[f];
+
+        }
         private static int FastFloor(float x) {
             return (x > 0) ? ((int)x) : (((int)x) - 1);
         }

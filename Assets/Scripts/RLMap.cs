@@ -23,12 +23,18 @@ public partial class RLMap  {
 
     public Texture2D minimap;
 
+    public Array2D<bool> hill;
+    public Array2D<bool> mountain;
+    public Array2D<bool> tree;
+
+
     //public Array2D<int?> wizwalltime;
     public Array2D<int?> onfire;
     public Array2D<int?> bloodgrid;
     public Array2D<Cell> extradata;
     public int width, height;                               //width and height of the map
     public Array2D<Etilesprite> displaychar;                                    //ascii char for each cell
+    public Array2D<Etilesprite> treechar;
     public Array2D<bool> passable;                                      //can player and mobs move through this square yes or no
     public Array2D<bool> blocks_sight;                                  //does this square block sight? e.g. wall yes, open door no
     public Array2D<bool> in_FOV;                                        //FOV routines set this to true in each square in FOV
@@ -229,7 +235,14 @@ public partial class RLMap  {
         moblist = new List<mob>(); //will the old mobs in the old moblist be garbage collected?
         newmoblist = new List<mob>();
         displaychar =new Array2D<Etilesprite>(width,height,Etilesprite.EMPTY);
-		passable=new Array2D<bool>(width,height,true);
+        treechar = new Array2D<Etilesprite>(width, height, Etilesprite.EMPTY);
+        passable =new Array2D<bool>(width,height,true);
+
+        tree = new Array2D<bool>(width, height, false);
+        hill = new Array2D<bool>(width, height, false);
+        mountain= new Array2D<bool>(width, height, false);
+
+
         onfire = new Array2D<int?>(width, height, null);
         bloodgrid = new Array2D<int?>(width, height, null);
         //wizwalltime = new Array2D<int?>(width, height, null);
