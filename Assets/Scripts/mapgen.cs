@@ -574,7 +574,124 @@ public partial class RLMap
 */
 public void genlevelsettlerstyle()
     {
+        emptyspaces = new List<Cell>();
 
+        //for (int x = 0; x < width; x++)
+        //    for (int y = 0; y < height; y++)
+        //    {
+        //        displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1;
+        //        passable[x, y] = true;
+        //        blocks_sight[x, y] = false;
+        //        emptyspaces.Add(new Cell(x, y));
+        //    }
+
+        float r = lil.randf(-1000, 1000);
+        float r2 = lil.randf(-1000, 1000);
+        float r3 = lil.randf(-1000, 1000);
+
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+            {
+                        displaychar[x, y] = Etilesprite.NOSPRITE;
+                        passable[x, y] = true;
+                        blocks_sight[x, y] = false;
+                        emptyspaces.Add(new Cell(x, y));
+
+
+                float xcoord = (float)x / (float)width;
+                float ycoord = (float)y / (float)height;
+
+                float noise_height = SimplexNoise.Noise.Generate(xcoord*5,ycoord*3, r);//-1 to +1 i think
+                float noise_temperature = SimplexNoise.Noise.Generate(xcoord * 5, ycoord * 3, r2);
+                float noise_moisture=SimplexNoise.Noise.Generate(xcoord*5,ycoord*3,r3);
+
+                double actualtemp = 1.0 - (  (Math.Abs(y - 25.0))/12.5   );//should be in range -1 at top and bottom to +1 in middle
+
+                noise_temperature = (float)actualtemp-(noise_temperature/4); //adjust temp map by lattitude
+                if (noise_height > -100) noise_temperature -= (noise_height / 3); //adjust temp map by height
+
+                Ebiometype bt = Biomes.classify(noise_temperature, noise_moisture);
+
+                switch (bt) {
+                    case Ebiometype.polar:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1+biometilerandom();
+                        break;
+                    case Ebiometype.tundra:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_TUNDRA_1 + biometilerandom();
+                        break;
+                    case Ebiometype.taiga:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_TAIGA_1 + biometilerandom();
+                        break;
+                    case Ebiometype.alpine:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_ALPINE_1 + biometilerandom();
+                        break;
+                    case Ebiometype.mediterranean:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_1 + biometilerandom();
+                        break;
+                    case Ebiometype.prairie:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_1 + biometilerandom();
+                        break;
+                    case Ebiometype.temperate_forest:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_1 + biometilerandom();
+                        break;
+                    case Ebiometype.desert:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_DESERT_1 + biometilerandom();
+                        break;
+                    case Ebiometype.savanna:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_SAVANNA_1 + biometilerandom();
+                        break;
+                    case Ebiometype.tropical_rainforest:
+                        displaychar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_1 + biometilerandom();
+                        break;
+
+                }
+                //float display = noise_moisture;
+
+                //if (display < -0.5)
+                //{
+                //    displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1;
+                //}
+                //else if (display < 0)
+                //{
+                //    displaychar[x, y] = Etilesprite.BASE_TILE_COASTAL_WATER_1;
+                //}
+                //else if (display < 0.5)
+                //{
+                //    displaychar[x, y] = Etilesprite.BASE_TILE_DESERT_1;
+                //}
+
+                
+                if (noise_height < 0)
+                {
+                    displaychar[x, y] = Etilesprite.BASE_TILE_OCEAN_1;
+                }
+                else if (noise_height < 0.2)
+                {
+                    displaychar[x, y] = Etilesprite.BASE_TILE_COASTAL_WATER_1;
+                }
+                else if (noise_height >0.9)
+                {
+                    //mountain
+                }
+
+               
+
+
+            }
+
+
+        emptyspaces.Shuffle();
+
+        
+
+        //dostaticlights();
+    }
+
+    int biometilerandom()
+    {
+        int t = lil.randi(1, 100);
+        if (t < 90) return lil.randi(0, 1);
+        else return 2;
     }
     public void genlevelskaterstyle()
     {

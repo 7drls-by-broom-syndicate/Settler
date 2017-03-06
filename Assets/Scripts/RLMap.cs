@@ -19,7 +19,7 @@ public partial class RLMap  {
     public List<item_instance> bomblist;
     public List<item_instance> walllist;
     public List<Cell> firelist;
-    public Color?[] minimapcolours;
+    public Color[] minimapcolours;
 
     public Texture2D minimap;
 
@@ -156,9 +156,12 @@ public partial class RLMap  {
             case DungeonGenType.Skater2016:
                 width = 80;height = 50;
                 break;
+            case DungeonGenType.Settler2017:
+                width = 80;height = 50;
+                break;
         }
 
-        minimapcolours = new Color?[256];
+        minimapcolours = new Color[256];
         // public static Color?[] minimapcolours = { new Color (0.25f,0.25f,0.25f), Color.grey, null, null, Color.grey, Color.grey, Color.grey, Color.grey,
     //                                          Color.yellow,Color.yellow,Color.yellow,Color.yellow,new Color (0.25f,0.25f,0.25f)};
 
@@ -168,6 +171,18 @@ public partial class RLMap  {
         {
             minimapcolours[i] = lightgrey;
         }
+        minimapcolours[(int)Etilesprite.BASE_TILE_OCEAN_1] = Color.blue;
+        minimapcolours[(int)Etilesprite.BASE_TILE_OCEAN_2] = Color.blue;
+        minimapcolours[(int)Etilesprite.BASE_TILE_OCEAN_3] = Color.blue;
+        minimapcolours[(int)Etilesprite.BASE_TILE_COASTAL_WATER_1] = Color.cyan;
+        minimapcolours[(int)Etilesprite.BASE_TILE_COASTAL_WATER_2] = Color.cyan;
+        minimapcolours[(int)Etilesprite.BASE_TILE_COASTAL_WATER_3] = Color.cyan;
+        minimapcolours[(int)Etilesprite.BASE_TILE_ALPINE_1] = Color.green;
+        minimapcolours[(int)Etilesprite.BASE_TILE_DESERT_1] = Color.yellow;
+        minimapcolours[(int)Etilesprite.BASE_TILE_POLAR_1] = Color.white;
+        minimapcolours[(int)Etilesprite.BUILDINGS_CITY] = Color.red;
+
+
         /*
         minimapcolours[(int)Etilesprite.MAP_SNOW] = Color.white;
         minimapcolours[(int)Etilesprite.MAP_WATER] = lil.rgb_unitycolour(38, 43, 55);
@@ -213,7 +228,10 @@ public partial class RLMap  {
                // genlevelsuckerstyle();
                 break;
             case DungeonGenType.Skater2016:
-                genlevelskaterstyle();
+                //genlevelskaterstyle();
+                break;
+            case DungeonGenType.Settler2017:
+                genlevelsettlerstyle();
                 break;
         }
 		
@@ -236,22 +254,11 @@ public partial class RLMap  {
          a = c.x; b = c.y;
 		}
 
-    /* public void fillminimap() {
-         for (int y = 0; y < height; y++) {
-             for (int x = 0; x < width; x++) {
-                 Etilesprite et=this.displaychar.AtGet(x,y);
-                 Color c;
-                 switch(et){
-                     case Etilesprite.WALL:
-                     case Etilesprite.TORCHDOWN:
-                     case Etilesprite.TORCHUP:
-                    case Etilesprite.TORCHLEFT:
-                    case Etilesprite.TORCHRIGHT:
-                    case Etilesprite.
-
-                 }
-                 minimap.SetPixel(x,y,)
-             }
-         }
-     }*/
+    public void fillminimap() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                minimap.SetPixel(x, y, minimapcolours[(int)displaychar[x, y]]);
+            }
+        }
+    }
 }

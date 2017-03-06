@@ -53,9 +53,9 @@ public partial class Game : MonoBehaviour
 
 
     //experimental snow
-    const int number_snow_particles = 200;
-    float[] snowx = new float[number_snow_particles];
-    float[] snowy = new float[number_snow_particles];
+    //const int number_snow_particles = 200;
+    //float[] snowx = new float[number_snow_particles];
+    //float[] snowy = new float[number_snow_particles];
     //
     byte[] bstrGameOver = System.Text.Encoding.ASCII.GetBytes("Game Over");
     byte[] statusline = System.Text.Encoding.ASCII.GetBytes("HP:     SPEED:     LEVEL:     SCORE:");
@@ -128,7 +128,7 @@ public partial class Game : MonoBehaviour
     Player player;
 
     Pangotimer floating_text_timer = new Pangotimer(0.008f);
-    Pangotimer snow_timer = new Pangotimer(0.005f);
+    //Pangotimer snow_timer = new Pangotimer(0.005f);
 
     static Rect wholescreen = new Rect(0, 0, 640 * zoomfactor, 360 * zoomfactor);
 
@@ -365,7 +365,8 @@ public partial class Game : MonoBehaviour
                     c.b -= LF_amount; if (c.b < 0) c.b = 0;
                     GUI.color = lil.colouradd(c, map.staticlight.AtGet(xx, yy));
 #else
-                            GUI.color = lil.colouradd(map.staticlight[xx, yy], map.dynamiclight[xx, yy]);
+                            //  GUI.color = lil.colouradd(map.staticlight[xx, yy], map.dynamiclight[xx, yy]);
+                            GUI.color = Color.white;
 #endif
 
                             //if (map.displaychar[xx, yy] == Etilesprite.ITEM_WARP_GATE_ANIM_1)
@@ -380,7 +381,7 @@ public partial class Game : MonoBehaviour
                             //    }
                             //}
                             //else {
-                            //    DrawSprite(screenx, screeny, (int)map.displaychar.AtGet(xx, yy));
+                                DrawSprite(screenx, screeny, (int)map.displaychar.AtGet(xx, yy));
                             //}
                             //blood layer
                             //if (map.bloodgrid[xx, yy] != null)
@@ -536,11 +537,11 @@ public partial class Game : MonoBehaviour
                 //}
                 //later: def down and attack down too
                // DrawSprite(20, 21, (int)Etilesprite.INVENTORY_HAND);
-                if (player.held != Etilesprite.EMPTY) DrawSprite(19, 21, (int)player.held);
+                //if (player.held != Etilesprite.EMPTY) DrawSprite(19, 21, (int)player.held);
                 //experimental snow
-                GUI.color = new Color(255, 255, 255, 0.5f);
-                for (int f = 0; f < number_snow_particles; f++)
-                {
+                //GUI.color = new Color(255, 255, 255, 0.5f);
+                //for (int f = 0; f < number_snow_particles; f++)
+                //{
                     //       float tx = (StoredNoise[(screenx * 16) + f] + 1.0f) * 4.5f;
                     //       float ty = (StoredNoise[(screeny * 16) + f + 8] + 1.0f) * 4.5f;
                     //
@@ -551,10 +552,10 @@ public partial class Game : MonoBehaviour
                    // snowx[f] += StoredNoise[sxf];
                    // snowy[f] += (StoredNoise[syf]+1)*2f;
                    // if (snowy[f] > 479) { snowy[f] = 0;snowx[f]= lil.randf(0, 21*16); }
-                    DrawSprite3x3((int)snowx[f], (int)snowy[f]);
+                  //  DrawSprite3x3((int)snowx[f], (int)snowy[f]);
 
                         //_Particle((screenx * 16 * zoomfactor) + zoomfactor * (int)tx, (screeny * 16 * zoomfactor) + zoomfactor * (int)ty, 13);
-                    }               
+                    //}               
                 //end snow 
 
 
@@ -756,11 +757,11 @@ public partial class Game : MonoBehaviour
         
 
         //experimental snow
-        for (int i = 0; i < number_snow_particles; i++)
-        {
-            snowx[i] = lil.randi(0,21*16);
-            snowy[i] = lil.randi(0,479);
-        }
+        //for (int i = 0; i < number_snow_particles; i++)
+        //{
+        //    snowx[i] = lil.randi(0,21*16);
+        //    snowy[i] = lil.randi(0,479);
+        //}
         //
         bstrPressStart = System.Text.Encoding.ASCII.GetBytes("Press " + "start" + " or Klik Left Maus");
         pressstartx = (640 - (bstrPressStart.Length * 6)) / 2;
@@ -824,7 +825,10 @@ public partial class Game : MonoBehaviour
             return;
         }
         map = new RLMap(player, DungeonGenType.Settler2017);
+        
         r_minimap = new Rect(336 * zoomfactor, 0, map.width * 2 * zoomfactor, map.height * 2 * zoomfactor);//was 339
+
+        map.fillminimap();
 
         //take this map reveal cheat out 
         /*
@@ -910,22 +914,22 @@ public partial class Game : MonoBehaviour
                     floating_text_timer.reset();
                 }
                 //do snow
-                if (snow_timer.test()) { 
-                    for (int f = 0; f < number_snow_particles; f++)
-                    {
-                        //       float tx = (StoredNoise[(screenx * 16) + f] + 1.0f) * 4.5f;
-                        //       float ty = (StoredNoise[(screeny * 16) + f + 8] + 1.0f) * 4.5f;
-                        //
-                        int sxf = (int)snowx[f];
-                        int syf = (int)snowy[f];
-                        if (sxf < 0) sxf = 0; if (syf < 0) syf = 0;
-                        if (sxf > 639) sxf = 639; if (syf > 479) syf = 479;
-                        snowx[f] += StoredNoise[sxf] * 2;
-                        snowy[f] += (StoredNoise2[syf] + StoredNoise2[sxf]) * 1f;// + lil.randf(0, 1) ;
-                        if (snowy[f] > 479) { snowy[f] = 0; snowx[f] = lil.randf(0, 21*16); }
-                    }
-                    snow_timer.reset();
-                }
+                //if (snow_timer.test()) { 
+                //    for (int f = 0; f < number_snow_particles; f++)
+                //    {
+                //        //       float tx = (StoredNoise[(screenx * 16) + f] + 1.0f) * 4.5f;
+                //        //       float ty = (StoredNoise[(screeny * 16) + f + 8] + 1.0f) * 4.5f;
+                //        //
+                //        int sxf = (int)snowx[f];
+                //        int syf = (int)snowy[f];
+                //        if (sxf < 0) sxf = 0; if (syf < 0) syf = 0;
+                //        if (sxf > 639) sxf = 639; if (syf > 479) syf = 479;
+                //        snowx[f] += StoredNoise[sxf] * 2;
+                //        snowy[f] += (StoredNoise2[syf] + StoredNoise2[sxf]) * 1f;// + lil.randf(0, 1) ;
+                //        if (snowy[f] > 479) { snowy[f] = 0; snowx[f] = lil.randf(0, 21*16); }
+                //    }
+                //    snow_timer.reset();
+                //}
                 //NEXT LETS PROCESS LE TURN
                 if (TimeEngine == CradleOfTime.ready_to_process_turn ||
                     TimeEngine == CradleOfTime.player_is_done)
