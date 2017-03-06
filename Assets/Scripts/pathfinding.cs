@@ -157,8 +157,9 @@ public partial class RLMap {
 				if (visited[scanx, scany]){
 					continue;
 				}
-				if (!passable[scanx, scany]&&!(displaychar[scanx,scany]==Etilesprite.MAP_WATER&&crosswater)){
-					//not a walkable square
+                //if (!passable[scanx, scany]&&!(displaychar[scanx,scany]==Etilesprite.MAP_WATER&&crosswater)){
+                if (!passable[scanx, scany]) { 
+                //not a walkable square
 					visited[scanx, scany]= true;
 					continue;
 				}

@@ -300,7 +300,7 @@ public partial class Game : MonoBehaviour
                     r3c.x = x * zoomfactor;
                     r3c.y = y * zoomfactor;
 
-                    r5.x = spriteratio * ((int)Etilesprite.EFFECT_FULLSQUARE-1);           //s
+                  //  r5.x = spriteratio * ((int)Etilesprite.EFFECT_FULLSQUARE-1);           //s
                     r5.y = (1f / 16f) * 10f;
                     r5.width = spriteratio3;
                     r5.height = (1f / 16f) * 3f;//0.5f;
@@ -368,25 +368,25 @@ public partial class Game : MonoBehaviour
                             GUI.color = lil.colouradd(map.staticlight[xx, yy], map.dynamiclight[xx, yy]);
 #endif
 
-                            if (map.displaychar[xx, yy] == Etilesprite.ITEM_WARP_GATE_ANIM_1)
-                            {
-                                int i = (int)(Time.time * 3.0f) % 3;
-                                DrawSprite(screenx, screeny, (int)Etilesprite.ITEM_WARP_GATE_ANIM_1 + i);
+                            //if (map.displaychar[xx, yy] == Etilesprite.ITEM_WARP_GATE_ANIM_1)
+                            //{
+                            //    int i = (int)(Time.time * 3.0f) % 3;
+                            //    DrawSprite(screenx, screeny, (int)Etilesprite.ITEM_WARP_GATE_ANIM_1 + i);
 
-                                if (player.mob.hasbeads)
-                                {
-                                    int ii = (int)(Time.time * 3.0f) % 2;
-                                    DrawSprite(screenx, screeny, (int)Etilesprite.ITEM_WARP_GATE_RAYS_1 + ii);
-                                }
-                            }
-                            else {
-                                DrawSprite(screenx, screeny, (int)map.displaychar.AtGet(xx, yy));
-                            }
+                            //    if (player.mob.hasbeads)
+                            //    {
+                            //        int ii = (int)(Time.time * 3.0f) % 2;
+                            //        DrawSprite(screenx, screeny, (int)Etilesprite.ITEM_WARP_GATE_RAYS_1 + ii);
+                            //    }
+                            //}
+                            //else {
+                            //    DrawSprite(screenx, screeny, (int)map.displaychar.AtGet(xx, yy));
+                            //}
                             //blood layer
-                            if (map.bloodgrid[xx, yy] != null)
-                            {
-                                DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_BLOOD_1+(int) map.bloodgrid[xx, yy]);
-                            }
+                            //if (map.bloodgrid[xx, yy] != null)
+                            //{
+                            //    DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_BLOOD_1+(int) map.bloodgrid[xx, yy]);
+                            //}
                             //item layer draw item draw mob
                             if (map.itemgrid[xx, yy] != null)
                             {
@@ -418,7 +418,7 @@ public partial class Game : MonoBehaviour
                                     }
 
 
-                                   if(!map.itemgrid[xx,yy].mob.dead_currently) DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + map.itemgrid[xx, yy].mob.facing);
+                               //    if(!map.itemgrid[xx,yy].mob.dead_currently) DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + map.itemgrid[xx, yy].mob.facing);
                                 }
                                 else DrawSprite(screenx, screeny, (int)map.itemgrid[xx, yy].tile);
                             }
@@ -432,7 +432,7 @@ public partial class Game : MonoBehaviour
                                 else DrawSprite(screenx, screeny, (int)player.mob.tile);
 
                                 //draw facing
-                                DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + player.mob.facing);
+                               // DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + player.mob.facing);
                             }
 
                             //smoke/cloud/gas
@@ -447,13 +447,13 @@ public partial class Game : MonoBehaviour
                                     DrawSprite_Particle((screenx * 16 * zoomfactor) + zoomfactor * (int)tx, (screeny * 16 * zoomfactor) + zoomfactor * (int)ty, 13);
                                 }
                             }
-                            if (map.onfire[xx, yy]!=null)
-                            {
-                                int i = (int)(Time.time * 3.0f) % 3;
-                                DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_FIRE_ANIM_1 + i);
+                            //if (map.onfire[xx, yy]!=null)
+                            //{
+                            //    int i = (int)(Time.time * 3.0f) % 3;
+                            //    DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_FIRE_ANIM_1 + i);
                                     
 
-                            }
+                            //}
 
 
 
@@ -522,20 +522,20 @@ public partial class Game : MonoBehaviour
                 PrintNumber(25 * 6, 359 - 12, player.dunlevel);
                 PrintNumber(37 * 6, 359 - 12, player.score);
                 //DO YOU GOT THE BEEDZ, PANGO? THE BEEEEEDS! THE BEEEEEEEDS!
-                if (player.mob.hasbeads) { DrawSprite(15, 21, (int)Etilesprite.ITEM_WARP_BEADS); }
+                //if (player.mob.hasbeads) { DrawSprite(15, 21, (int)Etilesprite.ITEM_WARP_BEADS); }
                 //draw other buffs if applicz
-                if(player.mob.hasattackup) {
-                    DrawSprite(16, 21, (int)Etilesprite.ICON_ATTACK_UP);
-                    GUI.color = Color.yellow;
-                    PrintNumber(16 * 16, 14+(21 * 16), player.mob.attackuptimer);
-                }
-                if (player.mob.hasdefenseup) {
-                    DrawSprite(17, 21, (int)Etilesprite.ICON_DEFENSE_UP);
-                    GUI.color = Color.yellow;
-                    PrintNumber(17 * 16, 14+(21 * 16), player.mob.defenseuptimer);
-                }
+                //if(player.mob.hasattackup) {
+                //    DrawSprite(16, 21, (int)Etilesprite.ICON_ATTACK_UP);
+                //    GUI.color = Color.yellow;
+                //    PrintNumber(16 * 16, 14+(21 * 16), player.mob.attackuptimer);
+                //}
+                //if (player.mob.hasdefenseup) {
+                //    DrawSprite(17, 21, (int)Etilesprite.ICON_DEFENSE_UP);
+                //    GUI.color = Color.yellow;
+                //    PrintNumber(17 * 16, 14+(21 * 16), player.mob.defenseuptimer);
+                //}
                 //later: def down and attack down too
-                DrawSprite(20, 21, (int)Etilesprite.INVENTORY_HAND);
+               // DrawSprite(20, 21, (int)Etilesprite.INVENTORY_HAND);
                 if (player.held != Etilesprite.EMPTY) DrawSprite(19, 21, (int)player.held);
                 //experimental snow
                 GUI.color = new Color(255, 255, 255, 0.5f);
@@ -798,8 +798,8 @@ public partial class Game : MonoBehaviour
         MyAudioSource.Play();
 
         log = new MessageLog(50, 15);
-        log.Printline("Skater by The Broom Institute: 7DRL 2016");
-        log.Printline("This is the post-contest version.");
+        log.Printline("Settler by The Broom Institute: 7DRL 2017");
+        log.Printline("This is the 7DRL work in progress.");
         //log.Printline("Resolution is " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
         lil.seednow();
         player = new Player(0);
@@ -823,7 +823,7 @@ public partial class Game : MonoBehaviour
             MyAudioSource.Stop();
             return;
         }
-        map = new RLMap(player, DungeonGenType.Skater2016);
+        map = new RLMap(player, DungeonGenType.Settler2017);
         r_minimap = new Rect(336 * zoomfactor, 0, map.width * 2 * zoomfactor, map.height * 2 * zoomfactor);//was 339
 
         //take this map reveal cheat out 

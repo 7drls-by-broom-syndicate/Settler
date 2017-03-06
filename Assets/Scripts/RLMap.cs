@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 
 
-public enum DungeonGenType { Splitter2013, Sucker2014,Synthesizer2015_nothere, Skater2016 }
+public enum DungeonGenType { Splitter2013, Sucker2014,Synthesizer2015_nothere, Skater2016, Settler2017 }
 
 //THESE HAVE TO BE IN SPRITE ORDER FROM LEFT TO RIGHT
 //public enum Etilesprite : int { FLOODTEMP=-2, EMPTY = -1, THEREISNTAZERO=0,NOSPRITE=1,FLOOR=106, WALL=109, PLAYER=2, KOBOLD, TORCHDOWN=46, TORCHRIGHT, TORCHLEFT, TORCHUP,
@@ -48,7 +48,8 @@ public partial class RLMap  {
 
     public bool passablecheck(int x,int y,mob m)
     {
-        return (passable[x, y] || displaychar[x, y] == Etilesprite.MAP_WATER && m.archetype.heavy);
+        return true;
+        // return (passable[x, y] || displaychar[x, y] == Etilesprite.MAP_WATER && m.archetype.heavy);
     }
     private Player player;
 
@@ -167,7 +168,7 @@ public partial class RLMap  {
         {
             minimapcolours[i] = lightgrey;
         }
-
+        /*
         minimapcolours[(int)Etilesprite.MAP_SNOW] = Color.white;
         minimapcolours[(int)Etilesprite.MAP_WATER] = lil.rgb_unitycolour(38, 43, 55);
         minimapcolours[(int)Etilesprite.MAP_ICE] = lil.rgb_unitycolour(101, 147, 232);
@@ -177,7 +178,7 @@ public partial class RLMap  {
         minimapcolours[(int)Etilesprite.ITEM_CAIRN_RED ]= Color.red;
         minimapcolours[(int)Etilesprite.ITEM_CAIRN_GREEN] = Color.green;
         minimapcolours[(int)Etilesprite.ITEM_CAIRN_PURPLE] = lil.rgb_unitycolour(100,27,136) ;
-
+        */
         //locked=new BitArray(width*height,false);
         itemgrid =new Array2D<item_instance>(width, height,null);
         moblist = new List<mob>(); //will the old mobs in the old moblist be garbage collected?

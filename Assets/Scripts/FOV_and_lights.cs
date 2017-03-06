@@ -237,7 +237,7 @@ public partial class RLMap
 
     //recalc lighting
     public void dostaticlights()
-    {
+    {/*
         staticlight.Fill(Color.black);
         for (int y = 0; y < height; y++)
         {
@@ -279,6 +279,7 @@ public partial class RLMap
                 }
             }
         }
+        */
     }
 
 

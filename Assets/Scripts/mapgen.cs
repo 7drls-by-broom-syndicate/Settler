@@ -31,7 +31,7 @@ public class Patch
     }
     public Patch(int w, int h)
     {
-        cells = new Array2D<Etilesprite>(w, h, Etilesprite.MAP_STONE_WALL_RUIN); //2016 was wall
+       // cells = new Array2D<Etilesprite>(w, h, Etilesprite.MAP_STONE_WALL_RUIN); //2016 was wall
     }
     public void drawchar(int x, int y)
     {
@@ -39,7 +39,7 @@ public class Patch
         {
             Debug.Log("drawchar out of bounds!");
         }
-        cells.AtSet(x, y, Etilesprite.MAP_STONE_FLOOR_RUIN);//2016 was floor
+       // cells.AtSet(x, y, Etilesprite.MAP_STONE_FLOOR_RUIN);//2016 was floor
     }
     void fillrect(int x0, int y0, int w, int h)
     {
@@ -154,7 +154,7 @@ public class Patch
         {
             for (int x = 0; x < cells.width; x++)
             {
-                if (cells.AtGet(x, y) == Etilesprite.MAP_STONE_FLOOR_RUIN)
+             //   if (cells.AtGet(x, y) == Etilesprite.MAP_STONE_FLOOR_RUIN)
                 {//2016 was floor
                     cellcount++;
                     if (cellcount > 3) return true;
@@ -572,10 +572,13 @@ public partial class RLMap
 	//}
 }
 */
-
-    public void genlevelskaterstyle()
+public void genlevelsettlerstyle()
     {
 
+    }
+    public void genlevelskaterstyle()
+    {
+        /*
         //handy item/powerup balancing in terms of numbers
         const int NUMBEROF_CAIRNS = 5;
         //barrels have a min and a max because the number of barrels with items in is set separately to the number of barrels
@@ -1128,5 +1131,7 @@ public partial class RLMap
         //if (!itpassed){
         //	displaychar.ReplaceXWithY(1, ' ');
         //}
+
+        */
     }
 }

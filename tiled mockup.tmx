@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="50" tilewidth="16" tileheight="16" nextobjectid="1">
  <tileset firstgid="1" name="e" tilewidth="16" tileheight="16">
-  <image source="settler tiles.png" width="784" height="16"/>
+  <image source="settler tiles.png" width="1920" height="16"/>
  </tileset>
  <layer name="background" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2NFqwkAQheG58KKWtqi0xYiKipYqhb7/2zULO3icThpNxcjsufjZeBP0Y3YjGYjI4E6TO/gO0fvuub5//7X8vm5cRL+t08rJu89DQ09Okf0+wG6XvdZ1m3/4vRTkh3Zd5m+YQ79ns0b324m/f9ctfkPx/ewMRvbD/bvNZuqmefdBu0fx568EP5y9FJ57bfOH6QyiWyn7F+dw5XSOX4nP30+nudM0V8H1a0Oj3BiuI/sd6vbgt6hb5nWR/ZLbDOxSb9nrPa/6OXlNwC66nzd/6mbnD2cQzayfLbLf3qxNfhWsMznds+ho924Jfgfx50/XqVPb+af7eBzcT1PH5LWU4+yl60p+n4F27vQcLG3+Lnn+2vOvaf70+aGOUf34/qq7H9+f9uOn84T7284Y/f72885IdaRfNz/OH/1u4ecZnmsXwe9a7t5/k9KNLvHjjDHGGGOMMcYYY4wxxhhjjDHGWNn9AAQ8l2k=
+   eJzt2FFLAlEQhuG5UNmkosTElRQNjRSh///v2gNn6GucXVLElTnfxcs5N0k9zOyGAxEZ3GlyB79D9L57ru+//1p+xxsX0W/rtHbyPqdqeoCq3KNTZL9PsNtlr03Th/Ebms9JZmNw1DN5PRfkh3Zt8zd0/HTevPl7Mmd0v534+7uR0/1NjiP5u7uYzhzOYGQ/3N9tNlM3De30jmZj46dzV4Ifzl4Kn3vqOJL2/a0cP62U/cU5XDvhz6sjuum9tPfvl9O70zxXw/2tpZfcK9wj+x2a9uC3bFrlc5n9ktsC7NRv2jRz/CZgF93Pmz91s/OHM6h+U8fPFtlvb842vxrOBdjZ7O6W4HcQf/70nDt1+WmTbBnZT1PH5LWS39lL91pOn4HWbSZlzt8571/c46750/eHOkb14/dXl/vx+9N+/HSecL/tjNGv2897Rqoj/S7z4/zR7xZ+nuF/7SL4Xcvd+9+kdKNz/DhjjDHGGGOMMcYYY4wxxhhjjDFWdj9AuJeR
   </data>
  </layer>
  <layer name="hills/mountains" width="80" height="50">
