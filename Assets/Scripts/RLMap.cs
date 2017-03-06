@@ -177,10 +177,40 @@ public partial class RLMap  {
         minimapcolours[(int)Etilesprite.BASE_TILE_COASTAL_WATER_1] = Color.cyan;
         minimapcolours[(int)Etilesprite.BASE_TILE_COASTAL_WATER_2] = Color.cyan;
         minimapcolours[(int)Etilesprite.BASE_TILE_COASTAL_WATER_3] = Color.cyan;
-        minimapcolours[(int)Etilesprite.BASE_TILE_ALPINE_1] = Color.green;
-        minimapcolours[(int)Etilesprite.BASE_TILE_DESERT_1] = Color.yellow;
-        minimapcolours[(int)Etilesprite.BASE_TILE_POLAR_1] = Color.white;
-        minimapcolours[(int)Etilesprite.BUILDINGS_CITY] = Color.red;
+        minimapcolours[(int)Etilesprite.BASE_TILE_POLAR_1] = lil.rgb_unitycolour(0xf5, 0xf5, 0xf5);
+        minimapcolours[(int)Etilesprite.BASE_TILE_POLAR_2] = lil.rgb_unitycolour(0xf5, 0xf5, 0xf5);
+        minimapcolours[(int)Etilesprite.BASE_TILE_POLAR_3] = lil.rgb_unitycolour(0xf5, 0xf5, 0xf5);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TUNDRA_1] = lil.rgb_unitycolour(0xd9,0x7e,0x82);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TUNDRA_2] = lil.rgb_unitycolour(0xd9, 0x7e, 0x82);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TUNDRA_3] = lil.rgb_unitycolour(0xd9, 0x7e, 0x82);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TAIGA_1] = lil.rgb_unitycolour(0xb5, 0xf2, 0x99);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TAIGA_2] = lil.rgb_unitycolour(0xb5, 0xf2, 0x99);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TAIGA_3] = lil.rgb_unitycolour(0xb5, 0xf2, 0x99);
+        minimapcolours[(int)Etilesprite.BASE_TILE_ALPINE_1] = lil.rgb_unitycolour(0x92, 0xc2, 0x7c);
+        minimapcolours[(int)Etilesprite.BASE_TILE_ALPINE_2] = lil.rgb_unitycolour(0x92, 0xc2, 0x7c);
+        minimapcolours[(int)Etilesprite.BASE_TILE_ALPINE_3] = lil.rgb_unitycolour(0x92, 0xc2, 0x7c);
+        minimapcolours[(int)Etilesprite.BASE_TILE_MEDITERRANEAN_1] = lil.rgb_unitycolour(0xe3, 0xe0, 0xb6);
+        minimapcolours[(int)Etilesprite.BASE_TILE_MEDITERRANEAN_2] = lil.rgb_unitycolour(0xe3, 0xe0, 0xb6);
+        minimapcolours[(int)Etilesprite.BASE_TILE_MEDITERRANEAN_3] = lil.rgb_unitycolour(0xe3, 0xe0, 0xb6);
+        minimapcolours[(int)Etilesprite.BASE_TILE_PRAIRIE_1] = lil.rgb_unitycolour(0xa6,0x7f,0x44);
+        minimapcolours[(int)Etilesprite.BASE_TILE_PRAIRIE_2] = lil.rgb_unitycolour(0xa6, 0x7f, 0x44);
+        minimapcolours[(int)Etilesprite.BASE_TILE_PRAIRIE_3] = lil.rgb_unitycolour(0xa6, 0x7f, 0x44);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TEMPERATE_FOREST_1] = lil.rgb_unitycolour(0x55,0x87,0x4d);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TEMPERATE_FOREST_2] = lil.rgb_unitycolour(0x55, 0x87, 0x4d);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TEMPERATE_FOREST_3] = lil.rgb_unitycolour(0x55, 0x87, 0x4d);
+        minimapcolours[(int)Etilesprite.BASE_TILE_DESERT_1] = lil.rgb_unitycolour(0xd9,0xc1,0x62);
+        minimapcolours[(int)Etilesprite.BASE_TILE_DESERT_2] = lil.rgb_unitycolour(0xd9, 0xc1, 0x62);
+        minimapcolours[(int)Etilesprite.BASE_TILE_DESERT_3] = lil.rgb_unitycolour(0xd9, 0xc1, 0x62);
+        minimapcolours[(int)Etilesprite.BASE_TILE_SAVANNA_1] = lil.rgb_unitycolour(0xc9,0xc9,0x73);
+        minimapcolours[(int)Etilesprite.BASE_TILE_SAVANNA_2] = lil.rgb_unitycolour(0xc9, 0xc9, 0x73);
+        minimapcolours[(int)Etilesprite.BASE_TILE_SAVANNA_3] = lil.rgb_unitycolour(0xc9, 0xc9, 0x73);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_1] = lil.rgb_unitycolour(0x3b,0x59,0x34);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_2] = lil.rgb_unitycolour(0x3b, 0x59, 0x34);
+        minimapcolours[(int)Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_3] = lil.rgb_unitycolour(0x3b, 0x59, 0x34);
+
+
+
+        
 
 
         /*
