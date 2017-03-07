@@ -442,8 +442,8 @@ public partial class Game : MonoBehaviour
     }
     public void doaction()
     {
-        Game.currentmenu = new Menu(Menu.Emenuidentity.test,
-            "Best Soft-Drink Product Placement", new List<string> { "Star Trek: The Pepsi Generation", "They Call Me Mr.Pibb","Snow White and the 7 Ups" });
+        Game.currentmenu = new Menu(Menu.Emenuidentity.build,
+            "Build", new List<string> { "City", "Penis Farm", "/Fuck this option in particular","Quim Eatery"});
         Game.menuup = true;
         Game.currentmenu.setpos(32, 32);
      //   log.Printline("-action- pressed", Color.grey);

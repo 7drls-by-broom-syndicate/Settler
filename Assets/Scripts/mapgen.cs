@@ -597,7 +597,7 @@ public void genlevelsettlerstyle()
                         displaychar[x, y] = Etilesprite.NOSPRITE;
                         passable[x, y] = true;
                         blocks_sight[x, y] = false;
-                        emptyspaces.Add(new Cell(x, y));
+                        //emptyspaces.Add(new Cell(x, y));
 
                 yield[x, y] = new yields();
 
@@ -622,6 +622,7 @@ public void genlevelsettlerstyle()
 
                 switch (bt) {
                     case Ebiometype.polar:
+                       // emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_POLAR_TREE_OVERLAY;
                         yield[x, y] = new yields(0, 0, 0);
@@ -629,6 +630,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.oil});
                         break;
                     case Ebiometype.tundra:
+                        //emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_TUNDRA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TUNDRA_TREE_OVERLAY;
                         yield[x, y].set(0, 0, 1);
@@ -637,6 +639,7 @@ public void genlevelsettlerstyle()
                         });
                         break;
                     case Ebiometype.taiga:
+                        //emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_TAIGA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TAIGA_TREE_OVERLAY;
                         yield[x, y].set(1, 0, 0);
@@ -644,6 +647,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.horses,Eresourcetype.leather }) ;
                         break;
                     case Ebiometype.alpine:
+                        //emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_ALPINE_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_ALPINE_TREE_OVERLAY;
                         yield[x, y].set(1, 0, 1);
@@ -651,6 +655,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.sheep,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.mediterranean:
+                        //emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_TREE_OVERLAY;
                         yield[x, y].set(2, 1, 2);
@@ -658,6 +663,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.sheep,Eresourcetype.oranges,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.prairie:
+                        //emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_TREE_OVERLAY;
                         yield[x, y].set(2, 1, 2);
@@ -665,6 +671,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.sheep,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.temperate_forest:
+                       // emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_TREE_OVERLAY;
                         yield[x, y].set(2, 1, 2);
@@ -672,6 +679,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.sheep,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.desert:
+                       // emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_DESERT_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_DESERT_TREE_OVERLAY;
                         yield[x, y].set(0, 0, 0);
@@ -679,6 +687,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.oil,Eresourcetype.coffee,Eresourcetype.leather});
                         break;
                     case Ebiometype.savanna:
+                       // emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_SAVANNA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_SAVANNA_TREE_OVERLAY;
                         yield[x, y].set(1, 0, 1);
@@ -686,6 +695,7 @@ public void genlevelsettlerstyle()
                             Eresourcetype.sheep,Eresourcetype.coffee,Eresourcetype.oranges,Eresourcetype.leather});
                         break;
                     case Ebiometype.tropical_rainforest:
+                       // emptyspaces.Add(new Cell(x, y));
                         displaychar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_TREE_OVERLAY;
                         yield[x, y].set(0, 0, 1);
@@ -731,7 +741,7 @@ public void genlevelsettlerstyle()
                     }
                 else
                 {
-
+                    emptyspaces.Add(new Cell(x, y));
                     if (noise_tree > 0.7)
                     {
                         tree[x, y] = true;
@@ -767,8 +777,30 @@ public void genlevelsettlerstyle()
 
         emptyspaces.Shuffle();
 
-        
+        //place things
 
+        //city states
+
+        int buildx;int buildy;
+
+        for(int f = 0; f < 4; f++)
+        {
+            FreeSpace(out buildx, out buildy);
+            resource[buildx, buildy] = null;
+            buildings[buildx, buildy] = Etilesprite.BUILDINGS_CITY_STATE;
+        }
+        
+        // barbarian camps
+        for (int f = 0; f < 4; f++)
+        {
+            FreeSpace(out buildx, out buildy);
+            resource[buildx, buildy] = null;
+            buildings[buildx, buildy] = Etilesprite.BUILDINGS_BARBARIAN_CAMP;
+        }
+        // barbarian citadel
+        FreeSpace(out buildx, out buildy);
+        resource[buildx, buildy] = null;
+        buildings[buildx, buildy] = Etilesprite.BUILDINGS_BARBARIAN_CITADEL;
         //dostaticlights();
     }
 

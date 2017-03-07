@@ -21,6 +21,8 @@ public partial class RLMap  {
     public List<Cell> firelist;
     public Color[] minimapcolours;
 
+    public Array2D<Etilesprite> buildings;
+
     public Texture2D minimap;
 
     public Array2D<bool> hill;
@@ -215,9 +217,24 @@ public partial class RLMap  {
         minimapcolours[(int)Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_2] = lil.rgb_unitycolour(0x3b, 0x59, 0x34);
         minimapcolours[(int)Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_3] = lil.rgb_unitycolour(0x3b, 0x59, 0x34);
 
+        minimapcolours[(int)Etilesprite.BUILDINGS_BARBARIAN_CITADEL] = Color.red;
+        minimapcolours[(int)Etilesprite.BUILDINGS_BARBARIAN_CAMP] = Color.red;
+        minimapcolours[(int)Etilesprite.BUILDINGS_CITY_STATE] = Color.yellow;
+        minimapcolours[(int)Etilesprite.BUILDINGS_CITY] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_FACTORY] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_TRADING_POST] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_BARRACKS] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_MARKET] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_ALLOTMENTS] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_GUARD_POST] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_ARMOURER] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_BLACKSMITH] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_PORT_AND_DOCKS] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_TELEPORTER] = Color.blue;
+        minimapcolours[(int)Etilesprite.BUILDINGS_TOWN_HALL] = Color.blue;
 
 
-        
+
 
 
         /*
@@ -245,6 +262,9 @@ public partial class RLMap  {
 
         yield= new Array2D<yields>(width, height);
         resource = new Array2D<Tresource>(width, height,null);
+
+
+        buildings = new Array2D<Etilesprite>(width, height, Etilesprite.EMPTY);
 
         onfire = new Array2D<int?>(width, height, null);
         bloodgrid = new Array2D<int?>(width, height, null);
@@ -303,7 +323,8 @@ public partial class RLMap  {
     public void fillminimap() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                minimap.SetPixel(x, y, minimapcolours[(int)displaychar[x, y]]);
+                if(buildings[x,y]!=Etilesprite.EMPTY)minimap.SetPixel(x, y, minimapcolours[(int)buildings[x, y]]);
+                else minimap.SetPixel(x, y, minimapcolours[(int)displaychar[x, y]]);
             }
         }
     }

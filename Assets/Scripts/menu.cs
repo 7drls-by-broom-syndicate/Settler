@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Menu  {
 
-    public enum Emenuidentity { graphics, wallabyselection, test, foreskin_shop }
+    public enum Emenuidentity { build }
 
     public List<byte[]> optionstrings;
+    public List<bool> optiondisabled;
     public int currently_selected_option;
     public int number_of_options;
 
@@ -15,6 +16,8 @@ public class Menu  {
     public Color colBackground = new Color(0, 0, 0, 0.6f);
     public Color colText = Color.white;
     public Color colTitle = Color.yellow;
+    public Color colDisabled = Color.grey;
+
     public byte[] title;
 
     public Emenuidentity type;
@@ -24,7 +27,7 @@ public class Menu  {
     public int locx, locy;//pos in the 640x360 space
     public Menu(Emenuidentity _type,string t,List<string> s)
     {
-
+        optiondisabled = new List<bool>();
         type = _type;
 
         title = System.Text.Encoding.ASCII.GetBytes(t);
@@ -37,10 +40,20 @@ public class Menu  {
 
         foreach (string x in s)
         {
-          
+            if (x[0] == '/')
+            {
+               optionstrings.Add(System.Text.Encoding.ASCII.GetBytes(x.TrimStart('/')));
+                optiondisabled.Add(true);
+                if (x.Length-1 > longeststring) longeststring = x.Length;//keep tabs on longest string so we can size menubox
+            } else
+            {
+                optionstrings.Add(System.Text.Encoding.ASCII.GetBytes(x));
+                optiondisabled.Add(false);
+                if (x.Length > longeststring) longeststring = x.Length;//keep tabs on longest string so we can size menubox
+            }
             number_of_options++;
-            if (x.Length > longeststring) longeststring = x.Length;//keep tabs on longest string so we can size menubox
-            optionstrings.Add(System.Text.Encoding.ASCII.GetBytes(x));
+            
+            
         }
 
         bgwidth = longeststring+3;//1 extra for each side and 1 for the "selector lane"

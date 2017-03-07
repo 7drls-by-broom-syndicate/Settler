@@ -409,6 +409,13 @@ public partial class Game : MonoBehaviour
 
                             if (showresource && map.resource[xx, yy] != null)
                                 DrawSprite(screenx, screeny, (int)map.resource[xx, yy].tile);
+
+
+                            //draw building
+                            if (map.buildings[xx, yy] != Etilesprite.EMPTY)
+                                DrawSprite(screenx, screeny, (int)map.buildings[xx, yy]);
+
+
                             //}
                             //blood layer
                             //if (map.bloodgrid[xx, yy] != null)
@@ -777,9 +784,11 @@ public partial class Game : MonoBehaviour
             GUI.color = currentmenu.colTitle;
             PrintString(currentmenu.titlepos, currentmenu.locy, currentmenu.title);
             //draw choices
-            GUI.color = currentmenu.colText;
+            //GUI.color = currentmenu.colText;
             for(int upto = 0; upto < currentmenu.number_of_options; upto++)
             {
+                if (currentmenu.optiondisabled[upto]) GUI.color = currentmenu.colDisabled;
+                else GUI.color = currentmenu.colText;
                 PrintString(currentmenu.locx+12,currentmenu.locy+((upto+2)*12),currentmenu.optionstrings[upto]);
             }
             //draw selector
@@ -846,6 +855,7 @@ public partial class Game : MonoBehaviour
         log = new MessageLog(50, 15);
         log.Printline("Settler by The Broom Institute: 7DRL 2017");
         log.Printline("This is the 7DRL work in progress.");
+        log.Printline("Lübeck Kraków");
         //log.Printline("Resolution is " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
         lil.seednow();
         player = new Player(0);
@@ -1037,7 +1047,7 @@ public partial class Game : MonoBehaviour
                     {
                         switch (Game.currentmenu.type)
                         {
-                            case Menu.Emenuidentity.test:
+                            case Menu.Emenuidentity.build:
                                 switch (Game.currentmenu.currently_selected_option)
                                 {
                                     case 0:

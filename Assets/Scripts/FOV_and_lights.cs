@@ -112,8 +112,12 @@ public partial class RLMap
             //end new debug
             playermemory.AtSet(xx, yy, et);
 
-            if (itemgrid[xx, yy] != null && itemgrid[xx,yy].ismob==false) minimap.SetPixel(xx, yy, (Color)minimapcolours[(int)itemgrid[xx, yy].tile]);
-            else minimap.SetPixel(xx, yy, (Color)minimapcolours[(int)et]);
+            if (itemgrid[xx, yy] != null && itemgrid[xx, yy].ismob == false) minimap.SetPixel(xx, yy, (Color)minimapcolours[(int)itemgrid[xx, yy].tile]);
+            else
+            {
+                if (buildings[xx, yy] != Etilesprite.EMPTY) minimap.SetPixel(xx, yy, (Color)minimapcolours[(int)buildings[xx, yy]]);
+                else minimap.SetPixel(xx, yy, (Color)minimapcolours[(int)et]);
+            }
             //if (et == Etilesprite.WALL) minimap.SetPixel(xx, yy, Color.grey);
             //else if (et == Etilesprite.FLOOR) minimap.SetPixel(xx, yy, Color.black);
 
@@ -128,7 +132,7 @@ public partial class RLMap
         }
         ff(x, y);
 
-        minimap.SetPixel(this.player.posx, this.player.posy, Color.cyan);
+        minimap.SetPixel(this.player.posx, this.player.posy, Color.magenta);
         minimap.Apply(false);
     }
 
