@@ -1027,7 +1027,7 @@ public partial class Game : MonoBehaviour
 
                     }
                     else
-                         if (Input.GetButtonDown("start"))
+                         if (Input.GetButtonDown("start")&&!Game.currentmenu.optiondisabled[currentmenu.currently_selected_option])
                     {
                         Game.menuup = false;
                         Game.menucommandwaiting = true;
