@@ -618,58 +618,81 @@ public void genlevelsettlerstyle()
 
                 Ebiometype bt = Biomes.classify(noise_temperature, noise_moisture);
 
-                
+
 
                 switch (bt) {
                     case Ebiometype.polar:
-                        displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1+biometilerandom();
+                        displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_POLAR_TREE_OVERLAY;
-                        yield[x, y]=new yields(0, 0, 0);
+                        yield[x, y] = new yields(0, 0, 0);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.oil});
                         break;
                     case Ebiometype.tundra:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TUNDRA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TUNDRA_TREE_OVERLAY;
-                        yield[x, y].set(0, 0,1);
+                        yield[x, y].set(0, 0, 1);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.sheep,Eresourcetype.horses,Eresourcetype.leather
+                        });
                         break;
                     case Ebiometype.taiga:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TAIGA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TAIGA_TREE_OVERLAY;
                         yield[x, y].set(1, 0, 0);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.horses,Eresourcetype.leather }) ;
                         break;
                     case Ebiometype.alpine:
                         displaychar[x, y] = Etilesprite.BASE_TILE_ALPINE_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_ALPINE_TREE_OVERLAY;
                         yield[x, y].set(1, 0, 1);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.sheep,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.mediterranean:
                         displaychar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_TREE_OVERLAY;
                         yield[x, y].set(2, 1, 2);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.sheep,Eresourcetype.oranges,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.prairie:
                         displaychar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_TREE_OVERLAY;
                         yield[x, y].set(2, 1, 2);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.sheep,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.temperate_forest:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_TREE_OVERLAY;
                         yield[x, y].set(2, 1, 2);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.sheep,Eresourcetype.horses,Eresourcetype.honey,Eresourcetype.leather});
                         break;
                     case Ebiometype.desert:
                         displaychar[x, y] = Etilesprite.BASE_TILE_DESERT_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_DESERT_TREE_OVERLAY;
                         yield[x, y].set(0, 0, 0);
+                        resource[x, y] = tryresource(new List<Eresourcetype> {
+                            Eresourcetype.oil,Eresourcetype.coffee,Eresourcetype.leather});
                         break;
                     case Ebiometype.savanna:
                         displaychar[x, y] = Etilesprite.BASE_TILE_SAVANNA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_SAVANNA_TREE_OVERLAY;
                         yield[x, y].set(1, 0, 1);
+                        resource[x, y] = tryresource(new List<Eresourcetype>{
+                            Eresourcetype.sheep,Eresourcetype.coffee,Eresourcetype.oranges,Eresourcetype.leather});
                         break;
                     case Ebiometype.tropical_rainforest:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_TREE_OVERLAY;
                         yield[x, y].set(0, 0, 1);
+                        resource[x, y] = tryresource(new List<Eresourcetype>
+                    {
+                        Eresourcetype.tropical_plants,Eresourcetype.coffee
+                    });
                         break;
 
                 }
@@ -693,12 +716,19 @@ public void genlevelsettlerstyle()
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_OCEAN_1;
                     yield[x, y].set(0, 0, 0);
+                    resource[x, y] = null;
                 }
                 else if (noise_height < 0.2)
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_COASTAL_WATER_1;
                     yield[x, y].set(0, 1, 1);
-                }
+                    resource[x, y] = null;
+                    resource[x, y] = tryresource(new List<Eresourcetype>
+                    {
+                        Eresourcetype.fish
+                    });
+                    
+                    }
                 else
                 {
 
@@ -718,6 +748,16 @@ public void genlevelsettlerstyle()
                         hill[x, y] = true;
                         yield[x, y].add(1, 0, 0);
                     }
+
+                    //separate resources for hills and mountains
+                    if (mountain[x, y] || hill[x, y])
+                    {
+                        if (resource[x, y] == null || lil.randi(1, 100) > 50)
+                            resource[x, y] = tryresource(new List<Eresourcetype>
+                            {
+                                Eresourcetype.iron,Eresourcetype.gems,Eresourcetype.copper,Eresourcetype.silver,Eresourcetype.gold
+                            });
+                    }
                 }
 
                 
@@ -730,6 +770,17 @@ public void genlevelsettlerstyle()
         
 
         //dostaticlights();
+    }
+
+    Tresource wtf()
+{
+    return null;
+}
+
+    Tresource tryresource(List<Eresourcetype> ll)
+    {
+        if (lil.randi(1, 20) != 1) return null;
+        return Cresource.resourcetypes[(int)ll.randmember()];
     }
 
     int biometilerandom()

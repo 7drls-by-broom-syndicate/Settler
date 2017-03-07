@@ -28,6 +28,7 @@ public partial class RLMap  {
     public Array2D<bool> tree;
 
     public Array2D<yields> yield;
+    public Array2D<Tresource> resource;
     //public Array2D<int?> wizwalltime;
     public Array2D<int?> onfire;
     public Array2D<int?> bloodgrid;
@@ -243,6 +244,7 @@ public partial class RLMap  {
         mountain= new Array2D<bool>(width, height, false);
 
         yield= new Array2D<yields>(width, height);
+        resource = new Array2D<Tresource>(width, height,null);
 
         onfire = new Array2D<int?>(width, height, null);
         bloodgrid = new Array2D<int?>(width, height, null);

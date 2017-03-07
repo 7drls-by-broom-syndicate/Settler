@@ -51,7 +51,8 @@ public enum CradleOfTime { dormant, ready_to_process_turn, waiting_for_player, p
 public partial class Game : MonoBehaviour
 {
 
-
+    public bool showresource = true;
+    public bool showyield = false;
     //experimental snow
     //const int number_snow_particles = 200;
     //float[] snowx = new float[number_snow_particles];
@@ -392,6 +393,22 @@ public partial class Game : MonoBehaviour
                             else if(map.hill[xx, yy]) DrawSprite(screenx, screeny, (int)Etilesprite.HILL_OVERLAY);
 
                             if(map.tree[xx, yy]) DrawSprite(screenx, screeny,(int)map.treechar[xx,yy]);
+
+                            //draw yields
+                            if (showyield)
+                            {
+                                if (map.yield[xx, yy].production > 0)
+                                    DrawSprite(screenx, screeny, -1 + map.yield[xx, yy].production + (int)Etilesprite.YIELD_PRODUCTION_1);
+                                if (map.yield[xx, yy].gold > 0)
+                                    DrawSprite(screenx, screeny, -1 + map.yield[xx, yy].gold + (int)Etilesprite.YIELD_GOLD_1);
+                                if (map.yield[xx, yy].food > 0)
+                                    DrawSprite(screenx,screeny, -1 + map.yield[xx, yy].food + (int)Etilesprite.YIELD_FOOD_1);
+                            }
+
+                            //draw resources
+
+                            if (showresource && map.resource[xx, yy] != null)
+                                DrawSprite(screenx, screeny, (int)map.resource[xx, yy].tile);
                             //}
                             //blood layer
                             //if (map.bloodgrid[xx, yy] != null)
@@ -586,13 +603,15 @@ public partial class Game : MonoBehaviour
                 if (mausx >= 0 && mausy >= 0 && mausx < VIEWPORT_WIDTH && mausy < VIEWPORT_HEIGHT && map.in_FOV[mapx,mapy])
                 {//general idea is setting s to be the string to display for tooltip
 
-                    if(map.yield[mapx,mapy].production>0)
-                        DrawSprite(mausx, mausy, -1+map.yield[mapx,mapy].production+(int)Etilesprite.YIELD_PRODUCTION_1);
-                    if (map.yield[mapx, mapy].gold > 0)
-                        DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].gold + (int)Etilesprite.YIELD_GOLD_1);
-                    if (map.yield[mapx, mapy].food > 0)
-                        DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].food + (int)Etilesprite.YIELD_FOOD_1);
-
+                    if (!showyield)
+                    {
+                        if (map.yield[mapx, mapy].production > 0)
+                            DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].production + (int)Etilesprite.YIELD_PRODUCTION_1);
+                        if (map.yield[mapx, mapy].gold > 0)
+                            DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].gold + (int)Etilesprite.YIELD_GOLD_1);
+                        if (map.yield[mapx, mapy].food > 0)
+                            DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].food + (int)Etilesprite.YIELD_FOOD_1);
+                    }
 
                     string s = "";
 
@@ -925,6 +944,10 @@ public partial class Game : MonoBehaviour
             case Egamestate.playing:
             case Egamestate.gameover:
             case Egamestate.youwon:
+
+                if (Input.GetButtonDown("showresource")) showresource = !showresource;
+                if (Input.GetButtonDown("showyield")) showyield = !showyield;
+
 
                 //FIRST LET'S MOVE THE FLOATZING TEXT
                 if (floating_text_timer.test())
