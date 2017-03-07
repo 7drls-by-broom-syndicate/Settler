@@ -585,12 +585,22 @@ public partial class Game : MonoBehaviour
                 
                 if (mausx >= 0 && mausy >= 0 && mausx < VIEWPORT_WIDTH && mausy < VIEWPORT_HEIGHT && map.in_FOV[mapx,mapy])
                 {//general idea is setting s to be the string to display for tooltip
+
+                    if(map.yield[mapx,mapy].production>0)
+                        DrawSprite(mausx, mausy, -1+map.yield[mapx,mapy].production+(int)Etilesprite.YIELD_PRODUCTION_1);
+                    if (map.yield[mapx, mapy].gold > 0)
+                        DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].gold + (int)Etilesprite.YIELD_GOLD_1);
+                    if (map.yield[mapx, mapy].food > 0)
+                        DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].food + (int)Etilesprite.YIELD_FOOD_1);
+
+
                     string s = "";
 
                     item_instance i = map.itemgrid[mapx, mapy];
                     if (i != null)
                     {
                         s = Tilestuff.tilestring[(int)i.tile + 2];
+
                         if (i.ismob && !i.mob.dead_currently)
                         {
                             s += " HP: " + i.mob.hp + "/" + i.mob.archetype.hp;
@@ -598,9 +608,15 @@ public partial class Game : MonoBehaviour
                             if (i.mob.skates_currently) s += " (skating)";
                             s += " SPEED:" + i.mob.speed;
                         }
-                        
+
                     }
-                    else s = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];
+                    else
+                    {
+                        s = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];
+                        if (map.mountain[mapx, mapy]) s += "[MTN]";
+                        else if (map.hill[mapx, mapy]) s += "[HIL]";
+                        if (map.tree[mapx, mapy]) s += "[FOR]";
+                    }
 
                     //debug:
                     //s += (map.passable[mapx, mapy]) ? " PASS" : " NOPASS";

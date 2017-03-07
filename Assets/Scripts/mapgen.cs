@@ -599,6 +599,7 @@ public void genlevelsettlerstyle()
                         blocks_sight[x, y] = false;
                         emptyspaces.Add(new Cell(x, y));
 
+                yield[x, y] = new yields();
 
                 float xcoord = (float)x / (float)width;
                 float ycoord = (float)y / (float)height;
@@ -623,42 +624,52 @@ public void genlevelsettlerstyle()
                     case Ebiometype.polar:
                         displaychar[x, y] = Etilesprite.BASE_TILE_POLAR_1+biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_POLAR_TREE_OVERLAY;
+                        yield[x, y]=new yields(0, 0, 0);
                         break;
                     case Ebiometype.tundra:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TUNDRA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TUNDRA_TREE_OVERLAY;
+                        yield[x, y].set(0, 0,1);
                         break;
                     case Ebiometype.taiga:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TAIGA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TAIGA_TREE_OVERLAY;
+                        yield[x, y].set(1, 0, 0);
                         break;
                     case Ebiometype.alpine:
                         displaychar[x, y] = Etilesprite.BASE_TILE_ALPINE_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_ALPINE_TREE_OVERLAY;
+                        yield[x, y].set(1, 0, 1);
                         break;
                     case Ebiometype.mediterranean:
                         displaychar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_MEDITERRANEAN_TREE_OVERLAY;
+                        yield[x, y].set(2, 1, 2);
                         break;
                     case Ebiometype.prairie:
                         displaychar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_PRAIRIE_TREE_OVERLAY;
+                        yield[x, y].set(2, 1, 2);
                         break;
                     case Ebiometype.temperate_forest:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TEMPERATE_FOREST_TREE_OVERLAY;
+                        yield[x, y].set(2, 1, 2);
                         break;
                     case Ebiometype.desert:
                         displaychar[x, y] = Etilesprite.BASE_TILE_DESERT_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_DESERT_TREE_OVERLAY;
+                        yield[x, y].set(0, 0, 0);
                         break;
                     case Ebiometype.savanna:
                         displaychar[x, y] = Etilesprite.BASE_TILE_SAVANNA_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_SAVANNA_TREE_OVERLAY;
+                        yield[x, y].set(1, 0, 1);
                         break;
                     case Ebiometype.tropical_rainforest:
                         displaychar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_1 + biometilerandom();
                         treechar[x, y] = Etilesprite.BASE_TILE_TROPICAL_RAINFOREST_TREE_OVERLAY;
+                        yield[x, y].set(0, 0, 1);
                         break;
 
                 }
@@ -681,19 +692,32 @@ public void genlevelsettlerstyle()
                 if (noise_height < 0)
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_OCEAN_1;
+                    yield[x, y].set(0, 0, 0);
                 }
                 else if (noise_height < 0.2)
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_COASTAL_WATER_1;
+                    yield[x, y].set(0, 1, 1);
                 }
                 else
                 {
 
-                    if (noise_tree > 0.7) tree[x, y] = true;
+                    if (noise_tree > 0.7)
+                    {
+                        tree[x, y] = true;
+                        yield[x, y].add(1, 0, 1);
+                    }
 
 
-                    if (noise_height > 0.9) mountain[x, y] = true;                    
-                    else if (noise_hill > 0.7) hill[x, y] = true;
+                    if (noise_height > 0.9)
+                    {
+                        mountain[x, y] = true;
+                    }
+                    else if (noise_hill > 0.7)
+                    {
+                        hill[x, y] = true;
+                        yield[x, y].add(1, 0, 0);
+                    }
                 }
 
                 
