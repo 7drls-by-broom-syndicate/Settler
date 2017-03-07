@@ -262,43 +262,48 @@ public partial class Game : MonoBehaviour
             }
         }
     }
-    bool trytomove(mob m, int rotdir, bool coasting = false)
+    bool trytomove(mob m,int deltax,int deltay)//, int rotdir, bool coasting = false)
     {
-        if (m.defenseuptimer > 0)
-        {
-            m.defenseuptimer--;
-            if (m.defenseuptimer == 0)
-            {
-                m.hasdefenseup = false;
-                log.Printline("Cairn defense is off.", Color.green);
-            }
-        }
-        if (m.attackuptimer > 0)
-        {
-            m.attackuptimer--;
-            if (m.attackuptimer == 0)
-            {
-                m.hasattackup = false;
-                log.Printline("Cairn offense is off.", Color.green);
-            }
-        }
+
+        if (deltax == 1) m.reversesprite = false;
+        else if (deltax == -1) m.reversesprite = true;
+
+        //if (m.defenseuptimer > 0)
+        //{
+        //    m.defenseuptimer--;
+        //    if (m.defenseuptimer == 0)
+        //    {
+        //        m.hasdefenseup = false;
+        //        log.Printline("Cairn defense is off.", Color.green);
+        //    }
+        //}
+        //if (m.attackuptimer > 0)
+        //{
+        //    m.attackuptimer--;
+        //    if (m.attackuptimer == 0)
+        //    {
+        //        m.hasattackup = false;
+        //        log.Printline("Cairn offense is off.", Color.green);
+        //    }
+        //}
 
 
-        if (coasting) rotdir = m.facing;
-        int deltax = lil.rot_deltax[rotdir];
-        int deltay = lil.rot_deltay[rotdir];
+        //if (coasting) rotdir = m.facing;
+       /// int deltax = lil.rot_deltax[rotdir];
+        //int deltay = lil.rot_deltay[rotdir];
         int tentx = m.posx + deltax;
         int tenty = m.posy + deltay;
 
         if (tentx < 0 || tentx >= map.width || tenty < 0 || tenty >= map.height)
         {
-            Speed.change(m, -200);
+         //   Speed.change(m, -200);
             return false;
         }
         bool didanactivation = false;
         //if (m.speed == 0 && !coasting) didanactivation = checkforitemactivation(m, tentx, tenty);
         //new- attempt to ensure you can only pick things up, activate cairns etc. if facing it.
-        if (m.speed == 0 && !coasting && rotdir==m.facing) didanactivation = checkforitemactivation(m, tentx, tenty);
+        //if (m.speed == 0 && !coasting && rotdir==m.facing)
+            didanactivation = checkforitemactivation(m, tentx, tenty);
 
         // Debug.Log(m.archetype.name + " " + rotdir);
        // if (coasting && !m.skates_currently) goto playercoastingbutnotaskater;//was &&m.isplayer
@@ -321,10 +326,10 @@ public partial class Game : MonoBehaviour
     */
         //if (!map.passable[tentx, tenty]&&player.mob.speed>0) return false;
 
-        if (!coasting)
-            Speed.SpeedAndDirectionChange(m, rotdir);
+      //  if (!coasting)
+         //   Speed.SpeedAndDirectionChange(m, rotdir);
 
-        if (m.speed > 0 && !didanactivation)
+        if ( !didanactivation)
         {
             if (map.passablecheck(tentx, tenty, m))
             {
@@ -804,7 +809,7 @@ public partial class Game : MonoBehaviour
         if (e.IsAdjacentTo(player.mob))
         {
             MobAttacksMob(e, player.mob);
-            e.speed = 0;//this is a hack. mobs should attack and coast. all combat is a hack at the moment though
+           // e.speed = 0;//this is a hack. mobs should attack and coast. all combat is a hack at the moment though
             return;
         }
 
@@ -1164,8 +1169,10 @@ public partial class Game : MonoBehaviour
                                             //attempt to move 
         if (map.PathfindAStar(e.posx, e.posy, player.posx, player.posy, false))
         {
-            int reldir = Speed.findrel(e.posx, e.posy, map.firststepx, map.firststepy);
-            trytomove(e, reldir);
+            //  int reldir = Speed.findrel(e.posx, e.posy, map.firststepx, map.firststepy);
+            int deltax = map.firststepx - e.posx;
+            int deltay = map.firststepy - e.posy;
+            trytomove(e, deltax,deltay);
             map.passable[e.posx, e.posy] = false;
             return;
         }

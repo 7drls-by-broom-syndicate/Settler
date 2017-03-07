@@ -1140,16 +1140,16 @@ public partial class Game : MonoBehaviour
                     switch (currentcommand)
                     {
                         case 0:
-                            trytomove(player.mob,0);//trytomove(0, -1);//N
+                            trytomove(player.mob,0,-1);//trytomove(0, -1);//N
                             break;
                         case 1:
-                            trytomove(player.mob, 4);// trytomove(0, 1);//S
+                            trytomove(player.mob, 0,1);// trytomove(0, 1);//S
                             break;
                         case 2:
-                            trytomove(player.mob, 6);// trytomove(-1, 0);//W
+                            trytomove(player.mob, -1,0);// trytomove(-1, 0);//W
                             break;
                         case 3:
-                            trytomove(player.mob, 2);// trytomove(1, 0);//E
+                            trytomove(player.mob, 1,0);// trytomove(1, 0);//E
                             break;
                         case 4://was 4
                             //from when command 4 was lantern. now it's "use"
@@ -1159,19 +1159,19 @@ public partial class Game : MonoBehaviour
                             break;
 
                         case 5:
-                            log.Printline((player.mob.speed>0)?"You coast.":"You wait.");trytomove(player.mob, 0,true);
+                            log.Printline((player.mob.speed>0)?"You coast.":"You wait.");trytomove(player.mob, 0,0);
                             break;
                         case 6:
-                            trytomove(player.mob, 7);//trytomove(-1, -1);// NW
+                            trytomove(player.mob, -1,-1);//trytomove(-1, -1);// NW
                             break;
                         case 7:
-                            trytomove(player.mob, 1);//trytomove(1, -1);//NE
+                            trytomove(player.mob, 1,-1);//trytomove(1, -1);//NE
                             break;
                         case 8:
-                            trytomove(player.mob, 5);// trytomove(-1, 1);//SW
+                            trytomove(player.mob, -1,1);// trytomove(-1, 1);//SW
                             break;
                         case 9:
-                            trytomove(player.mob, 3);// trytomove(1, 1);//SE
+                            trytomove(player.mob, 1,1);// trytomove(1, 1);//SE
                             break;
                         case 10://was 10
                             doaction();
