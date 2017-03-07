@@ -47,6 +47,37 @@ public class Ccity  {
         new Tcityaddons("teleporter",2000)
       
     };
-	
+
+    static List<string> citynames = new List<string>{
+        "Bristletown","Broomsville","Scorbee",
+        "Chogalog","Frome","Cottingham","Tunstall",
+        "Heslop","Wentworth","Goodricke","Vanbrugh",
+        "Langwith","Derwent","Zabra","Moog","Moopshire",
+        "Boblington","Pilkington","Ozric","Flicky Lumpton",
+        "Rogueton","Roguechester","Rogue Town","Dredmor","Angband",
+        "Steam City","Nethack","Korg","Ableton","Oblivion","Skyrim",
+        "Boulderdash","Harambe","Bigby","Douglas",
+        "Hupple Town","CCD Republic","Thin Walls",
+        "DS Creamton","Jabtown","The LN Frontier",
+        "Maurogistan", "Ondrasia", "Tanthie on Wye",
+        "Ebenopolis","Rsaa Realm","Jdaysia",
+        "Nootsville","Tussmehtown", "Seven Day City",
+        "Asda","Tesco","Pepsi","Coke","Tesla","Wallaby Stokesville"
+        //add moar
+    };
+
+    public string name;
+    public int posx, posy;//loc of city on map for teleport etc.
+
+    public int stored_production = 0;
+    public int stored_food = 0;
+    //store resources
+    public int[] stored_resources=new int[14];//hardcoded amount of resources seems dodgy but what can ya do
+
+    public int[] perturnresources = new int[14];
+    public yields perturnyields=new yields(0,0,0);
+
+    public List<Cell> influenced = new List<Cell>();
+
 }
 
