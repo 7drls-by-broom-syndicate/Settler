@@ -52,10 +52,11 @@ public class Ccity  {
       
     };
 
-
-
+    //public static List<string> citynames = new List<string>{
+     // "atown","btown","ctown" };
+    
     public static List<string> citynames = new List<string>{
-        "Bristletown","Broomsville","Scorbee",
+        "Bristletown","Broomsville","Scorbee","Spunkton",
         "Chogalog","Frome","Cottingham","Tunstall",
         "Heslop","Wentworth","Goodricke","Vanbrugh",
         "Langwith","Derwent","Zabra","Moog","Moopshire",
@@ -69,6 +70,10 @@ public class Ccity  {
         "Ebenopolis","Rsaa Realm","Jdaysia","Oddmundia",
         "Nootsville","Tussmehtown", "Seven Day City",
         "Asda","Tesco","Pepsi","Coke","Tesla","Wallaby Stokesville",
+        "Sinus","Cobble Bunton","Smacktown","Ipod","Ipad","Iphone","Android",
+        "Gervais","Merchant","Roland","Playstation","XBox","Nintendo","Microsoft",
+        "Sony","Square Enix","Final Fantasy","Stormwind","Ironforge","San d'Oria",
+        "Bastok","Windurst","Jeuno","Adoulin","Norg",
         //austria minus ones with accents
         "Vienna","Graz","Linz","Salzburg","Innsbruck","Klagenfurt","Villach","Wels","Dornbirn",
 "Wiener Neustadt","Steyr","Feldkirch","Bregenz","Leonding","Klosterneuburg",
@@ -86,7 +91,7 @@ public class Ccity  {
 "Brighton","Bristol","Cambridge","Canterbury","Cardiff","Carlisle",
 "Chelmsford","Chester","Chichester","Coventry","Derby","Derry",
 "Dundee","Durham","Edinburgh","Ely","Exeter","Glasgow","Gloucester",
-"Hereford","Inverness","Kingston upon Hull","Lancaster","Leeds",
+"Hereford","Inverness","Hull","Lancaster","Leeds",
 "Leicester","Lichfield","Lincoln","Lisburn","Liverpool","London",
 "Manchester","Newcastle upon Tyne","Newport","Newry","Norwich",
 "Nottingham","Oxford","Perth","Peterborough","Plymouth","Portsmouth",
@@ -94,7 +99,7 @@ public class Ccity  {
 "Stirling","Stoke-on-Trent","Sunderland","Swansea","Truro","Wakefield",
 "Wells","Westminster","Winchester","Wolverhampton","Worcester","York"
     };
-
+    
     public static int numcities;
 
     public string name;
@@ -116,8 +121,12 @@ public class Ccity  {
     public Ccity(int x,int y)
     {
         numcities++;
-        name = citynames[numcities];
+        if (numcities > citynames.Count) name = "No more names!";
+        else name = citynames[numcities];
         posx = x;posy = y;
     }
+
+    
+
 }
 

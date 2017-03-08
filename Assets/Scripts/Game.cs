@@ -1083,6 +1083,27 @@ public partial class Game : MonoBehaviour
                                         map.citylist.Add(citeh);
                                         map.citygrid[player.posx, player.posy] = citeh;
                                         log.Printline("The city of " + citeh.name + " was founded!",Color.magenta);
+
+                                        //influence
+                                        for (int zz = -1; zz < 2; zz++)
+                                        {
+                                            for (int ff = -1; ff < 2; ff++)
+                                            {
+                                                int tx = player.posx + zz;
+                                                int ty = player.posy + ff;
+                                                if (tx > 0 && ty > 0 && tx < map.width && ty < map.height)
+                                                {
+                                                    if (map.influence[tx, ty] == null)
+                                                    {
+                                                        map.influence[tx, ty] = true;
+                                                        citeh.influenced.Add(new Cell(tx, ty));
+                                                        map.citygrid[tx, ty] = citeh;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        //set up initial yields
+
                                         break;
                                     case 1://farm
                                         map.currentyield[player.posx, player.posy].add(0, 0, 2);
