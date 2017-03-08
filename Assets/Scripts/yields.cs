@@ -26,6 +26,12 @@ public class yields  {
         food += f;
     }
 
+    public void add(yields y)
+    {
+        production += y.production;
+        gold += y.gold;
+        food += y.food;
+    }
 
     public void set(int p,int g,int f)
     {

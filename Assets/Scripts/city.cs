@@ -52,7 +52,9 @@ public class Ccity  {
       
     };
 
-    static List<string> citynames = new List<string>{
+
+
+    public static List<string> citynames = new List<string>{
         "Bristletown","Broomsville","Scorbee",
         "Chogalog","Frome","Cottingham","Tunstall",
         "Heslop","Wentworth","Goodricke","Vanbrugh",
@@ -66,15 +68,41 @@ public class Ccity  {
         "Maurogistan", "Ondrasia", "Tanthie on Wye","Tenhiville",
         "Ebenopolis","Rsaa Realm","Jdaysia","Oddmundia",
         "Nootsville","Tussmehtown", "Seven Day City",
-        "Asda","Tesco","Pepsi","Coke","Tesla","Wallaby Stokesville"
-        //add moar
+        "Asda","Tesco","Pepsi","Coke","Tesla","Wallaby Stokesville",
+        //austria minus ones with accents
+        "Vienna","Graz","Linz","Salzburg","Innsbruck","Klagenfurt","Villach","Wels","Dornbirn",
+"Wiener Neustadt","Steyr","Feldkirch","Bregenz","Leonding","Klosterneuburg",
+"Baden bei Wien","Wolfsberg","Leoben","Krems","Traun","Amstetten","Lustenau",
+"Kapfenberg","Hallein","Kufstein","Traiskirchen","Schwechat","Braunau am Inn",
+"Stockerau","Saalfelden","Ansfelden","Tulln","Hohenems","Spittal an der Drau",
+"Telfs","Ternitz","Perchtoldsdorf","Feldkirchen","Bludenz","Bad Ischl","Eisenstadt",
+"Schwaz","Hall in Tirol","Gmunden","Wals-Siezenheim","Marchtrenk","Bruck an der Mur",
+"Sankt Veit an der Glan","Korneuburg","Neunkirchen","Hard","Lienz","Rankweil","Hollabrunn",
+"Enns","Brunn am Gebirge","Ried im Innkreis","Waidhofen","Knittelfeld","Trofaiach",
+"Mistelbach","Zwettl","Sankt Johann im Pongau","Gerasdorf bei Wien","Ebreichsdorf",
+"Bischofshofen","Seekirchen am Wallersee",
+//england - "st. something"s
+"Aberdeen","Armagh","Bangor","Bath","Belfast","Birmingham","Bradford",
+"Brighton","Bristol","Cambridge","Canterbury","Cardiff","Carlisle",
+"Chelmsford","Chester","Chichester","Coventry","Derby","Derry",
+"Dundee","Durham","Edinburgh","Ely","Exeter","Glasgow","Gloucester",
+"Hereford","Inverness","Kingston upon Hull","Lancaster","Leeds",
+"Leicester","Lichfield","Lincoln","Lisburn","Liverpool","London",
+"Manchester","Newcastle upon Tyne","Newport","Newry","Norwich",
+"Nottingham","Oxford","Perth","Peterborough","Plymouth","Portsmouth",
+"Preston4","Ripon","Salford","Salisbury","Sheffield","Southampton",
+"Stirling","Stoke-on-Trent","Sunderland","Swansea","Truro","Wakefield",
+"Wells","Westminster","Winchester","Wolverhampton","Worcester","York"
     };
+
+    public static int numcities;
 
     public string name;
     public int posx, posy;//loc of city on map for teleport etc.
 
-    public int stored_production = 0;
-    public int stored_food = 0;
+    //public int stored_production = 0;
+    //public int stored_food = 0;
+
     //store resources
     public int[] stored_resources=new int[14];//hardcoded amount of resources seems dodgy but what can ya do
 
@@ -84,5 +112,12 @@ public class Ccity  {
     public List<Cell> influenced = new List<Cell>();
 
     public int growthrate = 0;
+
+    public Ccity(int x,int y)
+    {
+        numcities++;
+        name = citynames[numcities];
+        posx = x;posy = y;
+    }
 }
 

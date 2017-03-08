@@ -1069,8 +1069,33 @@ public partial class Game : MonoBehaviour
 
                                 player.gold -= Ccity.addons[Game.currentmenu.currently_selected_option].cost;
                                 map.buildings[player.posx, player.posy] = Ccity.addons[Game.currentmenu.currently_selected_option].tile;
-                                                             
-                                
+
+                                //building on a tile destroys resources unless they are deep in the earth. deep! beyond the touch of bristle. that meanz joo, broomster.
+                                if (Game.currentmenu.currently_selected_option != 3 && map.resource[player.posx,player.posy]!=null && map.resource[player.posx,player.posy].destroyedbybuilding) map.resource[player.posx, player.posy] = null;
+
+                                Ccity citeh;
+
+                                //alter yields, do city stuff for city
+                                switch (Game.currentmenu.currently_selected_option)
+                                {
+                                    case 0://city
+                                        citeh = new Ccity(player.posx, player.posy);
+                                        map.citylist.Add(citeh);
+                                        map.citygrid[player.posx, player.posy] = citeh;
+                                        log.Printline("The city of " + citeh.name + " was founded!",Color.magenta);
+                                        break;
+                                    case 1://farm
+                                        map.currentyield[player.posx, player.posy].add(0, 0, 2);
+                                        break;
+                                    case 2://mine
+                                        map.currentyield[player.posx, player.posy].add(1, 2, 0);
+                                        break;
+                                    case 3://resource exploiter
+                                        map.currentyield[player.posx, player.posy].add(map.resource[player.posx, player.posy].yieldwhenworked);
+                                        break;
+                                }
+
+
                                   
                                
 

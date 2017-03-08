@@ -585,6 +585,9 @@ public void genlevelsettlerstyle()
         //        emptyspaces.Add(new Cell(x, y));
         //    }
 
+        Ccity.citynames.Shuffle();
+        Ccity.numcities = -1;
+
         float r = lil.randf(-1000, 1000);
         float r2 = lil.randf(-1000, 1000);
         float r3 = lil.randf(-1000, 1000);
