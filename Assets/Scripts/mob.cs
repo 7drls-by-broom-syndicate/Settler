@@ -48,7 +48,7 @@ public class mobarchetype
         upkeepfood = _upkeepfood;
         buildcostproduction = _buildprod;
         buildcostiron = _buildiron;
-        buildcosthorses = _buildhorse;
+        buildcosthorses =  _buildhorse;
 
         attacklow = _al;
         attackhigh = _ah;

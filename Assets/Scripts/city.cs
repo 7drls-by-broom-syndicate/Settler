@@ -36,6 +36,7 @@ public class addoninstance
 {
     public Tcityaddons type;
     public int storedproduction;
+    public mobarchetype mobtoproduce;
 
 }
 
