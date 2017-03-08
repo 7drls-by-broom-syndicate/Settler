@@ -1,7 +1,21 @@
+finish list of units in archetypes, remembering to do enemy versions of the basic units
+make a 2nd menu, "produce". if you press action key when over a barracks you get taht menu. can pick any unit to create even if don't have the 
+resources yet.
+your mobs walk around randomly until they detect an enemy camp, citadel or mob, then they attack it until it's dead or they are.
+
+basic things not done:
+
+city growing
+produce mobs
+enemy camps and citadel growing and producing mobs the same way you do
+better tooltips, panel under minimap showing square you are on? or use taht as tooltip area
+hero or gold huts
+
+
 eventually: pop up city list and mob list (per city)
 
 
-city needs a list of its cityaddons
+
 
 maybe we need to limit some city addons to 1 eg city hall. or rename it at least
 
