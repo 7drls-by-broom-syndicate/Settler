@@ -69,6 +69,12 @@ public class mob {
             0,0,0,0,0, // upkeep gold,food,buildcost production,iron,horses
             1,5,2, //attacklow,high,defence
             5,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+
+         new mobarchetype("scout","",2,false,true,Etilesprite.UNITS_PLAYER_SCOUT,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,0,0,0,0, // upkeep gold,food,buildcost production,iron,horses
+            1,5,2, //attacklow,high,defence
+            5,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
             )
     
             //do other units

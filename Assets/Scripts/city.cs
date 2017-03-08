@@ -158,6 +158,7 @@ public class Ccity  {
             y.add(map.currentyield[x.x, x.y]);
         }
         Debug.Log("yield now " + y.production + " " + y.gold + " " + y.food);
+        perturnyields = y;
     }
 
     public void takeaturn()

@@ -659,7 +659,7 @@ public partial class Game : MonoBehaviour
         //stop being scared of "foreach": think of all the other shitty garbage you are creating
 
         //DEBUGGING THING
-        player.hp = 60; //HP CHEAT DEBUG
+        //player.hp = 60; //HP CHEAT DEBUG
         foreach(var debugMob in map.moblist)//there's a mob in the moblist
         {
             if (map.itemgrid[debugMob.posx, debugMob.posy] == null)//the map's itemlist at the mob's position is null
@@ -695,6 +695,12 @@ public partial class Game : MonoBehaviour
             dirty = false;
         }
 
+        //city stuff
+
+        foreach(var cc in map.citylist)
+        {
+            cc.takeaturn();
+        }
         //bombs
         //foreach (var f in map.bomblist)
         //{

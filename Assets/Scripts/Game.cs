@@ -59,7 +59,12 @@ public partial class Game : MonoBehaviour
     //float[] snowy = new float[number_snow_particles];
     //
     byte[] bstrGameOver = System.Text.Encoding.ASCII.GetBytes("Game Over");
-    byte[] statusline = System.Text.Encoding.ASCII.GetBytes("HP:     SPEED:     LEVEL:     SCORE:");
+    //  byte[] statusline = System.Text.Encoding.ASCII.GetBytes("HP:     SPEED:     LEVEL:     SCORE:");
+
+    byte[] statusline;
+    int statusgold;
+    int statushp;
+
     byte[] winstring = System.Text.Encoding.ASCII.GetBytes("A winner is you!Score is:");
     Color whiteblend = new Color(1f, 1f, 1f, 0.8f);
     Color whiteblendvariable = new Color(0.9f, 0.1f, 0.1f, 0f);
@@ -566,12 +571,23 @@ public partial class Game : MonoBehaviour
 
                 //statusline
 
+            
+
+                if (statusgold != player.gold || statushp != player.hp) {
+                    statusline = System.Text.Encoding.ASCII.GetBytes(("Gold: " + player.gold + " Hp: " + player.hp));
+                    statusgold = player.gold;
+                    statushp = player.hp;
+                        }
+
                 GUI.color = Color.white;
                 PrintString(0, 359 - 12, statusline);
-                PrintNumber(3*6, 359 - 12, player.hp);
-                PrintNumber(14 * 6, 359 - 12, player.mob.speed);
-                PrintNumber(25 * 6, 359 - 12, player.dunlevel);
-                PrintNumber(37 * 6, 359 - 12, player.score);
+
+                //PrintNumber(3*6, 359 - 12, player.hp);
+                //PrintNumber(14 * 6, 359 - 12, player.mob.speed);
+                //PrintNumber(25 * 6, 359 - 12, player.dunlevel);
+                //PrintNumber(37 * 6, 359 - 12, player.score);
+
+
                 //DO YOU GOT THE BEEDZ, PANGO? THE BEEEEEDS! THE BEEEEEEEDS!
                 //if (player.mob.hasbeads) { DrawSprite(15, 21, (int)Etilesprite.ITEM_WARP_BEADS); }
                 //draw other buffs if applicz
