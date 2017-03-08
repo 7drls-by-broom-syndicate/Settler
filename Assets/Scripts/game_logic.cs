@@ -17,7 +17,7 @@ public partial class Game : MonoBehaviour
 
     void doplayerfovandlights()
     {
-        map.do_fov_rec_shadowcast(player.posx, player.posy, 11);
+        map.do_fov_rec_shadowcast(player.posx, player.posy, 5);//was 11
         map.dynamiclight.Fill(Color.black);
         if (player.lantern)
             map.do_fov_foradynamiclight(player.posx, player.posy, 11, Color.white);//was 9

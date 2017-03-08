@@ -14,7 +14,8 @@ public partial class RLMap
     static Color gatelight = lil.rgb_unitycolour(184, 133, 217);
     static Color lightgrey = new Color(0.7f, 0.7f, 0.7f);
     //    static Color walllight = new Color(1.0f/8f, 0.30859375f/8f, 0f);
-    public static Color memorylight = new Color(0f, 0f, 0.3f);
+    //public static Color memorylight = new Color(0f, 0f, 0.3f);
+    public static Color memorylight = Color.white;
     //static Color walllight = new Color(1.0f, 0.30859375f, 0.5f);
 
     //FOV STUFF

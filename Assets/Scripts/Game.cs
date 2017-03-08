@@ -353,7 +353,8 @@ public partial class Game : MonoBehaviour
                     for (int xx = originx; xx < originx + VIEWPORT_WIDTH; xx++)
                     {
 
-                        if (map.in_FOV.AtGet(xx, yy))
+                        // if (map.in_FOV.AtGet(xx, yy))
+                        if(!map.fogofwar.AtGet(xx, yy))
                         {
 
 #if FLICKERING_LANTERN
@@ -514,13 +515,13 @@ public partial class Game : MonoBehaviour
 
 
                         }
-                        else {
-                            if (!map.fogofwar.AtGet(xx, yy))
-                            {
-                                GUI.color = RLMap.memorylight;
-                                DrawSprite(screenx, screeny, (int)map.playermemory.AtGet(xx, yy));
-                            }
-                        }
+                        //else {
+                        //    if (!map.fogofwar.AtGet(xx, yy))
+                        //    {
+                        //        GUI.color = RLMap.memorylight;
+                        //        DrawSprite(screenx, screeny, (int)map.playermemory.AtGet(xx, yy));
+                        //    }
+                        //}
 
                         //draw the brief colour overlay on squares that is used for snake spit and 
                         //wizard bomb (if we get round to bomb that is)
@@ -887,7 +888,7 @@ public partial class Game : MonoBehaviour
         log = new MessageLog(50, 15);
         log.Printline("Settler by The Broom Institute: 7DRL 2017");
         log.Printline("This is the 7DRL work in progress.");
-        log.Printline("Lübeck Kraków");
+      
         //log.Printline("Resolution is " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
         lil.seednow();
         player = new Player(0);
@@ -915,7 +916,7 @@ public partial class Game : MonoBehaviour
         
         r_minimap = new Rect(336 * zoomfactor, 0, map.width * 2 * zoomfactor, map.height * 2 * zoomfactor);//was 339
 
-        map.fillminimap();
+        //map.fillminimap();
 
         //take this map reveal cheat out 
         /*
