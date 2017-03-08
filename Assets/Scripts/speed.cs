@@ -19,7 +19,7 @@
 //    public static void SpeedAndDirectionChange(mob m,int pressed)
 //    {
 //        //in comes pressed, 0-7 for direction pressed 0 is n round to 7 is nw
-//     //   int reldir = (pressed - m.facing);
+//     //   int reldir = ( - m.facing);
 //     //   if (reldir < 0) reldir += 8;
 //        //reldir is now 0-7 but is the difference, rotation-wise between the dir you were going and what you pressed
 //        //eg if you were going east and you pressed south it's 2

@@ -416,6 +416,22 @@ public partial class Game : MonoBehaviour
                                 DrawSprite(screenx, screeny, (int)map.buildings[xx, yy]);
 
 
+                            //draw influence. is this the right order in the layer chain? :D
+                            if (map.influence[xx, yy] == true)
+                            {
+                                GUI.color = colour_influenceplayer;
+                                DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_FULLSQUARE);
+                            }
+                            else
+                            {
+                                if (map.influence[xx, yy] == false)
+                                {
+                                    GUI.color = colour_influenceenemy;
+                                    DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_FULLSQUARE);
+                                }
+
+                            }
+
                             //}
                             //blood layer
                             //if (map.bloodgrid[xx, yy] != null)
@@ -1047,17 +1063,21 @@ public partial class Game : MonoBehaviour
                     {
                         switch (Game.currentmenu.type)
                         {
+                            
                             case Menu.Emenuidentity.build:
-                                switch (Game.currentmenu.currently_selected_option)
-                                {
-                                    case 0:
-                                        log.Printline("you selected the top option!");
-                                    break;
-                                    default:
-                                        log.Printline("you selected an option other than the top one!");
-                                        break;
-                                }
+                                //take the money, place the building, alter yields, do city stuff if city
+
+                                player.gold -= Ccity.addons[Game.currentmenu.currently_selected_option].cost;
+                                map.buildings[player.posx, player.posy] = Ccity.addons[Game.currentmenu.currently_selected_option].tile;
+                                                             
+                                
+                                  
+                               
+
+
+
                             break;
+                                //end of build menu
                         }
                         Game.menucommandwaiting = false;
                         TimeEngine = CradleOfTime.player_is_done;

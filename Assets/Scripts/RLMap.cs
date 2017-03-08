@@ -32,7 +32,9 @@ public partial class RLMap  {
     public Array2D<yields> yield;
     public Array2D<yields> currentyield;
     public Array2D<Tresource> resource;//this is the base resource for the tile and never changes
-  
+    public Array2D<bool?> influence;
+
+
     //public Array2D<int?> wizwalltime;
     public Array2D<int?> onfire;
     public Array2D<int?> bloodgrid;
@@ -264,6 +266,7 @@ public partial class RLMap  {
 
         yield= new Array2D<yields>(width, height);
         currentyield = new Array2D<yields>(width, height);
+        influence = new Array2D<bool?>(width, height, null);
 
         resource = new Array2D<Tresource>(width, height,null);
         

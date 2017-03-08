@@ -9,6 +9,9 @@ public partial class Game : MonoBehaviour
     Color ice_beam = new Color(0f, 0.2f, 0.7f, 0.5f);
     Color colour_damage = new Color(0.85f, 0.05f, 0.125f, 0.5f);
 
+    Color colour_influenceplayer = new Color(0, 0, 0.85f, 0.5f);
+    Color colour_influenceenemy = new Color(0.85f, 0, 0, 0.5f);
+
 
     // bool trytomove(int deltax, int deltay) {
 
@@ -512,6 +515,7 @@ public partial class Game : MonoBehaviour
         bool onmountain = map.mountain[player.posx, player.posy];
         bool onhill= map.hill[player.posx, player.posy];
         bool onpolar = check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_POLAR_1);
+        bool oninfluence=(map.influence[player.posx, player.posy]==true);
         int i = 0;
 
 
@@ -527,6 +531,7 @@ public partial class Game : MonoBehaviour
                 || (i==2 && !(onhill||onmountain)) //if not on hills or mountains disable mine
                 || (i==1 && (onmountain||onpolar||(onhill&&!waternsew)))//if on mountains or polar biome or (hill with no 4way water) disable farm
                 || (i==0 && (onmountain || onwater ||checkforbuildings(player.posx, player.posy)))
+                || ( (i>0 && i<4) && !oninfluence)
                 )
             ls.Add("/"+x.name + " (" + x.cost + ")");
             else  ls.Add(x.name + " (" + x.cost + ")");

@@ -22,29 +22,33 @@ public class Tcityaddons
 {
     public string name;
     public int cost;
+    public Etilesprite tile;
 
-    public Tcityaddons(string _n, int _cost)
+    public Tcityaddons(string _n, int _cost,Etilesprite _tile)
     {
         name = _n;
         cost = _cost;
+        tile = _tile;
     }
 }
 public class Ccity  {
     public static Tcityaddons[] addons =
     {
-        new Tcityaddons("city",1000),
-        new Tcityaddons("farm",10),new Tcityaddons("mine",20),new Tcityaddons("resource exploiter",100),
-        new Tcityaddons("town hall",100),
-        new Tcityaddons("factory",100),
-        new Tcityaddons("trading post",100),
-        new Tcityaddons("barracks",100),
-        new Tcityaddons("market",200),
-        new Tcityaddons("allotments",200),
-        new Tcityaddons("port and docks",200),
-        new Tcityaddons("guard post",350),
-        new Tcityaddons("armourer",400),
-        new Tcityaddons("blacksmith",400),
-        new Tcityaddons("teleporter",2000)
+        new Tcityaddons("city",1000,Etilesprite.BUILDINGS_CITY),
+        new Tcityaddons("farm",10,Etilesprite.BUILDINGS_IMPROVEMENTS_FARM),
+        new Tcityaddons("mine",20,Etilesprite.BUILDINGS_IMPROVEMENTS_MINE),
+        new Tcityaddons("resource exploiter",100,Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION),
+        new Tcityaddons("town hall",100,Etilesprite.BUILDINGS_TOWN_HALL),
+        new Tcityaddons("factory",100,Etilesprite.BUILDINGS_FACTORY),
+        new Tcityaddons("trading post",100,Etilesprite.BUILDINGS_TRADING_POST),
+        new Tcityaddons("barracks",100,Etilesprite.BUILDINGS_BARRACKS),
+        new Tcityaddons("market",200,Etilesprite.BUILDINGS_MARKET),
+        new Tcityaddons("allotments",200,Etilesprite.BUILDINGS_ALLOTMENTS),
+        new Tcityaddons("port and docks",200,Etilesprite.BUILDINGS_PORT_AND_DOCKS),
+        new Tcityaddons("guard post",350,Etilesprite.BUILDINGS_GUARD_POST),
+        new Tcityaddons("armourer",400,Etilesprite.BUILDINGS_ARMOURER),
+        new Tcityaddons("blacksmith",400,Etilesprite.BUILDINGS_BLACKSMITH),
+        new Tcityaddons("teleporter",2000,Etilesprite.BUILDINGS_TELEPORTER)
       
     };
 
@@ -79,5 +83,6 @@ public class Ccity  {
 
     public List<Cell> influenced = new List<Cell>();
 
+    public int growthrate = 0;
 }
 
