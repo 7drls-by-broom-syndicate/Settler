@@ -440,10 +440,60 @@ public partial class Game : MonoBehaviour
         if (m.isplayer) TimeEngine = CradleOfTime.player_is_done;
         return true;
     }
+    public bool checkforbuildings(int x,int y)
+    {
+        //check a 2 radius square round co-ords for buildings
+        for(int xx = x - 2; xx < x + 3; xx++)
+        {
+            for(int yy = y - 2; yy < y + 3; yy++)
+            {
+                if (xx>0&&yy>0&&xx<map.width&&yy<map.height&&map.buildings[xx, yy]!=Etilesprite.EMPTY)return true;
+            }
+        }
+
+
+        return false;
+    }
+    public bool check3(Etilesprite e, Etilesprite x)
+    {
+        //check if supplied tile e is of type x, i.e. is the same or in the same 3 set
+        //because there are 3 tiles for the biomes
+        //this is just to neaten the code. speed is not an issue.
+
+        int a = (int)e;
+        int b = (int)x;
+
+        return (a == b || a == b + 1 || a == b + 2);
+
+    }
+
+
     public void doaction()
     {
+        List<string> ls = new List<string>();
+
+        foreach (var x in Ccity.addons)
+        {
+            if(x.cost>player.gold)
+            ls.Add("/"+x.name + " (" + x.cost + ")");
+            else  ls.Add(x.name + " (" + x.cost + ")");
+        }
+
+        //can you build a city here?
+        //can't build city on a mountain, on coastal water or ocean
+        //or if there is a building in the area (2 square radius round this square)
+        if (map.mountain[player.posx, player.posy] ||
+            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_OCEAN_1) ||
+            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_COASTAL_WATER_1) ||
+            checkforbuildings(player.posx, player.posy))
+            ls[0] = "/" + ls[0];
+
+
         Game.currentmenu = new Menu(Menu.Emenuidentity.build,
-            "Build", new List<string> { "City", "Penis Farm", "/Fuck this option in particular","Quim Eatery"});
+            "Build", ls);
+
+
+
         Game.menuup = true;
         Game.currentmenu.setpos(32, 32);
      //   log.Printline("-action- pressed", Color.grey);

@@ -770,8 +770,8 @@ public void genlevelsettlerstyle()
                     }
                 }
 
-                
-
+                currentyield[x, y] = yield[x, y]; //copy base yield into current yield
+            
             }
 
 
