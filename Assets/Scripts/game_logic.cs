@@ -440,6 +440,20 @@ public partial class Game : MonoBehaviour
         if (m.isplayer) TimeEngine = CradleOfTime.player_is_done;
         return true;
     }
+
+    public bool water4way(int x,int y)
+    {
+        if (x >= 1 && water(x - 1, y)) return true;
+        if (x <= map.width-2 && water(x + 1, y)) return true;
+        if (y >= 1 && water(x , y-1)) return true;
+        if (y <= map.height - 2 && water(x , y+1)) return true;
+        return false;
+           
+    }
+    public bool water(int x,int y)
+    {
+        return (check3(map.displaychar[x, y], Etilesprite.BASE_TILE_OCEAN_1) || check3(map.displaychar[x, y], Etilesprite.BASE_TILE_COASTAL_WATER_1));
+    }
     public bool checkforbuildings(int x,int y)
     {
         //check a 2 radius square round co-ords for buildings
@@ -447,15 +461,31 @@ public partial class Game : MonoBehaviour
         {
             for(int yy = y - 2; yy < y + 3; yy++)
             {
-                if (xx>0&&yy>0&&xx<map.width&&yy<map.height&&map.buildings[xx, yy]!=Etilesprite.EMPTY)return true;
+                if (xx>0&&yy>0&&xx<map.width&&yy<map.height&&map.buildings[xx, yy]!=Etilesprite.EMPTY
+                    && map.buildings[xx, yy] != Etilesprite.BUILDINGS_IMPROVEMENTS_FARM
+                    && map.buildings[xx, yy] != Etilesprite.BUILDINGS_IMPROVEMENTS_MINE
+                    && map.buildings[xx, yy] != Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION) return true;
             }
         }
 
 
         return false;
     }
+    public bool citycheck9way(int x,int y)
+    {
+        for (int xx = x - 1; xx < x + 2; xx++)
+        {
+            for (int yy = y - 1; yy < y + 2; yy++)
+            {
+                if (xx > 0 && yy > 0 && xx < map.width && yy < map.height && map.buildings[xx, yy] ==Etilesprite.BUILDINGS_CITY)
+                    return true;
+            }
+        }
+        return false;
+    }
     public bool check3(Etilesprite e, Etilesprite x)
     {
+        //returns true if e matches x
         //check if supplied tile e is of type x, i.e. is the same or in the same 3 set
         //because there are 3 tiles for the biomes
         //this is just to neaten the code. speed is not an issue.
@@ -472,21 +502,41 @@ public partial class Game : MonoBehaviour
     {
         List<string> ls = new List<string>();
 
+        bool onbuilding = map.buildings[player.posx, player.posy] != Etilesprite.EMPTY;
+        bool onwater = (
+            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_OCEAN_1 )||
+            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_COASTAL_WATER_1)
+            );
+        bool waternsew = water4way(player.posx, player.posy);
+
+        bool onmountain = map.mountain[player.posx, player.posy];
+        bool onhill= map.hill[player.posx, player.posy];
+        bool onpolar = check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_POLAR_1);
+        int i = 0;
+
+
+
         foreach (var x in Ccity.addons)
         {
-            if(x.cost>player.gold)
+            if(x.cost>player.gold //disable if can't afford it
+                || onbuilding//can't replace one building with another. change this later eg build city on farm etc.
+                || (i!=3 && onwater)//if on water disable everything except resource exploiter
+                || (i==3 && map.resource[player.posx,player.posy]==null)//if no resource disable resource exploiter
+                || (i>=4 && !citycheck9way(player.posx,player.posy))//if there isn't a city in 9 way disable all city addons
+                || (i==10 && !waternsew)//if there isn't 4 way access to coastal water or ocean , disable port and docks
+                || (i==2 && !(onhill||onmountain)) //if not on hills or mountains disable mine
+                || (i==1 && (onmountain||onpolar||(onhill&&!waternsew)))//if on mountains or polar biome or (hill with no 4way water) disable farm
+                || (i==0 && (onmountain || onwater ||checkforbuildings(player.posx, player.posy)))
+                )
             ls.Add("/"+x.name + " (" + x.cost + ")");
             else  ls.Add(x.name + " (" + x.cost + ")");
-        }
 
-        //can you build a city here?
-        //can't build city on a mountain, on coastal water or ocean
-        //or if there is a building in the area (2 square radius round this square)
-        if (map.mountain[player.posx, player.posy] ||
-            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_OCEAN_1) ||
-            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_COASTAL_WATER_1) ||
-            checkforbuildings(player.posx, player.posy))
-            ls[0] = "/" + ls[0];
+            i++;
+        }
+                         
+        //if not in city influence disable farm, mine and resource exploiter
+              
+     
 
 
         Game.currentmenu = new Menu(Menu.Emenuidentity.build,

@@ -1,3 +1,7 @@
+data structures for city influence. influence can be player or enemy (barbarian)
+number of turns it takes city to grow. this is unique to each city
+list of influenced squares
+rlmap has influence map. try bool? null is no influence, true is player, false is enemy
 
 
 
@@ -11,7 +15,7 @@ need data structures for:
 	cities
 	
 
-
+szczęśliwy 
 
 
 stage 1

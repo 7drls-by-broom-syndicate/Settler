@@ -59,8 +59,8 @@ public class Ccity  {
         "Boulderdash","Harambe","Bigby","Douglas",
         "Hupple Town","CCD Republic","Thin Walls",
         "DS Creamton","Jabtown","The LN Frontier",
-        "Maurogistan", "Ondrasia", "Tanthie on Wye",
-        "Ebenopolis","Rsaa Realm","Jdaysia",
+        "Maurogistan", "Ondrasia", "Tanthie on Wye","Tenhiville",
+        "Ebenopolis","Rsaa Realm","Jdaysia","Oddmundia",
         "Nootsville","Tussmehtown", "Seven Day City",
         "Asda","Tesco","Pepsi","Coke","Tesla","Wallaby Stokesville"
         //add moar
