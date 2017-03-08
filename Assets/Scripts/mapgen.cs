@@ -801,6 +801,18 @@ public void genlevelsettlerstyle()
         FreeSpace(out buildx, out buildy);
         resource[buildx, buildy] = null;
         buildings[buildx, buildy] = Etilesprite.BUILDINGS_BARBARIAN_CITADEL;
+        
+        
+        //goodie huts
+   for (int f = 0; f < 4; f++)
+        {
+            FreeSpace(out buildx, out buildy);
+            resource[buildx, buildy] = null;
+            buildings[buildx, buildy] = Etilesprite.BUILDINGS_GOODIE_HUT;
+        }
+        
+        
+        
         //dostaticlights();
     }
 

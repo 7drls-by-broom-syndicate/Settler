@@ -1,22 +1,18 @@
-notes for 7drl 2017 civrl
 
 
-(ice)
-tundra (boreal forest)
-taiga
-	mink/ermine,
-temperate rainforest
-temperate seasonal forest
-woodland/scrubland
-temperate grassland/cold desert
-tropical rainforest
-	black pepper, vanilla, tropical plants->medicine
-savanna
-subtropical forest
+
+use menu to build stuff
+
+need data structures for:
+	cost of buildings
+	store gold on player
+	store production and food in city
+	store resources in city
+	cities
+	
 
 
-project with old civ map gen:
-C:\Users\graspee\Documents\Visual Studio 2013\Projects\bepangod
+
 
 stage 1
 you generate a map. the map has tiles on for things like mountains, lakes, rivers,
@@ -54,127 +50,7 @@ do in the game?
 
 maybe have independent cities in the game and they demand luxury goods. you have to build a road between your city that has that good in its influence range
 
-
----------------
-from spreadsheet
------------------
-
-
-	polar	polar	polar	polar	polar						
-	tundra	tundra	tundra	tundra	tundra						
-	taiga	taiga	taiga	taiga	taiga						
-	alpine	alpine	alpine	alpine	alpine		(mediterranean == cold desert)				
-	mediter		prairie		temp forest		(prairie==temperate grassland)				
-	mediter		prairie		temp forest		(temp forest==temp deciduous forest)				
-	desert		savanna		tropical RF						
-	desert		savanna		tropical RF						
-											
-											
-	base tile:	base 2	yield	resource	building	unit					
-	polar	mountain	hammer	leather	city	player					
-	tundra	hill	coin	oranges	city addons incl wonders	heroes					
-	taiga	trees(vary)	apple	sheep	tile improvements for tiles	player army					
-	alpine			coffee	tile improvements for resources	barbarians					
-	mediter			gems	city state						
-	prairie			oil	barbarian camp						
-	temp forest			copper	barbarian citadel						
-	desert			silver							
-	savanna			gold							
-	tropical rf			trop. Plants							
-	coastal water			fish							
-	ocean			iron [s]							
-				horses [s]							
-				honey							
-											
-											
-											
-	units for player and barbarian version										
-											
-hp	name	needs	attack	defense	notes	sight radius	upkeep cost	tank?	attacks	parry	move
-2	scout		1-2	0	doesn't attack, bigger sight radius	3	1		1		1
-8	clubber		1-4	0		1	2		1		1
-8	spearman		1-6	0		1	2		1		1
-20	knight	iron	2-8	2		1	4		1		1
-12	pikeman	iron	3-9	0		1	4		1		1
-10	mounted clubber	horse	1-4	0	double move or move + attack	1	8		1		2
-22	mounted knight	horse, iron	2-8	2	double move or move + attack	1	8		1		2
-40	player		1-5	2		5	--		1		1
-40	barbarian champion		1-10	3			--		1		1
-200	barbarian lord		1-10	5	unique, ranged attack, charges, melee attacks knockback		--		1		1
-40	Broom		1-10	1	"clean sweep" attack in a line	3	10		1		1
-100	Moop 		1-4	2		3	10	yes	2		1
-10	Torkin Spider		1-1	0		3	10		8		1
-100	Reginald Marsby		1-6	2		3	10	yes	1		1
-40	Chickadee Monserat		2-8	2			10	yes	1	yes	1
-40	Benzedrene the ESR		1-4	2	ranged attack, ignores def		10		1		1
-40	Creepy Salado		1-4	1	"flash" aoe stun		10		1		1
-40	Doctor Barnaby		1-4	1	aoe heal		10		1		1
-100	Pango Pangolin		2-8	4			10	yes	1		1
-2	trader		0	0							
-											
-	tile bonuses	gold	production	food	combat 						
-											
-	polar	0	0	0							
-	tundra	0	0	1							
-	taiga	0	1	0							
-	alpine	0	1	1							
-	mediter	1	2	2							
-	prairie	1	2	2							
-	temp forest	1	2	2							
-	desert	0	0	0							
-	savanna	0	1	1							
-	tropical rf	0	0	1							
-	coastal water	1	0	1							
-	ocean	0	0	0							
-											
-	hills add 1 production				25% defence for defender, 25% attack for attacker						
-	forest add 1 production 1 food				25% defence for defender if attacker not in forest						
-											
-	building farm where allowed will add 2 food										
-	building mine on hills will add 2 production 2 gold (make sure mine costs more than farm)										
-											
-											
-	things you can build		cost gold								
-											
-	city		1000								
-improves	farm		10								
-	mine		20								
-	resource exploiter		100								
-city parts	factory		100		10 production						
-	trading post				send a named resource to a named city state for money if turned on						
-	barracks				produces named military unit if possible and turned on						
-	market 		200		10 gold						
-	allotments		200		10 food						
-	guard post		350		ups defence of city						
-	armourer		400		+1 defence for units produced by this city						
-	blacksmith		400		+1 attack for units produced by this city						
-	port (only next to coastal water)		200		7 gold 7 food						
-	teleporter		2000		instant travel between cities						
-	city planning office				makes city grow faster						
-											
-	wonders? No wonders. No natural wonders. Stretch goal										
-											
-	in addition to adding that resource, exploiting the resource adds the following bonuses:										
-											
-	leather		5 production								
-	oranges	5 food									
-	sheep	3 food	3 production								
-	coffee	5 food									
-	gems			5 gold							
-	oil		5 production								
-	copper		2 product	3 gold							
-	silver			4 gold							
-	gold			5 gold							
-	trop. Plants		5 production								
-	fish	5 food									
-	iron [s]		5 production								
-	horses [s]		5 production								
-	honey	5 food									
-	
-	words to "avoid"
-	
-	Tribal.
-Primitive.
-Braves.
-Savage
-
+boat issue:
+	new buildings: boat builder, sturdy boat builder
+	the buildings create an object to pick up that is boat or sturdy boat
+	sturdy boat is only one trip and works only on shallow water?

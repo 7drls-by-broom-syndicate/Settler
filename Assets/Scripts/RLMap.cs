@@ -232,7 +232,7 @@ public partial class RLMap  {
         minimapcolours[(int)Etilesprite.BUILDINGS_PORT_AND_DOCKS] = Color.blue;
         minimapcolours[(int)Etilesprite.BUILDINGS_TELEPORTER] = Color.blue;
         minimapcolours[(int)Etilesprite.BUILDINGS_TOWN_HALL] = Color.blue;
-
+        minimapcolours[(int)Etilesprite.BUILDINGS_GOODIE_HUT] = Color.yellow;
 
 
 
