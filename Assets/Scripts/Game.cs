@@ -1079,9 +1079,9 @@ public partial class Game : MonoBehaviour
                                 switch (Game.currentmenu.currently_selected_option)
                                 {
                                     case 0://city
-                                        citeh = new Ccity(player.posx, player.posy);
+                                        citeh = new Ccity(player.posx, player.posy,map,player,log);
                                         map.citylist.Add(citeh);
-                                        map.citygrid[player.posx, player.posy] = citeh;
+                                        map.citythathasinfluence[player.posx, player.posy] = citeh;
                                         log.Printline("The city of " + citeh.name + " was founded!",Color.magenta);
 
                                         //influence
@@ -1097,22 +1097,33 @@ public partial class Game : MonoBehaviour
                                                     {
                                                         map.influence[tx, ty] = true;
                                                         citeh.influenced.Add(new Cell(tx, ty));
-                                                        map.citygrid[tx, ty] = citeh;
+                                                        map.citythathasinfluence[tx, ty] = citeh;
                                                     }
                                                 }
                                             }
                                         }
                                         //set up initial yields
+                                        citeh.recalcyield();
+
+
 
                                         break;
                                     case 1://farm
                                         map.currentyield[player.posx, player.posy].add(0, 0, 2);
+                                        map.citythathasinfluence[player.posx, player.posy].perturnyields.add(0, 0, 2);
+                                        //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
                                     case 2://mine
                                         map.currentyield[player.posx, player.posy].add(1, 2, 0);
+                                        map.citythathasinfluence[player.posx, player.posy].perturnyields.add(1,2,0);
+                                        //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
                                     case 3://resource exploiter
                                         map.currentyield[player.posx, player.posy].add(map.resource[player.posx, player.posy].yieldwhenworked);
+                                        map.citythathasinfluence[player.posx, player.posy].perturnyields.add(map.resource[player.posx, player.posy].yieldwhenworked);
+                                        //add resources too, as in coffee, horses:
+                                        map.citythathasinfluence[player.posx, player.posy].perturnresources[(int)map.resource[player.posx, player.posy].ert]++;
+                                        //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
                                 }
 

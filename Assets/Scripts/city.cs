@@ -31,6 +31,14 @@ public class Tcityaddons
         tile = _tile;
     }
 }
+
+public class addoninstance
+{
+    public Tcityaddons type;
+    public int storedproduction;
+
+}
+
 public class Ccity  {
     public static Tcityaddons[] addons =
     {
@@ -38,6 +46,7 @@ public class Ccity  {
         new Tcityaddons("farm",10,Etilesprite.BUILDINGS_IMPROVEMENTS_FARM),
         new Tcityaddons("mine",20,Etilesprite.BUILDINGS_IMPROVEMENTS_MINE),
         new Tcityaddons("resource exploiter",100,Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION),
+
         new Tcityaddons("town hall",100,Etilesprite.BUILDINGS_TOWN_HALL),
         new Tcityaddons("factory",100,Etilesprite.BUILDINGS_FACTORY),
         new Tcityaddons("trading post",100,Etilesprite.BUILDINGS_TRADING_POST),
@@ -52,8 +61,7 @@ public class Ccity  {
       
     };
 
-    //public static List<string> citynames = new List<string>{
-     // "atown","btown","ctown" };
+    public List<addoninstance> thiscitysaddons=new List<addoninstance>();
     
     public static List<string> citynames = new List<string>{
         "Bristletown","Broomsville","Scorbee","Spunkton",
@@ -73,7 +81,9 @@ public class Ccity  {
         "Sinus","Cobble Bunton","Smacktown","Ipod","Ipad","Iphone","Android",
         "Gervais","Merchant","Roland","Playstation","XBox","Nintendo","Microsoft",
         "Sony","Square Enix","Final Fantasy","Stormwind","Ironforge","San d'Oria",
-        "Bastok","Windurst","Jeuno","Adoulin","Norg",
+        "Bastok","Windurst","Jeuno","Adoulin","Norg","Ottertown","Rogue Basin",
+        "Lisp","Cobol","Kobold","Slashie","Darkgod","Katana","Schwackabee",
+
         //austria minus ones with accents
         "Vienna","Graz","Linz","Salzburg","Innsbruck","Klagenfurt","Villach","Wels","Dornbirn",
 "Wiener Neustadt","Steyr","Feldkirch","Bregenz","Leonding","Klosterneuburg",
@@ -99,14 +109,17 @@ public class Ccity  {
 "Stirling","Stoke-on-Trent","Sunderland","Swansea","Truro","Wakefield",
 "Wells","Westminster","Winchester","Wolverhampton","Worcester","York"
     };
-    
+
+    public List<mob> unitlist;
+    public int armycostperturn=0;
+
     public static int numcities;
 
     public string name;
     public int posx, posy;//loc of city on map for teleport etc.
 
     //public int stored_production = 0;
-    //public int stored_food = 0;
+    public int stored_food = 0;
 
     //store resources
     public int[] stored_resources=new int[14];//hardcoded amount of resources seems dodgy but what can ya do
@@ -116,17 +129,52 @@ public class Ccity  {
 
     public List<Cell> influenced = new List<Cell>();
 
-    public int growthrate = 0;
+    public bool growthboost = false;
+    public int growthcounter=0;
 
-    public Ccity(int x,int y)
+    RLMap map;Player player;
+    MessageLog log;
+
+    public Ccity(int x,int y,RLMap m,Player p,MessageLog ml)
+
     {
+        log = ml;
+        player = p;
         numcities++;
         if (numcities > citynames.Count) name = "No more names!";
         else name = citynames[numcities];
         posx = x;posy = y;
+        map = m;
     }
 
-    
+   public void recalcyield()
+    {
+        //add up the "currentyield" in each square this city owns
+        //currentyield is the base yield of the tile plus any improvements like worked resources, mines or farms
+        yields y = new yields(0, 0, 0);
+        foreach (var x in influenced)
+        {
+            y.add(map.currentyield[x.x, x.y]);
+        }
+        Debug.Log("yield now " + y.production + " " + y.gold + " " + y.food);
+    }
+
+    public void takeaturn()
+    {
+        //we need to do the yields and the resources and the growth
+
+        //stored resources  
+        for(int i = 0; i < 14; i++)
+        {
+            stored_resources[i] += perturnresources[i];
+        }
+        //yields. gold goes straight to player.
+        player.gold += perturnyields.gold;
+        //production goes to barracks (and trader?)
+
+        //food goes to standing army. any left over makes city grow!
+        
+    }
 
 }
 

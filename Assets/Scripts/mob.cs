@@ -22,47 +22,56 @@ public class mobarchetype
     public int hp;
     public bool heavy;
 
-    public mobarchetype(bool _heavy,string _name,string _wep,int _hp,
-        bool _hostileplayer,bool _hostileenemy,
-        bool _undead,bool _skates,bool _flies,
-        Etilesprite _tile,Etilesprite _tile_dead,Etilesprite _tile_undead)
+    //new for settler:
+    public int upkeepgold;
+    public int upkeepfood;
+    public int buildcostproduction;
+    public int buildcostiron;
+    public int buildcosthorses;
+
+    public int attacklow;
+    public int attackhigh;
+    public int defence;
+    public int sightradius;
+    public bool tank;
+    public bool parry;
+    public int moves;
+    public int attacks;
+
+
+    public mobarchetype(string _name,string _wep,int _hp,bool _hostileplayer,bool _hostileenemy,Etilesprite _tile,
+        int _upkeepgold,int _upkeepfood,int _buildprod,int _buildhorse,int _buildiron,
+        int _al,int _ah,int _def,int _sr,bool _tank,bool _parry,int _moves,int _attacks)
     {
-        heavy = _heavy; name = _name; weaponname = _wep; hp = _hp; skates = _skates;flies = _flies;
-        tile = _tile; tile_dead = _tile_dead;tile_undead = _tile_undead;
+        name = _name; weaponname = _wep; hp = _hp; tile = _tile;hostile_toplayer = _hostileplayer;hostile_toenemies = _hostileenemy;
+        upkeepgold = _upkeepgold;
+        upkeepfood = _upkeepfood;
+        buildcostproduction = _buildprod;
+        buildcostiron = _buildiron;
+        buildcosthorses = _buildhorse;
+
+        attacklow = _al;
+        attackhigh = _ah;
+        defence = _def;
+        sightradius = _sr;
+        tank = _tank;
+        parry = _parry;
+        moves = _moves;
+        attacks = _attacks;
     }
 }
 
 public class mob {
 
     public static mobarchetype[] archetypes =
-    {//                   heavy? name       wep       hp  hostp hoste unded   skates flies    tile,deadtile,undeadtile
-        new mobarchetype(false,"pango","sword",       40, false,true,false,   true,false,     Etilesprite.UNITS_PLAYER,Etilesprite.EMPTY,Etilesprite.EMPTY)
-        //new mobarchetype(false,"marsby","assegai",    40, false,true,false,   true,false,     Etilesprite.PLAYER_REGINALD_MARSBY,Etilesprite.EMPTY,Etilesprite.EMPTY),
-        //new mobarchetype(false,"papa greebo","chainhook",40, false,true,false,true,false,  Etilesprite.PLAYER_PAPA_GREEBO,Etilesprite.EMPTY,Etilesprite.EMPTY),
-        //new mobarchetype(true,"polarmoop","claws",   60, false,true,false,   false,false,     Etilesprite.PLAYER_POLARMOOP,Etilesprite.EMPTY,Etilesprite.EMPTY),
-
-        //new mobarchetype(true,"polarmoop","claws",   15, true,false,false,   false,false,    Etilesprite.ENEMY_POLARMOOP,Etilesprite.ENEMY_POLARMOOP_CORPSE,Etilesprite.ENEMY_POLARMOOP_SKELETON) ,
-        //new mobarchetype(false,"lancer","spear",      10, true,false,false,   true,false,     Etilesprite.ENEMY_SKATER_SPEAR,Etilesprite.ENEMY_SKATER_CORPSE,Etilesprite.ENEMY_HUMAN_SKELETON) ,
-        //new mobarchetype(false,"antipaladin","sword", 10, true,false,false,   true,false,     Etilesprite.ENEMY_SKATER_SWORDANDBOARD,Etilesprite.ENEMY_SKATER_CORPSE,Etilesprite.ENEMY_HUMAN_SKELETON) ,
-        //new mobarchetype(false,"swinger","chain",     10, true,false,false,   true,false,     Etilesprite.ENEMY_SKATER_CHAIN,Etilesprite.ENEMY_SKATER_CORPSE,Etilesprite.ENEMY_HUMAN_SKELETON) ,
-        //new mobarchetype(false,"tef-rog","dagger",    10, true,false,false,   true,false,     Etilesprite.ENEMY_SKATER_DAGGER,Etilesprite.ENEMY_SKATER_CORPSE,Etilesprite.ENEMY_HUMAN_SKELETON),
-        //new mobarchetype(false,"giant bat","fangs",   5,  true,false,false,   false,true,     Etilesprite.ENEMY_GIANTBAT,Etilesprite.ENEMY_GIANTBAT_CORPSE,Etilesprite.ENEMY_GIANTBAT_SKELETON),
-        //new mobarchetype(false,"kobby bomber","knife",5,  true,false,false,   false,false,    Etilesprite.ENEMY_KOBBY_BOMBER,Etilesprite.ENEMY_KOBBY_BOMBER_CORPSE,Etilesprite.ENEMY_KOBBY_BOMBER_SKELETON),
-        //new mobarchetype(false,"ice mage","frost hands",    10, true,false,false,   false,false,    Etilesprite.ENEMY_MAGE,Etilesprite.ENEMY_MAGE_CORPSE,Etilesprite.ENEMY_HUMAN_SKELETON),
-        //new mobarchetype(false,"necromancer","drain life", 10, true,false,false,   false,false,    Etilesprite.ENEMY_NECROMANCER,Etilesprite.ENEMY_NECROMANCER_CORPSE,Etilesprite.ENEMY_LICH),
-
-        //new mobarchetype(false,"wolf","bite",         5,  false,true,false,   false,false,    Etilesprite.PLAYER_COMPANION_WOLF,Etilesprite.PLAYER_COMPANION_WOLF_CORPSE,Etilesprite.PLAYER_COMPANION_WOLF_SKELETON),
-        //new mobarchetype(false,"muhkitten","sharps",  1,  false,true,false,   false,false,    Etilesprite.PLAYER_COMPANION_MUHKITTENS_BLACK,Etilesprite.PLAYER_COMPANION_MUHKITTENS_BLACK_CORPSE,Etilesprite.PLAYER_COMPANION_MUHKITTENS_SKELETON),
-        //new mobarchetype(false,"muhkitten","sharps",  1,  false,true,false,   false,false,    Etilesprite.PLAYER_COMPANION_MUHKITTENS_BW,Etilesprite.PLAYER_COMPANION_MUHKITTENS_BW_CORPSE,Etilesprite.PLAYER_COMPANION_MUHKITTENS_SKELETON),
-        //new mobarchetype(false,"muhkitten","sharps",  1,  false,true,false,   false,false,    Etilesprite.PLAYER_COMPANION_MUHKITTENS_GINGER,Etilesprite.PLAYER_COMPANION_MUHKITTENS_GINGER_CORPSE,Etilesprite.PLAYER_COMPANION_MUHKITTENS_SKELETON),
-        //new mobarchetype(false,"muhkitten","sharps",  1,  false,true,false,   false,false,    Etilesprite.PLAYER_COMPANION_MUHKITTENS_BRITISHBLUE,Etilesprite.PLAYER_COMPANION_MUHKITTENS_BRITISHBLUE_CORPSE,Etilesprite.PLAYER_COMPANION_MUHKITTENS_SKELETON),
-
-        //new mobarchetype(false,"summoned skel","raw bones",5,true,false,true,    false,false,Etilesprite.ENEMY_HUMAN_SKELETON,Etilesprite.EMPTY,Etilesprite.ENEMY_HUMAN_SKELETON),
-        //new mobarchetype(true,"ice golem","icy prong",2,true,false,false,  false,false,    Etilesprite.ENEMY_ICE_GOLEM,Etilesprite.EMPTY,Etilesprite.EMPTY),
-        //HP OF GOLEM IS 20
-        //new mobarchetype(false,"lich","drain life",        5,true,false,true,    false,true,     Etilesprite.ENEMY_LICH,Etilesprite.EMPTY,Etilesprite.EMPTY),
-
-        //new mobarchetype(false,"hopped-up fox","bodypart",5,true,true,false,false,false,    Etilesprite.ENEMY_HOPPED_UP_FOX,Etilesprite.ENEMY_HOPPED_UP_FOX_CORPSE,Etilesprite.ENEMY_HOPPED_UP_FOX_SKELETON)
+    {//                 
+        new mobarchetype("@snake","sword",40,false,true,Etilesprite.UNITS_PLAYER,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,0,0,0,0, // upkeep gold,food,buildcost production,iron,horses
+            1,5,2, //attacklow,high,defence
+            5,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            )
+    
+            //do other units
            
  };
 

@@ -1,19 +1,28 @@
-data structures for city influence. influence can be player or enemy (barbarian)
-number of turns it takes city to grow. this is unique to each city
-list of influenced squares
-rlmap has influence map. try bool? null is no influence, true is player, false is enemy
+eventually: pop up city list and mob list (per city)
+
+
+city needs a list of its cityaddons
+
+maybe we need to limit some city addons to 1 eg city hall. or rename it at least
+
+barracks at least needs a count of production horses and iron pumped into it. or just count up the production and when you have enough,
+check if you have the horses and iron
+
+if a city is destroyed there will still by citygrid links to it in map. set them to null.
+citygrid points to the city that has influence on that square. it's possible for there to be a city addon for a different city on that tile
+x where you build city has to be neutral influence
+//city gets initual 8 squares but only if they are neutral
+
+//you need "which city owns this tile" map
+//create city object
+//list of cities in rlmap
+
+display gold, turn
 
 
 
-use menu to build stuff
 
-need data structures for:
-	cost of buildings
-	store gold on player
-	store production and food in city
-	store resources in city
-	cities
-	
+
 
 szczęśliwy 
 
