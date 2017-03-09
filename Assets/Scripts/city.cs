@@ -63,7 +63,20 @@ public class Ccity  {
     };
 
     public List<addoninstance> thiscitysaddons=new List<addoninstance>();
-    
+
+
+    public static List<string> citynamesevil = new List<string>
+    {
+        "Scab","Fester","Deathly","Ooze","Rattle",
+        "Terminus","Panic","Stab","Knife","Jagged","Black",
+        "Stale","Crusty","Weeping","Dark","Spike","Flail","Blade's Edge",
+        "Crush","Peel","Torture","Pain","Rape","Suicide","Abortion",
+        "Murder","Crime","Punishment","Sin","Greed","Gluttony","Disease",
+        "Pallor","Failure","Depression","Infanticide","Bully","Jeer","Leer",
+        "Puncture","Penetration","Slice","Hack","Chop","Slash","Acidbath"
+    };
+
+
     public static List<string> citynames = new List<string>{
         "Bristletown","Broomsville","Scorbee","Spunkton",
         "Chogalog","Frome","Cottingham","Tunstall",
@@ -111,6 +124,8 @@ public class Ccity  {
 "Wells","Westminster","Winchester","Wolverhampton","Worcester","York"
     };
 
+    public bool isfrenzleecity;
+
     public List<mob> unitlist;
     public int armycostperturn=0;
 
@@ -136,16 +151,43 @@ public class Ccity  {
     RLMap map;Player player;
     MessageLog log;
 
-    public Ccity(int x,int y,RLMap m,Player p,MessageLog ml)
+    public int evilgold;//enemy cities don't spend gold. instead they accumulate it and it's given to player when they kill it
+
+    public int hp = 100;
+    public int defence = 2;
+    public static int numcitiesevil=0;
+    public Ccity(bool frenz,int x,int y,RLMap m,Player p)//,MessageLog ml)
 
     {
-        log = ml;
+        isfrenzleecity = frenz;
+        //log = ml;
         player = p;
-        numcities++;
-        if (numcities > citynames.Count) name = "No more names!";
-        else name = citynames[numcities];
+
+        if (isfrenzleecity)
+        {
+            numcities++;
+            if (numcities > citynames.Count) name = "No more names!";
+            else name = citynames[numcities];
+        }
+        else
+        {
+            numcitiesevil++;
+            if (numcitiesevil > citynamesevil.Count) name = "!";
+            else name = citynamesevil[numcitiesevil];
+        }
         posx = x;posy = y;
         map = m;
+
+
+        map.citylist.Add(this);
+        map.citythathasinfluence[player.posx, player.posy] = this;
+        //log.Printline("The city of " + citeh.name + " was founded!", Color.magenta);
+
+        //influence
+        grabinitialsquares();
+        //set up initial yields
+        recalcyield();
+
     }
 
    public void recalcyield()
@@ -157,7 +199,7 @@ public class Ccity  {
         {
             y.add(map.currentyield[x.x, x.y]);
         }
-        Debug.Log("yield now " + y.production + " " + y.gold + " " + y.food);
+       // Debug.Log("yield now " + y.production + " " + y.gold + " " + y.food);
         perturnyields = y;
     }
 
@@ -170,13 +212,36 @@ public class Ccity  {
         {
             stored_resources[i] += perturnresources[i];
         }
-        //yields. gold goes straight to player.
-        player.gold += perturnyields.gold;
+        //yields. gold goes straight to player. or to evilgold pot for enemy cities
+        if (isfrenzleecity) player.gold += perturnyields.gold;
+        else evilgold += perturnyields.gold;
         //production goes to barracks (and trader?)
 
         //food goes to standing army. any left over makes city grow!
         
     }
+
+    public void grabinitialsquares()
+    {
+        for (int zz = -1; zz < 2; zz++)
+        {
+            for (int ff = -1; ff < 2; ff++)
+            {
+                int tx =posx + zz;
+                int ty = posy + ff;
+                if (tx > 0 && ty > 0 && tx < map.width && ty < map.height)
+                {
+                    if (map.influence[tx, ty] == null)
+                    {
+                        map.influence[tx, ty] = isfrenzleecity;
+                        influenced.Add(new Cell(tx, ty));
+                        map.citythathasinfluence[tx, ty] = this;
+                    }
+                }
+            }
+        }
+    }
+
 
 }
 

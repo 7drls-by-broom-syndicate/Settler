@@ -1096,31 +1096,8 @@ public partial class Game : MonoBehaviour
                                 switch (Game.currentmenu.currently_selected_option)
                                 {
                                     case 0://city
-                                        citeh = new Ccity(player.posx, player.posy,map,player,log);
-                                        map.citylist.Add(citeh);
-                                        map.citythathasinfluence[player.posx, player.posy] = citeh;
-                                        log.Printline("The city of " + citeh.name + " was founded!",Color.magenta);
-
-                                        //influence
-                                        for (int zz = -1; zz < 2; zz++)
-                                        {
-                                            for (int ff = -1; ff < 2; ff++)
-                                            {
-                                                int tx = player.posx + zz;
-                                                int ty = player.posy + ff;
-                                                if (tx > 0 && ty > 0 && tx < map.width && ty < map.height)
-                                                {
-                                                    if (map.influence[tx, ty] == null)
-                                                    {
-                                                        map.influence[tx, ty] = true;
-                                                        citeh.influenced.Add(new Cell(tx, ty));
-                                                        map.citythathasinfluence[tx, ty] = citeh;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //set up initial yields
-                                        citeh.recalcyield();
+                                        citeh = new Ccity(true,player.posx, player.posy,map,player);
+                                       //
 
 
 

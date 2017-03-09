@@ -586,7 +586,9 @@ public void genlevelsettlerstyle()
         //    }
 
         Ccity.citynames.Shuffle();
+        Ccity.citynamesevil.Shuffle();
         Ccity.numcities = -1;
+        Ccity.numcitiesevil = -1;
 
         float r = lil.randf(-1000, 1000);
         float r2 = lil.randf(-1000, 1000);
@@ -799,6 +801,7 @@ public void genlevelsettlerstyle()
             FreeSpace(out buildx, out buildy);
             resource[buildx, buildy] = null;
             buildings[buildx, buildy] = Etilesprite.BUILDINGS_BARBARIAN_CAMP;
+            var t = new Ccity(false, buildx, buildy, this, player);
         }
         // barbarian citadel
         FreeSpace(out buildx, out buildy);
