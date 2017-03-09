@@ -46,7 +46,9 @@ public class addoninstance
 
 public class Ccity  {
 
-    public static readonly int arbitrary_growth_value = 100;
+    public int arbitrary_growth_value = 100;
+    public int arbitrary_growth_value_add = 100;
+    public int arbitrary_growth_value_add_add = 100;
 
     public static Tcityaddons[] addons =
     {
@@ -275,6 +277,8 @@ public class Ccity  {
             if (growthcounter > arbitrary_growth_value)
             {//now grow the city
                 growthcounter -= arbitrary_growth_value;
+                arbitrary_growth_value += arbitrary_growth_value_add;
+                arbitrary_growth_value_add += arbitrary_growth_value_add_add;
                 foreach (var tty in spiral.l)
                 {
                     int tx = tty.c.x;

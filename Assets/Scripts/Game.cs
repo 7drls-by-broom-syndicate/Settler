@@ -683,7 +683,8 @@ public partial class Game : MonoBehaviour
                     //line 3 name of building + improved yields
                     if (map.buildings[mapx, mapy] != Etilesprite.EMPTY)
                     {
-                        s[2]= Tilestuff.tilestring[(int)map.buildings[mapx,mapy]+2]+" ";
+                        if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION) s[2] = map.resource[mapx, mapy].nameofexploiter + " ";
+                        else s[2]= Tilestuff.tilestring[(int)map.buildings[mapx,mapy]+2]+" ";
                     }
                     s[2] += "[P:" + map.currentyield[mapx, mapy].production + " G:" + map.currentyield[mapx, mapy].gold + " F:" + map.currentyield[mapx, mapy].food + "]";
                     
@@ -691,6 +692,7 @@ public partial class Game : MonoBehaviour
                     {//x units use g:10 f:20 of [p:1 g:3 f:3]
                         Ccity cctv = map.citythathasinfluence[mapx, mapy];
                         s[3] += cctv.unitlist.Count + " units use G:" + cctv.armycostperturn_gold + " F:" + cctv.armycostperturn_food + " of [P:" + cctv.perturnyields.production + " G:" + cctv.perturnyields.gold + " F:" + cctv.perturnyields.food + "]";
+                        s[4] = "Growth " + cctv.growthcounter + "/" + cctv.arbitrary_growth_value;
                     }
 
                     //item_instance i = map.itemgrid[mapx, mapy];
