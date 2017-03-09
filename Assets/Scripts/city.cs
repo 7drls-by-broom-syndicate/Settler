@@ -174,9 +174,9 @@ public class Ccity  {
     {
         //copy the static list of distances 
         spiral = new Spiral(m.width, m.height,x,y);
-       
 
 
+        unitlist = new List<mob>();
 
         isfrenzleecity = frenz;
         if(ml!=null)log = ml;
@@ -205,7 +205,7 @@ public class Ccity  {
         //influence
         grabinitialsquares();
         //set up initial yields
-        recalcyield();
+        //recalcyield();
 
     }
 
@@ -324,6 +324,7 @@ public class Ccity  {
     }
     public void grabsquare(int eggs, int why)
     {
+        perturnyields.add(map.currentyield[eggs, why]);
         map.influence[eggs,why] = isfrenzleecity;
         influenced.Add(new Cell(eggs,why));
         map.citythathasinfluence[eggs,why] = this;

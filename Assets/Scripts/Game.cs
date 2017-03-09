@@ -686,6 +686,12 @@ public partial class Game : MonoBehaviour
                         s[2]= Tilestuff.tilestring[(int)map.buildings[mapx,mapy]+2]+" ";
                     }
                     s[2] += "[P:" + map.currentyield[mapx, mapy].production + " G:" + map.currentyield[mapx, mapy].gold + " F:" + map.currentyield[mapx, mapy].food + "]";
+                    
+                    if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_CITY)
+                    {//x units use g:10 f:20 of [p:1 g:3 f:3]
+                        Ccity cctv = map.citythathasinfluence[mapx, mapy];
+                        s[3] += cctv.unitlist.Count + " units use G:" + cctv.armycostperturn_gold + " F:" + cctv.armycostperturn_food + " of [P:" + cctv.perturnyields.production + " G:" + cctv.perturnyields.gold + " F:" + cctv.perturnyields.food + "]";
+                    }
 
                     //item_instance i = map.itemgrid[mapx, mapy];
                     //if (i != null)
@@ -1084,9 +1090,6 @@ public partial class Game : MonoBehaviour
                                     case 0://city
                                         citeh = new Ccity(true,player.posx, player.posy,map,player);
                                         log.Printline("The city of " + citeh.name + " was founded!", Color.magenta);
-
-
-
                                         break;
                                     case 1://farm
                                         map.currentyield[player.posx, player.posy].add(0, 0, 2);
