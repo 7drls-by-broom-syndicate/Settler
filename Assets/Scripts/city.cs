@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 //"Bremen","Hamburg","Lübeck","Franfurt","Geneva","Kraków","Fiume","Danzig","Shanghai","Tangier","Memel","Trieste","Jerusalem","Monaco","Singapore","Vatican City","Hong Kong","Gibraltar","Guanabara","Macau","Ceuta","Melilla"
 
@@ -11,6 +12,9 @@ using UnityEngine;
 //{
 
 //}
+
+   
+
 public enum Ebuildables {
     city,
     farm, mine, exploit,
@@ -41,6 +45,9 @@ public class addoninstance
 }
 
 public class Ccity  {
+
+    public static readonly int arbitrary_growth_value = 100;
+
     public static Tcityaddons[] addons =
     {
         new Tcityaddons("city",1000,Etilesprite.BUILDINGS_CITY),
@@ -48,17 +55,17 @@ public class Ccity  {
         new Tcityaddons("mine",20,Etilesprite.BUILDINGS_IMPROVEMENTS_MINE),
         new Tcityaddons("resource exploiter",100,Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION),
 
-        new Tcityaddons("town hall",100,Etilesprite.BUILDINGS_TOWN_HALL),
-        new Tcityaddons("factory",100,Etilesprite.BUILDINGS_FACTORY),
+        new Tcityaddons("town hall",100,Etilesprite.BUILDINGS_TOWN_HALL),//makes city grow faster
+        new Tcityaddons("factory",100,Etilesprite.BUILDINGS_FACTORY),//10 production
         new Tcityaddons("trading post",100,Etilesprite.BUILDINGS_TRADING_POST),
-        new Tcityaddons("barracks",100,Etilesprite.BUILDINGS_BARRACKS),
-        new Tcityaddons("market",200,Etilesprite.BUILDINGS_MARKET),
-        new Tcityaddons("allotments",200,Etilesprite.BUILDINGS_ALLOTMENTS),
+        new Tcityaddons("barracks",100,Etilesprite.BUILDINGS_BARRACKS),//produces units
+        new Tcityaddons("market",200,Etilesprite.BUILDINGS_MARKET),//10 gold
+        new Tcityaddons("allotments",200,Etilesprite.BUILDINGS_ALLOTMENTS),//10 food
         new Tcityaddons("port and docks",200,Etilesprite.BUILDINGS_PORT_AND_DOCKS),
-        new Tcityaddons("guard post",350,Etilesprite.BUILDINGS_GUARD_POST),
-        new Tcityaddons("armourer",400,Etilesprite.BUILDINGS_ARMOURER),
-        new Tcityaddons("blacksmith",400,Etilesprite.BUILDINGS_BLACKSMITH),
-        new Tcityaddons("teleporter",2000,Etilesprite.BUILDINGS_TELEPORTER)
+        new Tcityaddons("guard post",350,Etilesprite.BUILDINGS_GUARD_POST),//ups city defence
+        new Tcityaddons("armourer",400,Etilesprite.BUILDINGS_ARMOURER),//+1 def for units produced
+        new Tcityaddons("blacksmith",400,Etilesprite.BUILDINGS_BLACKSMITH),//+1 atk for units produced
+        new Tcityaddons("teleporter",2000,Etilesprite.BUILDINGS_TELEPORTER)//telport between cities
       
     };
 
@@ -127,7 +134,8 @@ public class Ccity  {
     public bool isfrenzleecity;
 
     public List<mob> unitlist;
-    public int armycostperturn=0;
+    public int armycostperturn_food=0;
+    public int armycostperturn_gold = 0;
 
     public static int numcities;
 
@@ -156,11 +164,21 @@ public class Ccity  {
     public int hp = 100;
     public int defence = 2;
     public static int numcitiesevil=0;
-    public Ccity(bool frenz,int x,int y,RLMap m,Player p)//,MessageLog ml)
+
+    public Spiral spiral;
+
+
+    public Ccity(bool frenz,int x,int y,RLMap m,Player p,MessageLog ml=null)
 
     {
+        //copy the static list of distances 
+        spiral = new Spiral(m.width, m.height);
+       
+
+
+
         isfrenzleecity = frenz;
-        //log = ml;
+        if(ml!=null)log = ml;
         player = p;
 
         if (isfrenzleecity)
@@ -203,6 +221,8 @@ public class Ccity  {
         perturnyields = y;
     }
 
+
+
     public void takeaturn()
     {
         //we need to do the yields and the resources and the growth
@@ -212,13 +232,92 @@ public class Ccity  {
         {
             stored_resources[i] += perturnresources[i];
         }
-        //yields. gold goes straight to player. or to evilgold pot for enemy cities
-        if (isfrenzleecity) player.gold += perturnyields.gold;
-        else evilgold += perturnyields.gold;
-        //production goes to barracks (and trader?)
+
+        //gold goes to standing army. any left over goes to player. evil city: all gold goes to pot for player when they defeat it
+
+        int GOLD = perturnyields.gold;                     //let g be the amount of gold we have on hand 
+        if (GOLD <= armycostperturn_gold)                  //if the gold bill for standing army is exactly what we have or less....
+        {
+            GOLD -= armycostperturn_gold;                  
+            if (isfrenzleecity) player.gold += GOLD;       //if it's a player city, give excess gold to player
+            else evilgold += GOLD;                         //if enemy city, gold goes to pot for when player kills the city
+        }
+        else                                            //we can't afford all the units that are currently out
+        {
+            bool bust = false;
+            foreach(var u in unitlist)
+            {
+                GOLD -= u.archetype.upkeepgold;
+                if(GOLD<0 || bust)
+                {
+                    bust = true;
+                    if (log != null) log.Printline(u.archetype.name + " leaves: " + name + " can't pay.", Color.red);
+                    armycostperturn_gold -= u.archetype.upkeepgold;
+                    armycostperturn_food -= u.archetype.upkeepfood;//remove the cost in both food and gold when mob leaves
+                    map.killoffamob(u);//mob leaves
+                   
+                }
+                unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);//remove mobs that left from the unitlist for this city
+            }
+
+        }
 
         //food goes to standing army. any left over makes city grow!
-        
+
+        int FOOD = perturnyields.food;                     //let f be the amount of food we have on hand
+        if (FOOD <= armycostperturn_food)                  //if the food bill for standing army is exactly what we have or less....
+        {
+            FOOD -= armycostperturn_food;                   //take the food for the army
+            if (growthboost) FOOD= (int)((float)FOOD * 1.25);//multiply excess food if you have growthboost addon
+            growthcounter += FOOD;
+
+            if (growthcounter > arbitrary_growth_value)
+            {//now grow the city
+                growthcounter -= arbitrary_growth_value;
+                foreach (var tty in spiral.l)
+                {
+                    int tx = tty.c.x + posx;//values in spiral are offsets, not co-ords so add to where this city is
+                    int ty = tty.c.y + posy;
+                    if (tx < 0 || ty < 0 || tx >= map.width || ty >= map.height) tty.flagfordeletion = true;
+                    else
+                    {//co-ord is on map
+                        bool? b = map.influence[tx,ty];
+                        if (b != null || b == !isfrenzleecity) tty.flagfordeletion = true;//remove cells that are enemy held or already held by us (where enemy of enemy is player)
+                        else
+                        {
+                            map.influence[tx, ty] = isfrenzleecity;//set influence to true for player, false if this is barb city.
+                        }
+                    }
+                
+                }
+            }
+           
+        }
+        else                                            //we can't afford all the units that are currently out
+        {
+            bool bust = false;
+            foreach (var u in unitlist)
+            {
+                FOOD -= u.archetype.upkeepfood;
+                if (FOOD < 0 || bust)
+                {
+                    bust = true;
+                    if (log != null) log.Printline(u.archetype.name + " leaves: " + name + " can't feed.", Color.red);
+                    armycostperturn_gold -= u.archetype.upkeepgold;
+                    armycostperturn_food -= u.archetype.upkeepfood;
+                    map.killoffamob(u);//mob leaves
+
+                }
+                unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);//remove mobs that left from the unitlist for this city
+            }
+
+        }
+
+
+        //production goes to barracks (and trader?)
+
+
+
     }
 
     public void grabinitialsquares()

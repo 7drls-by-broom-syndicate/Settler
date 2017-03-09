@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Emobtype { playerpango, playermarsby, playerpapa, playermoop,
-    polarmoop, lancer, antipaladin, swinger, tefrog, bat,
-    kobbybomber, mage, necro,
-    wolf, kitten1, kitten2, kitten3, kitten4, skelsumd, golem, lich, fox }
-
+public enum Emobtype { playersnake, playerscout }
 public class mobarchetype
 {
    
@@ -80,6 +76,8 @@ public class mob {
             //do other units
            
  };
+
+    public Ccity citythatownsit;
 
     public bool isplayer=false;
     public bool reversesprite = false;

@@ -2,14 +2,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-
+using System.Linq;
 
 public enum DungeonGenType { Splitter2013, Sucker2014,Synthesizer2015_nothere, Skater2016, Settler2017 }
 
 //THESE HAVE TO BE IN SPRITE ORDER FROM LEFT TO RIGHT
 //public enum Etilesprite : int { FLOODTEMP=-2, EMPTY = -1, THEREISNTAZERO=0,NOSPRITE=1,FLOOR=106, WALL=109, PLAYER=2, KOBOLD, TORCHDOWN=46, TORCHRIGHT, TORCHLEFT, TORCHUP,
-  //                      DOOR_V, DOOR_H, DOOR_V_OPEN, DOOR_H_OPEN, CORRIDOR}
+//                      DOOR_V, DOOR_H, DOOR_V_OPEN, DOOR_H_OPEN, CORRIDOR}
 
+
+
+
+public class Cellndist
+{
+    public Cell c;
+    public double dist;
+    public bool flagfordeletion;
+
+    public Cellndist(Cell _c, double _d)
+    {
+        c = _c;
+        dist = _d;
+        flagfordeletion = false;
+    }
+}
+
+public class Spiral
+{
+    public List<Cellndist> l;
+    public Spiral(int w,int h)
+    {
+        for (int x = -w; x < w; x++)
+        {
+            for (int y = -h; y < h; y++)
+            {
+                l.Add(new Cellndist(new Cell(x, y), RLMap.Distance_EuclideanD(x, y, 0, 0)));
+            }
+        }
+        l.Shuffle(); //not sure what happens here. will the ordering below change the relative order of items with the same value ?
+        l.OrderBy(o => o.dist);
+    }
+}
 
 public partial class RLMap  {
     // public static Color?[] minimapcolours = { new Color (0.25f,0.25f,0.25f), Color.grey, null, null, Color.grey, Color.grey, Color.grey, Color.grey,
@@ -58,6 +91,15 @@ public partial class RLMap  {
     public Queue<Cell> lastpath=new Queue<Cell>();                                    //this is filled by the pathfinding routines
     public int firststepx, firststepy;                             //used by pathfinding
     public List<Cell> emptyspaces;                                 //free squares
+
+    public void killoffamob(mob f)
+    {
+        f.tile = Etilesprite.EMPTY;         //this will make the processturn function garbage collect the mob from moblist
+        passable[f.posx, f.posy] = true;    
+        itemgrid[f.posx, f.posy] = null;
+        
+
+    }
 
     public bool passablecheck(int x,int y,mob m)
     {
@@ -150,11 +192,22 @@ public partial class RLMap  {
 		return (int)Math.Sqrt((dx*dx) + (dy*dy));
 	}
 
+   public static double Distance_EuclideanD(int x, int y, int x2, int y2) {
+		int dx = Math.Abs(x - x2);
+		int dy = Math.Abs(y - y2);
+		return Math.Sqrt((dx*dx) + (dy*dy));
+	}
+
     public static int Distance_Squared(int x, int y, int x2, int y2) {
 		int dx = Math.Abs(x - x2);
 		int dy = Math.Abs(y - y2);
 		return (dx*dx) + (dy*dy);
 	}
+
+
+    
+
+  
 
     public RLMap(Player pp,DungeonGenType dgt) {
         player = pp;
