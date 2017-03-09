@@ -30,17 +30,19 @@ public class Cellndist
 public class Spiral
 {
     public List<Cellndist> l;
-    public Spiral(int w,int h)
+    public Spiral(int w,int h,int xp,int yp)
     {
-        for (int x = -w; x < w; x++)
+        l = new List<Cellndist>();
+
+        for (int x = 0; x < w; x++)
         {
-            for (int y = -h; y < h; y++)
+            for (int y = 0; y < h; y++)
             {
-                l.Add(new Cellndist(new Cell(x, y), RLMap.Distance_EuclideanD(x, y, 0, 0)));
+                l.Add(new Cellndist(new Cell(x, y), RLMap.Distance_EuclideanD(x, y, xp,yp)));
             }
         }
         l.Shuffle(); //not sure what happens here. will the ordering below change the relative order of items with the same value ?
-        l.OrderBy(o => o.dist);
+        l=l.OrderBy(o => o.dist).ToList();
     }
 }
 

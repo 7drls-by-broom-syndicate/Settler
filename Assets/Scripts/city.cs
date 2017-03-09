@@ -172,7 +172,7 @@ public class Ccity  {
 
     {
         //copy the static list of distances 
-        spiral = new Spiral(m.width, m.height);
+        spiral = new Spiral(m.width, m.height,x,y);
        
 
 
@@ -236,7 +236,7 @@ public class Ccity  {
         //gold goes to standing army. any left over goes to player. evil city: all gold goes to pot for player when they defeat it
 
         int GOLD = perturnyields.gold;                     //let g be the amount of gold we have on hand 
-        if (GOLD <= armycostperturn_gold)                  //if the gold bill for standing army is exactly what we have or less....
+        if (GOLD >= armycostperturn_gold)                  //if the gold bill for standing army is exactly what we have or less....
         {
             GOLD -= armycostperturn_gold;                  
             if (isfrenzleecity) player.gold += GOLD;       //if it's a player city, give excess gold to player
@@ -265,7 +265,7 @@ public class Ccity  {
         //food goes to standing army. any left over makes city grow!
 
         int FOOD = perturnyields.food;                     //let f be the amount of food we have on hand
-        if (FOOD <= armycostperturn_food)                  //if the food bill for standing army is exactly what we have or less....
+        if (FOOD >= armycostperturn_food)                  //if the food bill for standing army is exactly what we have or less....
         {
             FOOD -= armycostperturn_food;                   //take the food for the army
             if (growthboost) FOOD= (int)((float)FOOD * 1.25);//multiply excess food if you have growthboost addon
@@ -276,22 +276,24 @@ public class Ccity  {
                 growthcounter -= arbitrary_growth_value;
                 foreach (var tty in spiral.l)
                 {
-                    int tx = tty.c.x + posx;//values in spiral are offsets, not co-ords so add to where this city is
-                    int ty = tty.c.y + posy;
-                    if (tx < 0 || ty < 0 || tx >= map.width || ty >= map.height) tty.flagfordeletion = true;
+                    int tx = tty.c.x;
+                    int ty = tty.c.y;
+                    //   if (tx < 0 || ty < 0 || tx >= map.width || ty >= map.height) tty.flagfordeletion = true;
+                    // else
+                    //{//co-ord is on map
+                    bool? b = map.influence[tx, ty];
+                    if (b != null || b == !isfrenzleecity) tty.flagfordeletion = true;//remove cells that are enemy held or already held by us (where enemy of enemy is player)
                     else
-                    {//co-ord is on map
-                        bool? b = map.influence[tx,ty];
-                        if (b != null || b == !isfrenzleecity) tty.flagfordeletion = true;//remove cells that are enemy held or already held by us (where enemy of enemy is player)
-                        else
-                        {
-                            map.influence[tx, ty] = isfrenzleecity;//set influence to true for player, false if this is barb city.
-                        }
+                    {
+                        grabsquare(tx, ty);
+
+                        break;
                     }
-                
+                    // }
+
                 }
             }
-           
+
         }
         else                                            //we can't afford all the units that are currently out
         {
@@ -319,7 +321,12 @@ public class Ccity  {
 
 
     }
-
+    public void grabsquare(int eggs, int why)
+    {
+        map.influence[eggs,why] = isfrenzleecity;
+        influenced.Add(new Cell(eggs,why));
+        map.citythathasinfluence[eggs,why] = this;
+    }
     public void grabinitialsquares()
     {
         for (int zz = -1; zz < 2; zz++)
@@ -332,9 +339,7 @@ public class Ccity  {
                 {
                     if (map.influence[tx, ty] == null)
                     {
-                        map.influence[tx, ty] = isfrenzleecity;
-                        influenced.Add(new Cell(tx, ty));
-                        map.citythathasinfluence[tx, ty] = this;
+                        grabsquare(tx, ty);
                     }
                 }
             }
