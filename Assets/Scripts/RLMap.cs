@@ -70,6 +70,8 @@ public partial class RLMap  {
     public Array2D<bool?> influence;
     public Array2D<Ccity> citythathasinfluence;
     public List<Ccity> citylist;
+    public Array2D<Citystate> citystates;
+    
     //public Array2D<int?> wizwalltime;
     public Array2D<int?> onfire;
     public Array2D<int?> bloodgrid;
@@ -325,6 +327,8 @@ public partial class RLMap  {
 
         citythathasinfluence = new Array2D<Ccity>(width, height, null);
         citylist = new List<Ccity>();
+        citystates = new Array2D<Citystate>(width, height, null);
+
 
         resource = new Array2D<Tresource>(width, height,null);
         

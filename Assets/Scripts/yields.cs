@@ -19,6 +19,13 @@ public class yields  {
         food = 0;
     }
 
+    public yields(yields a)
+    {
+        production = a.production;
+        gold = a.gold;
+        food = a.food;
+    }
+
     public void add(int p,int g,int f)
     {
         production += p;

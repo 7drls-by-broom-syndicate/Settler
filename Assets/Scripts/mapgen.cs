@@ -587,6 +587,8 @@ public void genlevelsettlerstyle()
 
         Ccity.citynames.Shuffle();
         Ccity.citynamesevil.Shuffle();
+        Citystate.citystatenames.Shuffle();
+
         Ccity.numcities = -1;
         Ccity.numcitiesevil = -1;
 
@@ -775,7 +777,7 @@ public void genlevelsettlerstyle()
                     }
                 }
 
-                currentyield[x, y] = yield[x, y]; //copy base yield into current yield
+                currentyield[x, y] = new yields(yield[x, y]); //copy base yield into current yield
             
             }
 
@@ -793,6 +795,7 @@ public void genlevelsettlerstyle()
             FreeSpace(out buildx, out buildy);
             resource[buildx, buildy] = null;
             buildings[buildx, buildy] = Etilesprite.BUILDINGS_CITY_STATE;
+            citystates[buildx, buildy] = new Citystate(buildx, buildy);
         }
         
         // barbarian camps
@@ -807,10 +810,10 @@ public void genlevelsettlerstyle()
         FreeSpace(out buildx, out buildy);
         resource[buildx, buildy] = null;
         buildings[buildx, buildy] = Etilesprite.BUILDINGS_BARBARIAN_CITADEL;
-        
-        
+        var tt = new Ccity(false, buildx, buildy, this, player);
+
         //goodie huts
-   for (int f = 0; f < 4; f++)
+        for (int f = 0; f < 4; f++)
         {
             FreeSpace(out buildx, out buildy);
             resource[buildx, buildy] = null;

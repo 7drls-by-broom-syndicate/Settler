@@ -639,8 +639,8 @@ public partial class Game : MonoBehaviour
 
                 int mapx = mausx + originx;
                 int mapy = mausy + originy;
-                
-                if (mausx >= 0 && mausy >= 0 && mausx < VIEWPORT_WIDTH && mausy < VIEWPORT_HEIGHT && !map.fogofwar[mapx,mapy]) //&& map.in_FOV[mapx,mapy]
+
+                if (mausx >= 0 && mausy >= 0 && mausx < VIEWPORT_WIDTH && mausy < VIEWPORT_HEIGHT && !map.fogofwar[mapx, mapy]) //&& map.in_FOV[mapx,mapy]
                 {//general idea is setting s to be the string to display for tooltip
 
                     //if (!showyield)
@@ -657,12 +657,36 @@ public partial class Game : MonoBehaviour
 
                     string[] s = { "", "", "", "", "", "" };
 
-                       s[0] = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];
-                        if (map.mountain[mapx, mapy]) s[0] += ",Mountains";
-                        else if (map.hill[mapx, mapy]) s[0] += ",Hills";
-                        if (map.tree[mapx, mapy]) s[0] += ",Forest";
+                    //line 1 Tundra, Hills, Forest [P:2 G:0 F:1]
+                    s[0] = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];
+                    if (map.mountain[mapx, mapy]) s[0] += ",Mountains";
+                    else if (map.hill[mapx, mapy]) s[0] += ",Hills";
+                    if (map.tree[mapx, mapy]) s[0] += ",Forest";
 
-                    s[0] += " [P:" + map.yield[mapx, mapy].production + " G:" + map.yield[mapx, mapy].gold + " F:" + map.yield[mapx, mapy].food+"]";
+                    s[0] += " [P:" + map.yield[mapx, mapy].production + " G:" + map.yield[mapx, mapy].gold + " F:" + map.yield[mapx, mapy].food + "]";
+
+                    //line 2 Resource: oranges Infl: player (Biscuit)
+                    s[1] = "Resource: " + ((map.resource[mapx, mapy] != null) ? map.resource[mapx, mapy].name : "none")+" Owner: ";
+                    if (map.citystates[mapx, mapy] != null) s[1] += map.citystates[mapx, mapy].name;
+
+                    else
+                    {
+                        if (map.influence[mapx, mapy] == null) s[1] += "none";
+                        else
+                        {
+                            if (map.influence[mapx, mapy] == true) s[1] += "player (";
+                            else s[1] += "barbs (";
+
+                            s[1] += map.citythathasinfluence[mapx, mapy].name + ")";
+                        }
+                    }
+                    //line 3 name of building + improved yields
+                    if (map.buildings[mapx, mapy] != Etilesprite.EMPTY)
+                    {
+                        s[2]= Tilestuff.tilestring[(int)map.buildings[mapx,mapy]+2]+" ";
+                    }
+                    s[2] += "[P:" + map.currentyield[mapx, mapy].production + " G:" + map.currentyield[mapx, mapy].gold + " F:" + map.currentyield[mapx, mapy].food + "]";
+
                     //item_instance i = map.itemgrid[mapx, mapy];
                     //if (i != null)
                     //{
@@ -696,7 +720,7 @@ public partial class Game : MonoBehaviour
 
                             for (int x = 0; x < bstr.Length; x++)
                             {
-                                int y = (0 + (16 * mausy)) + 2;//- 12 - 12;
+                                int y =(12*ii)+ (0 + (16 * mausy)) + 2;//- 12 - 12;
                                 byte c = bstr[x];
                                 int xpos = c % 32;
                                 int ypos = 7 - (c / 32);
@@ -1059,7 +1083,7 @@ public partial class Game : MonoBehaviour
                                 {
                                     case 0://city
                                         citeh = new Ccity(true,player.posx, player.posy,map,player);
-                                       //
+                                        log.Printline("The city of " + citeh.name + " was founded!", Color.magenta);
 
 
 
