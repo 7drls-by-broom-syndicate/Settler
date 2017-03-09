@@ -695,6 +695,8 @@ public partial class Game : MonoBehaviour
                         s[4] = "Growth " + cctv.growthcounter + "/" + cctv.arbitrary_growth_value;
                     }
 
+                    //s[5] is for mob details
+                    s[5] = "mob stuff";
                     //item_instance i = map.itemgrid[mapx, mapy];
                     //if (i != null)
                     //{
@@ -726,9 +728,12 @@ public partial class Game : MonoBehaviour
 
                             int waffle = -16 - 8;// ((bstr.Length * 6) - 16) / 2;
 
+                            int mausysubst = (mausy > 18) ? 18 : mausy;
+
                             for (int x = 0; x < bstr.Length; x++)
                             {
-                                int y =(12*ii)+ (0 + (16 * mausy)) + 2;//- 12 - 12;
+                                int y =(12*ii)+ (0 + (16 * mausysubst)) + 2;//- 12 - 12;
+                               // if (y + (6 * 12) > 359) y = 359 - (6 * 12);
                                 byte c = bstr[x];
                                 int xpos = c % 32;
                                 int ypos = 7 - (c / 32);
