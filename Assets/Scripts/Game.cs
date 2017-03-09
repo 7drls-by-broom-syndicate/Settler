@@ -640,126 +640,88 @@ public partial class Game : MonoBehaviour
                 int mapx = mausx + originx;
                 int mapy = mausy + originy;
                 
-                if (mausx >= 0 && mausy >= 0 && mausx < VIEWPORT_WIDTH && mausy < VIEWPORT_HEIGHT && map.in_FOV[mapx,mapy])
+                if (mausx >= 0 && mausy >= 0 && mausx < VIEWPORT_WIDTH && mausy < VIEWPORT_HEIGHT && !map.fogofwar[mapx,mapy]) //&& map.in_FOV[mapx,mapy]
                 {//general idea is setting s to be the string to display for tooltip
 
-                    if (!showyield)
-                    {
-                        if (map.yield[mapx, mapy].production > 0)
-                            DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].production + (int)Etilesprite.YIELD_PRODUCTION_1);
-                        if (map.yield[mapx, mapy].gold > 0)
-                            DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].gold + (int)Etilesprite.YIELD_GOLD_1);
-                        if (map.yield[mapx, mapy].food > 0)
-                            DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].food + (int)Etilesprite.YIELD_FOOD_1);
-                    }
+                    //if (!showyield)
+                    //{
+                    //    if (map.yield[mapx, mapy].production > 0)
+                    //        DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].production + (int)Etilesprite.YIELD_PRODUCTION_1);
+                    //    if (map.yield[mapx, mapy].gold > 0)
+                    //        DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].gold + (int)Etilesprite.YIELD_GOLD_1);
+                    //    if (map.yield[mapx, mapy].food > 0)
+                    //        DrawSprite(mausx, mausy, -1 + map.yield[mapx, mapy].food + (int)Etilesprite.YIELD_FOOD_1);
+                    //}
 
-                    string s = "";
+                    //string s = "";
 
-                    item_instance i = map.itemgrid[mapx, mapy];
-                    if (i != null)
-                    {
-                        s = Tilestuff.tilestring[(int)i.tile + 2];
+                    string[] s = { "", "", "", "", "", "" };
 
-                        if (i.ismob && !i.mob.dead_currently)
-                        {
-                            s += " HP: " + i.mob.hp + "/" + i.mob.archetype.hp;
-                            if (i.mob.flies_currently) s += " (flying)";
-                            if (i.mob.skates_currently) s += " (skating)";
-                            s += " SPEED:" + i.mob.speed;
-                        }
+                       s[0] = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];
+                        if (map.mountain[mapx, mapy]) s[0] += ",Mountains";
+                        else if (map.hill[mapx, mapy]) s[0] += ",Hills";
+                        if (map.tree[mapx, mapy]) s[0] += ",Forest";
 
-                    }
-                    else
-                    {
-                        s = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];
-                        if (map.mountain[mapx, mapy]) s += "[MTN]";
-                        else if (map.hill[mapx, mapy]) s += "[HIL]";
-                        if (map.tree[mapx, mapy]) s += "[FOR]";
-                    }
+                    s[0] += " [P:" + map.yield[mapx, mapy].production + " G:" + map.yield[mapx, mapy].gold + " F:" + map.yield[mapx, mapy].food+"]";
+                    //item_instance i = map.itemgrid[mapx, mapy];
+                    //if (i != null)
+                    //{
+                    //    s = Tilestuff.tilestring[(int)i.tile + 2];
+
+                    //    if (i.ismob && !i.mob.dead_currently)
+                    //    {
+                    //        s += " HP: " + i.mob.hp + "/" + i.mob.archetype.hp;                      
+                    //    }
+
+                    //}
+                    //else
+                    //{
+                    //    s = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];
+                    //    if (map.mountain[mapx, mapy]) s += "[MTN]";
+                    //    else if (map.hill[mapx, mapy]) s += "[HIL]";
+                    //    if (map.tree[mapx, mapy]) s += "[FOR]";
+                    //}
 
                     //debug:
                     //s += (map.passable[mapx, mapy]) ? " PASS" : " NOPASS";
 
-                    if (s != "")
+                    for (int ii = 0; ii < 6; ii++)
                     {
-                        //string s = mob.mobname[(int)m.type]+" HP: "+m.hp;
-                        byte[] bstr = System.Text.Encoding.ASCII.GetBytes(s);
-
-                        int waffle = -16-8;// ((bstr.Length * 6) - 16) / 2;
-
-                        for (int x = 0; x < bstr.Length; x++)
+                        if (s[ii] != "")
                         {
-                            int y = (0 + (16 * mausy))+2;//- 12 - 12;
-                            byte c = bstr[x];
-                            int xpos = c % 32;
-                            int ypos = 7 - (c / 32);
-                            //   r.x =  ((31+(mausx*16) + (x * 6))-waffle) * zoomfactor;
+                            //string s = mob.mobname[(int)m.type]+" HP: "+m.hp;
+                            byte[] bstr = System.Text.Encoding.ASCII.GetBytes(s[ii]);
 
-                            r.x = ((0 + (mausx * 16)) - waffle);
-                            if (r.x < 0) r.x = 0;
-                            r.x = (r.x + (x * 6)) * zoomfactor;
+                            int waffle = -16 - 8;// ((bstr.Length * 6) - 16) / 2;
 
-                            r.y = (y) * zoomfactor;
+                            for (int x = 0; x < bstr.Length; x++)
+                            {
+                                int y = (0 + (16 * mausy)) + 2;//- 12 - 12;
+                                byte c = bstr[x];
+                                int xpos = c % 32;
+                                int ypos = 7 - (c / 32);
+                                //   r.x =  ((31+(mausx*16) + (x * 6))-waffle) * zoomfactor;
 
-                            r2.x = xratio * xpos;
-                            r2.y = yratio * ypos;
+                                r.x = ((0 + (mausx * 16)) - waffle);
+                                if (r.x < 0) r.x = 0;
+                                r.x = (r.x + (x * 6)) * zoomfactor;
 
-                            GUI.color = Color.grey;
-                            GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, false);
-                            GUI.color = Color.white;
-                            GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, true);
-                          //  if (itsamob)
-                           // {
-                            //    rango.y = (216 + (5 * m.entryontimegrid)) * zoomfactor;
+                                r.y = (y) * zoomfactor;
 
-                                //  rango.y = (216 + (5 * (3))) * zoomfactor;
+                                r2.x = xratio * xpos;
+                                r2.y = yratio * ypos;
 
-                              //  GUI.color = highlight;
-                              //  GUI.DrawTextureWithTexCoords(rango, particle, Roner);
-                           // }
+                                GUI.color = Color.grey;
+                                GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, false);
+                                GUI.color = Color.white;
+                                GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, true);
+                               
 
+                            }
                         }
                     }
-                   /* effect e = map.effects[mausx, mausy];
-                    if (e != null)
-                    {
-                        string ss = effect.effectdesc[(int)e.type];
-                        byte[] bstr = System.Text.Encoding.ASCII.GetBytes(ss);
-
-                        int waffle = ((bstr.Length * 6) - 16) / 2;
-                        for (int x = 0; x < bstr.Length; x++)
-                        {
-                            int y = (214 + (16 * mausy)) - 12;
-                            byte c = bstr[x];
-                            int xpos = c % 32;
-                            int ypos = 7 - (c / 32);
-                            // r.x = ((31 + (mausx * 16) + (x * 6)) - waffle) * zoomfactor;
-
-                            r.x = ((31 + (mausx * 16)) - waffle);
-                            if (r.x < 0) r.x = 0;
-                            r.x = (r.x + (x * 6)) * zoomfactor;
-
-
-                            r.y = (y) * zoomfactor;
-
-                            r2.x = xratio * xpos;
-                            r2.y = yratio * ypos;
-
-                            GUI.color = Color.grey;
-                            GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, false);
-                            GUI.color = Color.blue;
-                            GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, true);
-
-
-                            //Debug.Log(e.entryontimegrid);//i think these entry on time grids are wrong but only used here.
-                            rango.y = (216 + (5 * (e.entryontimegrid + 1))) * zoomfactor;
-
-                            //rango.y = (216 + (5 * (3))) * zoomfactor;
-                            //highlight = new Color(0.7f, 0.4f, 0.2f, 0.05f);
-                            GUI.color = highlight;
-                            GUI.DrawTextureWithTexCoords(rango, particle, Roner);
-                        }
-                    }*/
+               
+                    
 
                 }
                 //end tooltips
