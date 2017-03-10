@@ -1101,11 +1101,13 @@ public partial class Game : MonoBehaviour
                                     case 1://farm
                                         map.currentyield[player.posx, player.posy].add(0, 0, 2);
                                         map.citythathasinfluence[player.posx, player.posy].perturnyields.add(0, 0, 2);
+                                        log.Printline("You build a farm. [+2 food]", Color.yellow);
                                         //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
                                     case 2://mine
                                         map.currentyield[player.posx, player.posy].add(1, 2, 0);
                                         map.citythathasinfluence[player.posx, player.posy].perturnyields.add(1,2,0);
+                                        log.Printline("You build a mine. [+1 prod +2 gold]", Color.yellow);
                                         //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
                                     case 3://resource exploiter
@@ -1113,18 +1115,44 @@ public partial class Game : MonoBehaviour
                                         map.citythathasinfluence[player.posx, player.posy].perturnyields.add(map.resource[player.posx, player.posy].yieldwhenworked);
                                         //add resources too, as in coffee, horses:
                                         map.citythathasinfluence[player.posx, player.posy].perturnresources[(int)map.resource[player.posx, player.posy].ert]++;
+                                        log.Printline("You build a "+map.resource[player.posx, player.posy].nameofexploiter
+                                            + ". [P:"+map.resource[player.posx, player.posy].yieldwhenworked.production
+                                            + " G:" + map.resource[player.posx, player.posy].yieldwhenworked.gold
+                                            + " F:" + map.resource[player.posx, player.posy].yieldwhenworked.food
+                                            , Color.yellow);
                                         //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
                                 }
 
+                                if (Game.currentmenu.currently_selected_option >= 4)
+                                {
+                                    //find owning city
+                                    Ccity thecity = findcity9way(player.posx, player.posy);
+                                    if (thecity == null) log.Printline("ERROR CITY ADDON CAN'T FIND CITY IT BELONGS TO!");
+                                    else {
+                                        //make a new city addon owned by the city we found and of type according to menu option (they're in the right order)
+                                        addoninstance a = new addoninstance(thecity, Ccity.addons[Game.currentmenu.currently_selected_option]);
+                                        //add the city addon to the map's grid of them
+                                        map.addons[player.posx, player.posy] = a;
+                                        log.Printline("You build a " + a.type.name, Color.yellow);
+                                            }
+                                }
 
-                                  
-                               
+
+
 
 
 
                             break;
-                                //end of build menu
+                            //end of build menu
+                            case Menu.Emenuidentity.unitproduce:
+                                int which = Game.currentmenu.currently_selected_option + 2;
+                                log.Printline("Now building " + mob.archetypes[which].name + ".", Color.yellow);
+                                map.addons[player.posx, player.posy].mobtoproduce = mob.archetypes[which];
+
+                                break;
+
+                                //end of unitproduce menu
                         }
                         Game.menucommandwaiting = false;
                         TimeEngine = CradleOfTime.player_is_done;

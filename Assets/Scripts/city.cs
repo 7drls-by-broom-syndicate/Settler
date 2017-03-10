@@ -24,6 +24,7 @@ public enum Ebuildables {
 
 public class Tcityaddons
 {
+    
     public string name;
     public int cost;
     public Etilesprite tile;
@@ -38,9 +39,19 @@ public class Tcityaddons
 
 public class addoninstance
 {
+    public Ccity owner;
     public Tcityaddons type;
-    public int storedproduction;
+    public int storedproduction,storediron,storedhorse;
     public mobarchetype mobtoproduce;
+
+    public addoninstance(Ccity _owner,Tcityaddons _type)
+    {
+        owner = _owner;
+        type = _type;
+        storedproduction = storedhorse = storediron=0;
+        mobtoproduce = null;
+        owner.thiscitysaddons.Add(this);//add this addon to list of addons of its owning city
+    }
 
 }
 
@@ -239,7 +250,7 @@ public class Ccity  {
         //gold goes to standing army. any left over goes to player. evil city: all gold goes to pot for player when they defeat it
 
         int GOLD = perturnyields.gold;                     //let g be the amount of gold we have on hand 
-        if (GOLD >= armycostperturn_gold)                  //if the gold bill for standing army is exactly what we have or less....
+        if (GOLD >= armycostperturn_gold)                  //if the gold bill for standing army is exactly what we have or more....
         {
             GOLD -= armycostperturn_gold;                  
             if (isfrenzleecity) player.gold += GOLD;       //if it's a player city, give excess gold to player
@@ -268,7 +279,7 @@ public class Ccity  {
         //food goes to standing army. any left over makes city grow!
 
         int FOOD = perturnyields.food;                     //let f be the amount of food we have on hand
-        if (FOOD >= armycostperturn_food)                  //if the food bill for standing army is exactly what we have or less....
+        if (FOOD >= armycostperturn_food)                  //if the food bill for standing army is exactly what we have or more....
         {
             FOOD -= armycostperturn_food;                   //take the food for the army
             if (growthboost) FOOD= (int)((float)FOOD * 1.25);//multiply excess food if you have growthboost addon
@@ -322,7 +333,75 @@ public class Ccity  {
 
 
         //production goes to barracks (and trader?)
+        int PROD = perturnyields.production;
 
+        //loop through our city addons, putting production into them as needed and available, same with horses and iron
+        //TODO evil cities will have to work a different way, or you have to use AI for when they build barracks and what they produce also they don't have resources
+        //ideally you would have proper AI that built addons for barbarian cities the same as we do. maybe after 7drl but certainly not now.
+        foreach(var ao in thiscitysaddons)
+        {
+            if (ao.type.tile == Etilesprite.BUILDINGS_BARRACKS)
+            {
+                //if needs production, give it some
+                int prodneeded = ao.mobtoproduce.buildcostproduction - ao.storedproduction;//does it need production?
+                if (prodneeded > 0 && PROD>0)//yes it needs horse and we have some to give
+                {
+                    if (PROD >= prodneeded)//if we have enough to fill it
+                    {
+                        ao.storedproduction += prodneeded;
+                        PROD -= prodneeded;
+                    }
+                    else//it needs production but we don't have enough to fill it so give it what we have
+                    {
+                        ao.storedproduction += PROD;
+                        PROD = 0;
+                    }
+                }//note we aren't taking anything off perturnyields.production but we shouldn't need to
+
+                //if needs iron, give it some
+                int Ineeded = ao.mobtoproduce.buildcostiron - ao.storediron;//does it need iron?
+                if (Ineeded > 0 && stored_resources[12] > 0)//yes it needs iron and we have some to give
+                {
+                    if (stored_resources[12] >= Ineeded)//if we have enough to fill it
+                    {
+                        ao.storediron += Ineeded;
+                        stored_resources[12] -= Ineeded;
+                    }
+                    else//it needs iron but we don't have enough to fill it so give it what we have
+                    {
+                        ao.storediron += stored_resources[12];
+                        stored_resources[12] = 0;
+                    }
+                }
+
+
+                //if needs horses, give it some
+                int Hneeded = ao.mobtoproduce.buildcosthorses - ao.storedhorse;//does it need horses?
+                if (Hneeded > 0 && stored_resources[13] > 0)//yes it needs production and we have some to give
+                {
+                    if (stored_resources[13] >= Hneeded)//if we have enough to fill it
+                    {
+                        ao.storedhorse += Hneeded;
+                        stored_resources[13] -= Hneeded;
+                    }
+                    else//it needs horse but we don't have enough to fill it so give it what we have
+                    {
+                        ao.storedhorse += stored_resources[13];
+                        stored_resources[13] = 0;
+                    }
+                }
+
+                //if everything is full, splurt out a mob, you jibber jabber bitch weed face
+                if(ao.storedproduction==ao.mobtoproduce.buildcostproduction &&
+                    ao.storedhorse==ao.mobtoproduce.buildcosthorses &&
+                    ao.storediron == ao.mobtoproduce.buildcostiron){
+                    log.Printline(name + " produces a " + ao.mobtoproduce.name, Color.cyan);
+                    ao.storedproduction = ao.storediron = ao.storedhorse = 0;
+                }
+
+
+            }//end of if barracks
+        }
 
 
     }
@@ -347,6 +426,7 @@ public class Ccity  {
                     {
                         grabsquare(tx, ty);
                     }
+                    
                 }
             }
         }

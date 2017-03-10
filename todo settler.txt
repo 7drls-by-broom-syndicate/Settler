@@ -3,14 +3,21 @@ interface for producing mobs
 producing them
 making them fight
 
-
+a turn is like this:
+	all cities get to act, including letting mobs go they can't feed or pay
+	all mobs get to act which can include killing other mobs and cities
 
 finish list of mobs
-make a second menu with mobs
-hit menu key when over barracks brings up 2nd menu of "what to produce"
-you can change the mob to produce to anything even if you don't have enough resources
+
+when you meet a city state get a message about what they wants
+add message when press action over trader saying send what where and you get a list of city states with whath they wants
+showing how many of the resources you have like:
+	SEND WHAT WHERE?
+	oranges to venice [0 on hand 0 per turn]
+	oil to vatican city [105 on hand, 2 per turn]
+add a (city) to addons on tooltip so it's clear they belong to that city even if influ differnt
 if barracks on tooltip show what it's producing
-	like Barracks: Mounted Clubber P:341/1100 H:0/10 I:10/10
+	like Barracks: Mounted Clubber P:341/1100 H:0/10 I:10/10. can show on the line normally for city info 
 show def and hp for cities
 city names shown on map with F3 toggle on and off
 

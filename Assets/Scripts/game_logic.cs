@@ -486,6 +486,21 @@ public partial class Game : MonoBehaviour
         }
         return false;
     }
+
+    public Ccity findcity9way(int x, int y)
+    {
+        for (int xx = x - 1; xx < x + 2; xx++)
+        {
+            for (int yy = y - 1; yy < y + 2; yy++)
+            {
+                if (xx > 0 && yy > 0 && xx < map.width && yy < map.height && map.buildings[xx, yy] == Etilesprite.BUILDINGS_CITY)
+                    return map.citythathasinfluence[xx,yy];//again, assuming every city has influence on itself at least, since you can't build one on an influenced square
+            }
+        }
+        return null;
+    }
+
+
     public bool check3(Etilesprite e, Etilesprite x)
     {
         //returns true if e matches x
