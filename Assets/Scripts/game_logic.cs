@@ -508,9 +508,12 @@ public partial class Game : MonoBehaviour
         if (map.buildings[player.posx, player.posy] != Etilesprite.EMPTY && map.buildings[player.posx, player.posy] == Etilesprite.BUILDINGS_BARRACKS)
         {
 
-            for(int i = 2; i < 9; i++)
+            for (int i = 2; i < 9; i++)
             {
-                string s = mob.archetypes[i].name;
+                var m = mob.archetypes[i];
+                string s = "[P:" + m.buildcostproduction.ToString("D3")+ " I:" + m.buildcostiron.ToString("D2") + " H:" + m.buildcosthorses.ToString("D2") + "] " + 
+                    m.name.PadRight(15) +
+                    " (Atk:" + m.attacks + "@" + m.attacklow + "-" + m.attackhigh + " Def:" + m.defence + " Move:" + m.moves + " Upkeep:" + m.upkeepfood + "F," + m.upkeepgold + "G)";
                 ls.Add(s);
             }
 
