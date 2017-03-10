@@ -519,10 +519,10 @@ public partial class Game : MonoBehaviour
     public void doaction()
     {
         List<string> ls = new List<string>();
-
+      
         if (map.buildings[player.posx, player.posy] != Etilesprite.EMPTY && map.buildings[player.posx, player.posy] == Etilesprite.BUILDINGS_BARRACKS)
         {
-
+            ls.Add("--HALT PRODUCTION--");
             for (int i = 2; i < 9; i++)
             {
                 var m = mob.archetypes[i];

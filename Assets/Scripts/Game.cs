@@ -1149,10 +1149,17 @@ public partial class Game : MonoBehaviour
                             break;
                             //end of build menu
                             case Menu.Emenuidentity.unitproduce:
-                                int which = Game.currentmenu.currently_selected_option + 2;
-                                log.Printline("Now building " + mob.archetypes[which].name + ".", Color.yellow);
-                                map.addons[player.posx, player.posy].mobtoproduce = mob.archetypes[which];
-
+                                if (Game.currentmenu.currently_selected_option == 0)
+                                {
+                                    log.Printline("You halt production.", Color.yellow);
+                                    map.addons[player.posx, player.posy].mobtoproduce = null;
+                                }
+                                else
+                                {
+                                    int which = Game.currentmenu.currently_selected_option + 1;
+                                    log.Printline("Now building " + mob.archetypes[which].name + ".", Color.yellow);
+                                    map.addons[player.posx, player.posy].mobtoproduce = mob.archetypes[which];
+                                }
                                 break;
 
                                 //end of unitproduce menu
