@@ -43,9 +43,11 @@ public class addoninstance
     public Tcityaddons type;
     public int storedproduction,storediron,storedhorse;
     public mobarchetype mobtoproduce;
-
-    public addoninstance(Ccity _owner,Tcityaddons _type)
+    public int x, y;
+    public addoninstance(Ccity _owner,Tcityaddons _type,int _x,int _y)
     {
+        x = _x;
+        y = _y;
         owner = _owner;
         type = _type;
         storedproduction = storedhorse = storediron=0;
@@ -340,7 +342,7 @@ public class Ccity  {
         //ideally you would have proper AI that built addons for barbarian cities the same as we do. maybe after 7drl but certainly not now.
         foreach(var ao in thiscitysaddons)
         {
-            if (ao.type.tile == Etilesprite.BUILDINGS_BARRACKS)
+            if (ao.type.tile == Etilesprite.BUILDINGS_BARRACKS && ao.mobtoproduce!=null)
             {
                 //if needs production, give it some
                 int prodneeded = ao.mobtoproduce.buildcostproduction - ao.storedproduction;//does it need production?
@@ -391,19 +393,46 @@ public class Ccity  {
                     }
                 }
 
+               // Debug.Log("" + ao.mobtoproduce.name+" "+ao.storedproduction);
+
                 //if everything is full, splurt out a mob, you jibber jabber bitch weed face
-                if(ao.storedproduction==ao.mobtoproduce.buildcostproduction &&
-                    ao.storedhorse==ao.mobtoproduce.buildcosthorses &&
-                    ao.storediron == ao.mobtoproduce.buildcostiron){
-                    log.Printline(name + " produces a " + ao.mobtoproduce.name, Color.cyan);
-                    ao.storedproduction = ao.storediron = ao.storedhorse = 0;
+                if(ao.storedproduction  ==  ao.mobtoproduce.buildcostproduction &&
+                   ao.storedhorse       ==  ao.mobtoproduce.buildcosthorses &&
+                   ao.storediron        ==  ao.mobtoproduce.buildcostiron){
+                    //    log.Printline(name + " produces a " + ao.mobtoproduce.name+".", Color.cyan);
+                    //  ao.storedproduction = ao.storediron = ao.storedhorse = 0;//take the mats
+
+                    Cell papa = map.Random9way(ao.x, ao.y);
+                    if (papa == null)
+                    {
+                        if (log != null) log.Printline(name + " has nowhere to deploy " + ao.mobtoproduce.name + "!", Color.red);
+                    }
+                    else
+                    {
+                        if (log != null)log.Printline(name + " produces a " + ao.mobtoproduce.name + ".", Color.cyan);
+                        ao.storedproduction = ao.storediron = ao.storedhorse = 0;//take the mats
+                        CreateMob(ao.mobtoproduce.type,papa.x,papa.y);
+
+                    }
+
+
                 }
 
 
             }//end of if barracks
-        }
+        }//end of for ao in addons
 
 
+    }
+    void CreateMob(Emobtype t, int tentx, int tenty)
+    {//copied from Game.CreateMob
+        mob m = new mob(t);
+        m.posx = tentx; m.posy = tenty;
+        map.itemgrid[tentx, tenty] = new item_instance(m.tile, true, m);
+        map.passable[tentx, tenty] = false;
+        map.newmoblist.Add(m);
+        unitlist.Add(m);
+       // return m;
     }
     public void grabsquare(int eggs, int why)
     {

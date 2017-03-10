@@ -1,3 +1,7 @@
+change game over message
+put mobs on top of everything else on guidraw
+add mobs to tooltips
+
 list of todo: today:
 interface for producing mobs
 producing them

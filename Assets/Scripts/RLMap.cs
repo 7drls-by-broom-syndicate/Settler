@@ -132,7 +132,7 @@ public partial class RLMap  {
         return true;
     }
 
-    Cell Random9way(int x, int y)
+   public Cell Random9way(int x, int y)
     {
         
             List<Cell> bob = new List<Cell>();

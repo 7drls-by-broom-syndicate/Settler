@@ -1095,7 +1095,7 @@ public partial class Game : MonoBehaviour
                                 switch (Game.currentmenu.currently_selected_option)
                                 {
                                     case 0://city
-                                        citeh = new Ccity(true,player.posx, player.posy,map,player);
+                                        citeh = new Ccity(true,player.posx, player.posy,map,player,log);
                                         log.Printline("The city of " + citeh.name + " was founded!", Color.magenta);
                                         break;
                                     case 1://farm
@@ -1131,10 +1131,10 @@ public partial class Game : MonoBehaviour
                                     if (thecity == null) log.Printline("ERROR CITY ADDON CAN'T FIND CITY IT BELONGS TO!");
                                     else {
                                         //make a new city addon owned by the city we found and of type according to menu option (they're in the right order)
-                                        addoninstance a = new addoninstance(thecity, Ccity.addons[Game.currentmenu.currently_selected_option]);
+                                        addoninstance a = new addoninstance(thecity, Ccity.addons[Game.currentmenu.currently_selected_option],player.posx,player.posy);
                                         //add the city addon to the map's grid of them
                                         map.addons[player.posx, player.posy] = a;
-                                        log.Printline("You build a " + a.type.name, Color.yellow);
+                                        log.Printline("You build a " + a.type.name+".", Color.yellow);
                                             }
                                 }
 
