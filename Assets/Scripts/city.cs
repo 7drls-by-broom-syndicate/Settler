@@ -432,6 +432,8 @@ public class Ccity  {
         map.passable[tentx, tenty] = false;
         map.newmoblist.Add(m);
         unitlist.Add(m);
+        armycostperturn_food += m.archetype.upkeepfood;
+        armycostperturn_gold += m.archetype.upkeepgold;
        // return m;
     }
     public void grabsquare(int eggs, int why)

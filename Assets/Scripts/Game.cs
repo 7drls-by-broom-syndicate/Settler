@@ -445,6 +445,9 @@ public partial class Game : MonoBehaviour
                             //    DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_BLOOD_1+(int) map.bloodgrid[xx, yy]);
                             //}
                             //item layer draw item draw mob
+
+                            GUI.color = Color.white;//new 
+
                             if (map.itemgrid[xx, yy] != null)
                             {
                                 if (map.itemgrid[xx, yy].ismob)
@@ -696,18 +699,18 @@ public partial class Game : MonoBehaviour
                     }
 
                     //s[5] is for mob details
-                    s[5] = "mob stuff";
-                    //item_instance i = map.itemgrid[mapx, mapy];
-                    //if (i != null)
-                    //{
-                    //    s = Tilestuff.tilestring[(int)i.tile + 2];
+                    s[5] = "Mob:";
+                    item_instance i = map.itemgrid[mapx, mapy];
+                    if (i != null)
+                    {
+                        s[5]+= Tilestuff.tilestring[(int)i.tile + 2];
 
-                    //    if (i.ismob && !i.mob.dead_currently)
-                    //    {
-                    //        s += " HP: " + i.mob.hp + "/" + i.mob.archetype.hp;                      
-                    //    }
+                        if (i.ismob)// && !i.mob.dead_currently)
+                        {
+                            s[5] += " HP: " + i.mob.hp + "/" + i.mob.archetype.hp;                      
+                        }
 
-                    //}
+                    }
                     //else
                     //{
                     //    s = Tilestuff.tilestring[(int)map.displaychar[mapx, mapy] + 2];

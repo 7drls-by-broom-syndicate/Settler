@@ -830,8 +830,8 @@ public partial class Game : MonoBehaviour
 
         if (player.hp <= 0)
         {
-            log.Printline("This life no longer grips you.", Color.magenta);
-            log.Printline("Now you can into Sky Burrow.", Color.magenta);
+            log.Printline("You have failed to protect civilization", Color.magenta);
+            log.Printline("from the scourge of the barbarians.", Color.magenta);
 
             TimeEngine = CradleOfTime.dormant;
             gamestate = Egamestate.gameover;

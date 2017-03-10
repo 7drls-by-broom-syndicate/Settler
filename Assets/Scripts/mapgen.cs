@@ -733,12 +733,14 @@ public void genlevelsettlerstyle()
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_OCEAN_1;
                     yield[x, y].set(0, 0, 0);
+                    passable[x, y] = false;
                     resource[x, y] = null;
                 }
                 else if (noise_height < 0.2)
                 {
                     displaychar[x, y] = Etilesprite.BASE_TILE_COASTAL_WATER_1;
                     yield[x, y].set(0, 1, 1);
+                    passable[x, y] = false;
                     resource[x, y] = null;
                     resource[x, y] = tryresource(new List<Eresourcetype>
                     {
@@ -759,6 +761,7 @@ public void genlevelsettlerstyle()
                     if (noise_height > 0.9)
                     {
                         mountain[x, y] = true;
+                        passable[x, y] = false;
                     }
                     else if (noise_hill > 0.7)
                     {

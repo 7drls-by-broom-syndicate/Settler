@@ -107,7 +107,8 @@ public partial class RLMap  {
 
     public bool passablecheck(int x,int y,mob m)
     {
-        return true;
+        if (m == player.mob) return true;
+        else return passable[x,y];
         // return (passable[x, y] || displaychar[x, y] == Etilesprite.MAP_WATER && m.archetype.heavy);
     }
     private Player player;
