@@ -1,9 +1,12 @@
-slow down city growth as city grows
+finish list of mobs
+make a second menu with mobs
+hit menu key when over barracks brings up 2nd menu of "what to produce"
+you can change the mob to produce to anything even if you don't have enough resources
 
-show exploit name instead of generic
 
-1 last line in tooltip
-move tooltips up if at bottom
+
+1 last line in tooltip for mobs
+
 
 if barracks on tooltip show what it's producing
 
@@ -22,7 +25,7 @@ basic things not done:
 produce mobs
 
 hero or gold huts
-effect of city buildings
+effect of city buildings (pretty easy except for trader and barracks)
 
 
 eventually: pop up city list and mob list (per city)

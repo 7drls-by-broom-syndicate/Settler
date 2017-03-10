@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Emobtype { playersnake, playerscout }
+
 public class mobarchetype
 {
    
@@ -57,25 +57,116 @@ public class mobarchetype
     }
 }
 
+public enum Emobtype { playersnake,trader,
+    playerscout,playerclubber,playerspearman,playerknight,playerpikeman,playermountedcluber,playermountedknight,
+    enemyscout, enemyclubber, enemyspearman, enemyknight, enemypikeman, enemymountedcluber, enemymountedknight,
+    enemychampion,enemylord,
+    broom,moop,torkinspider,reginaldmarsby,chickadeemonserat,benzedreneESR,creepysalado,doctorbarnaby,pangopangolin
+}
+
 public class mob {
 
     public static mobarchetype[] archetypes =
     {//                 
         new mobarchetype("@snake","sword",40,false,true,Etilesprite.UNITS_PLAYER,//name,attackname, hp,hostile to player, hostile to enemy,tile
-            0,0,0,0,0, // upkeep gold,food,buildcost production,iron,horses
+            0,0,// upkeep gold,food,
+            0,0,0,// buildcost production,iron,horses
             1,5,2, //attacklow,high,defence
             5,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
             ),
-
-         new mobarchetype("scout","",2,false,true,Etilesprite.UNITS_PLAYER_SCOUT,//name,attackname, hp,hostile to player, hostile to enemy,tile
-            0,0,0,0,0, // upkeep gold,food,buildcost production,iron,horses
-            1,5,2, //attacklow,high,defence
-            5,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+             new mobarchetype("trader","",40,false,true,Etilesprite.UNITS_PLAYER_TRADER,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,0,// upkeep gold,food,
+            0,0,0,// buildcost production,iron,horses
+            0,0,0, //attacklow,high,defence
+            0,false,false,1,0//sightradius,tank?,parry?,#moves,#attacks
+            ),
+            new mobarchetype("scout","penknife",2,false,true,Etilesprite.UNITS_PLAYER_SCOUT,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,1,// upkeep gold,food,
+            50,0,0,// buildcost production,iron,horses
+            1,2,0, //attacklow,high,defence
+            3,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+           new mobarchetype("clubber","club",8,false,true,Etilesprite.UNITS_PLAYER_CLUBBER,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,2,// upkeep gold,food,
+            100,0,0,// buildcost production,iron,horses
+            1,4,0, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+            new mobarchetype("spearman","spear",8,false,true,Etilesprite.UNITS_PLAYER_SPEARMAN,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,3,// upkeep gold,food,
+            100,0,0,// buildcost production,iron,horses
+            1,6,0, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+             new mobarchetype("knight","sword",20,false,true,Etilesprite.UNITS_PLAYER_KNIGHT,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,5,// upkeep gold,food,
+            400,10,0,// buildcost production,iron,horses
+            2,8,2, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+             new mobarchetype("pikeman","pike",12,false,true,Etilesprite.UNITS_PLAYER_PIKEMAN,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,5,// upkeep gold,food,
+            300,8,0,// buildcost production,iron,horses
+            3,9,0, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+            new mobarchetype("mounted clubber","club",10,false,true,Etilesprite.UNITS_PLAYER_MOUNTED_CLUBBER,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,8,// upkeep gold,food,
+            400,8,0,// buildcost production,iron,horses
+           1,4,0, //attacklow,high,defence
+            1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+            new mobarchetype("mounted knight","sword",22,false,true,Etilesprite.UNITS_PLAYER_MOUNTED_KNIGHT,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,8,// upkeep gold,food,
+            500,10,10,// buildcost production,iron,horses
+            2,8,2, //attacklow,high,defence
+            1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+             new mobarchetype("scout","penknife",2,true,false,Etilesprite.UNITS_ENEMY_SCOUT,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,1,// upkeep gold,food,
+            50,0,0,// buildcost production,iron,horses
+            1,2,0, //attacklow,high,defence
+            3,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+           new mobarchetype("clubber","club",8,true,false,Etilesprite.UNITS_ENEMY_CLUBBER,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,2,// upkeep gold,food,
+            100,0,0,// buildcost production,iron,horses
+            1,4,0, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+            new mobarchetype("spearman","spear",8,true,false,Etilesprite.UNITS_ENEMY_SPEARMAN,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,3,// upkeep gold,food,
+            100,0,0,// buildcost production,iron,horses
+            1,6,0, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+             new mobarchetype("knight","sword",20,true,false,Etilesprite.UNITS_ENEMY_KNIGHT,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,5,// upkeep gold,food,
+            400,10,0,// buildcost production,iron,horses
+            2,8,2, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+             new mobarchetype("pikeman","pike",12,true,false,Etilesprite.UNITS_ENEMY_PIKEMAN,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,5,// upkeep gold,food,
+            300,8,0,// buildcost production,iron,horses
+            3,9,0, //attacklow,high,defence
+            1,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+            new mobarchetype("mounted clubber","club",10,true,false,Etilesprite.UNITS_ENEMY_MOUNTED_CLUBBER,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,8,// upkeep gold,food,
+            400,8,0,// buildcost production,iron,horses
+           1,4,0, //attacklow,high,defence
+            1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+            new mobarchetype("mounted knight","sword",22,true,false,Etilesprite.UNITS_ENEMY_MOUNTED_KNIGHT,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,8,// upkeep gold,food,
+            500,10,10,// buildcost production,iron,horses
+            2,8,2, //attacklow,high,defence
+            1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
             )
-    
-            //do other units
-           
- };
+
+            //still more mobs to do
+    };
 
     public Ccity citythatownsit;
 
