@@ -77,13 +77,13 @@ public class Ccity  {
 
     public static List<string> citynamesevil = new List<string>
     {
-        "Scab","Fester","Deathly","Ooze","Rattle",
-        "Terminus","Panic","Stab","Knife","Jagged","Black",
-        "Stale","Crusty","Weeping","Dark","Spike","Flail","Blade's Edge",
-        "Crush","Peel","Torture","Pain","Rape","Suicide","Abortion",
-        "Murder","Crime","Punishment","Sin","Greed","Gluttony","Disease",
-        "Pallor","Failure","Depression","Infanticide","Bully","Jeer","Leer",
-        "Puncture","Penetration","Slice","Hack","Chop","Slash","Acidbath"
+        "Scab","Fester","Deathly","Ooze","Rattle","Depression","Dark Cloud","Malformation",
+        "Terminus","Panic","Stab","Knife","Jagged","Black","Confrontation","Bone","Shadow",
+        "Stale","Crusty","Weeping","Dark","Spike","Flail","Blade's Edge","Cancer","Despair","Shit",
+        "Crush","Peel","Torture","Pain","Rape","Suicide","Abortion","Violation","Grief","Vomit",
+        "Murder","Crime","Punishment","Sin","Greed","Gluttony","Disease","Sloth","Envy","Loss","Splatter",
+        "Pallor","Failure","Depression","Infanticide","Bully","Jeer","Leer","Pestilence","Fracture",
+        "Puncture","Penetration","Slice","Hack","Chop","Slash","Acidbath","War","Famine","Cruelty","Neglect","Terror"
     };
 
 
