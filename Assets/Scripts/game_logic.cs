@@ -505,59 +505,74 @@ public partial class Game : MonoBehaviour
     {
         List<string> ls = new List<string>();
 
-        bool onbuilding = map.buildings[player.posx, player.posy] != Etilesprite.EMPTY;
-        bool onwater = (
-            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_OCEAN_1 )||
-            check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_COASTAL_WATER_1)
-            );
-        bool waternsew = water4way(player.posx, player.posy);
-
-        bool onmountain = map.mountain[player.posx, player.posy];
-        bool onhill= map.hill[player.posx, player.posy];
-        bool onpolar = check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_POLAR_1);
-        bool oninfluence=(map.influence[player.posx, player.posy]==true);
-        int i = 0;
-
-
-
-        foreach (var x in Ccity.addons)
+        if (map.buildings[player.posx, player.posy] != Etilesprite.EMPTY && map.buildings[player.posx, player.posy] == Etilesprite.BUILDINGS_BARRACKS)
         {
-            //NOTE. WE DON'T ALLOW PLAYER TO BUILD A CITY UNLESS ON NEUTRAL GROUND
-            //THIS IS BECAUSE UNLIKE NORMAL CIV, WHICH CITY "OWNS" A TILE IN TERMS OF INFFLUENCE IS IMPORTANT
-            //BECAUSE RESOURCES AND TILE YIELDS GO TO THAT CITY. OR MAYBE THAT DOES HAPPEN IN CIV.
-            //WHY AM I TYPING IN CAPS
 
+            for(int i = 2; i < 9; i++)
+            {
+                string s = mob.archetypes[i].name;
+                ls.Add(s);
+            }
 
-            if(x.cost>player.gold //disable if can't afford it
-                || onbuilding//can't replace one building with another. change this later eg build city on farm etc.
-                || (i!=3 && onwater)//if on water disable everything except resource exploiter
-                || (i==3 && map.resource[player.posx,player.posy]==null)//if no resource disable resource exploiter
-               || (i>=4 && !citycheck9way(player.posx,player.posy))//if there isn't a city in 9 way disable all city addons
-                || (i==10 && !waternsew)//if there isn't 4 way access to coastal water or ocean , disable port and docks
-                || (i==2 && !(onhill||onmountain)) //if not on hills or mountains disable mine
-                || (i==1 && (onmountain||onpolar||(onhill&&!waternsew)))//if on mountains or polar biome or (hill with no 4way water) disable farm
-                || (i==0 && (
-                        onmountain || 
-                        onwater ||
-                        checkforbuildings(player.posx, player.posy)||
-                        map.influence[player.posx,player.posy]!=null))//can't build unless influence is neutral.
-               || ( (i>0 && i<4) && !oninfluence)
-                )
-            ls.Add("/"+x.name + " (" + x.cost + ")");
-            else  ls.Add(x.name + " (" + x.cost + ")");
-
-            i++;
+            Game.currentmenu = new Menu(Menu.Emenuidentity.unitproduce,
+               "Unit to produce?", ls);
         }
-                         
-        //if not in city influence disable farm, mine and resource exploiter
-              
-     
+        else
+        {
+
+            bool onbuilding = map.buildings[player.posx, player.posy] != Etilesprite.EMPTY;
+            bool onwater = (
+                check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_OCEAN_1) ||
+                check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_COASTAL_WATER_1)
+                );
+            bool waternsew = water4way(player.posx, player.posy);
+
+            bool onmountain = map.mountain[player.posx, player.posy];
+            bool onhill = map.hill[player.posx, player.posy];
+            bool onpolar = check3(map.displaychar[player.posx, player.posy], Etilesprite.BASE_TILE_POLAR_1);
+            bool oninfluence = (map.influence[player.posx, player.posy] == true);
+            int i = 0;
 
 
-        Game.currentmenu = new Menu(Menu.Emenuidentity.build,
-            "Build", ls);
+
+            foreach (var x in Ccity.addons)
+            {
+                //NOTE. WE DON'T ALLOW PLAYER TO BUILD A CITY UNLESS ON NEUTRAL GROUND
+                //THIS IS BECAUSE UNLIKE NORMAL CIV, WHICH CITY "OWNS" A TILE IN TERMS OF INFFLUENCE IS IMPORTANT
+                //BECAUSE RESOURCES AND TILE YIELDS GO TO THAT CITY. OR MAYBE THAT DOES HAPPEN IN CIV.
+                //WHY AM I TYPING IN CAPS
 
 
+                if (x.cost > player.gold //disable if can't afford it
+                    || onbuilding//can't replace one building with another. change this later eg build city on farm etc.
+                    || (i != 3 && onwater)//if on water disable everything except resource exploiter
+                    || (i == 3 && map.resource[player.posx, player.posy] == null)//if no resource disable resource exploiter
+                   || (i >= 4 && !citycheck9way(player.posx, player.posy))//if there isn't a city in 9 way disable all city addons
+                    || (i == 10 && !waternsew)//if there isn't 4 way access to coastal water or ocean , disable port and docks
+                    || (i == 2 && !(onhill || onmountain)) //if not on hills or mountains disable mine
+                    || (i == 1 && (onmountain || onpolar || (onhill && !waternsew)))//if on mountains or polar biome or (hill with no 4way water) disable farm
+                    || (i == 0 && (
+                            onmountain ||
+                            onwater ||
+                            checkforbuildings(player.posx, player.posy) ||
+                            map.influence[player.posx, player.posy] != null))//can't build unless influence is neutral.
+                   || ((i > 0 && i < 4) && !oninfluence)
+                    )
+                    ls.Add("/" + x.name + " (" + x.cost + ")");
+                else ls.Add(x.name + " (" + x.cost + ")");
+
+                i++;
+            }
+
+            //if not in city influence disable farm, mine and resource exploiter
+
+
+
+
+            Game.currentmenu = new Menu(Menu.Emenuidentity.build,
+                "Build", ls);
+
+        }
 
         Game.menuup = true;
         Game.currentmenu.setpos(32, 32);

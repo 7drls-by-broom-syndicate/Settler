@@ -1,14 +1,24 @@
+list of todo: today:
+interface for producing mobs
+producing them
+making them fight
+
+
+
 finish list of mobs
 make a second menu with mobs
 hit menu key when over barracks brings up 2nd menu of "what to produce"
 you can change the mob to produce to anything even if you don't have enough resources
-
+if barracks on tooltip show what it's producing
+	like Barracks: Mounted Clubber P:341/1100 H:0/10 I:10/10
+show def and hp for cities
+city names shown on map with F3 toggle on and off
 
 
 1 last line in tooltip for mobs
 
 
-if barracks on tooltip show what it's producing
+
 
 if a mob dies remove its upkeep cost from city
 
