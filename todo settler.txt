@@ -1,14 +1,14 @@
 you can't attack mobs
-need click to move to go anywhere regardless of passable
+mobs need to walk randomly, select targets etc.
+remove old corpse code for death, just kill everything to disappear
 "BUG: mob at"
 
 
-add a (city) to addons on tooltip so it's clear they belong to that city even if influ differnt
+if a mob dies remove its upkeep cost from city
 
-if barracks on tooltip show what it's producing
-	like Barracks: Mounted Clubber P:341/1100 H:0/10 I:10/10. can show on the line normally for city info 
-show def and hp for cities
-city names shown on map with F3 toggle on and off
+probably post 7drl:
+need click to move to go anywhere regardless of passable. kind of annoying to do
+city names shown on map with F3 toggle on and off. harder than i thought because need to wait until drawn all tiles then draw over top.
 
 
 a turn is like this:
@@ -32,7 +32,6 @@ showing how many of the resources you have like:
 
 
 
-if a mob dies remove its upkeep cost from city
 
 
 
@@ -101,9 +100,6 @@ grows by one square every time you have enough food. pick one random tile in the
 Goal of the game:
 Buy presents for Broom's Bristleday! There is one present per level. 10 levels. there's always one shop on the map and the top item it sells, say for 1,000,000 gold is something broom wants, like a toy sailing boat. after you buy the present you have to exit the level via the warp gate
 
-things you could sneakily add to skater so they are ready for 7drl:
-menu choose screen (for shops)
-particle system
 
 
 roads to build manually between cities? sounds like a fun activity but what would it 

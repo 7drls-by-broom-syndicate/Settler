@@ -787,15 +787,15 @@ public partial class Game : MonoBehaviour
         //check for mob hp so dead
         foreach (var f in map.moblist)
         {
-            if(f.dead_currently==true && f.hp < -4)
-            {
-                //corpse has taken enough damage. we remove it. this stops corpses blocking doors
-                //and means you can prevent zombie apocalypse by killing corpses
+            //if(f.dead_currently==true && f.hp < -4)
+            //{
+            //    //corpse has taken enough damage. we remove it. this stops corpses blocking doors
+            //    //and means you can prevent zombie apocalypse by killing corpses
 
-                    f.tile = Etilesprite.EMPTY;
-                    map.passable[f.posx, f.posy] = true;
-                    map.itemgrid[f.posx, f.posy] = null;
-            }
+            //        f.tile = Etilesprite.EMPTY;
+            //        map.passable[f.posx, f.posy] = true;
+            //        map.itemgrid[f.posx, f.posy] = null;
+            //}
             if (f.dead_currently == false && f.hp <= 0)
             {
                 log.Printline("The " + f.archetype.name + " dies.", new Color(0.6f, 0, 0));
@@ -805,16 +805,20 @@ public partial class Game : MonoBehaviour
 
                 f.hp = 0; //newly added. Even if you smack a mob for 10 damage when it has 1hp its corpse should take 5 damage to make disappear
 
-                if (f.archetype.tile_dead != Etilesprite.EMPTY) //if the type of mob has a sprite for its dead state
-                {
-                    f.tile = f.archetype.tile_dead; //mob's display tile = what it should be for dead
-                    map.itemgrid[f.posx, f.posy].tile = f.tile;//crash
-                }
-                else {
-                    f.tile = Etilesprite.EMPTY;
-                    map.passable[f.posx, f.posy] = true;
-                    map.itemgrid[f.posx, f.posy] = null;
-                        }
+                //  if (f.archetype.tile_dead != Etilesprite.EMPTY) //if the type of mob has a sprite for its dead state
+                //  {
+                //      f.tile = f.archetype.tile_dead; //mob's display tile = what it should be for dead
+                //      map.itemgrid[f.posx, f.posy].tile = f.tile;//crash
+                //  }
+                //  else {
+
+                map.killoffamob(f,true);
+
+                    //f.tile = Etilesprite.EMPTY;
+                    //map.passable[f.posx, f.posy] = true;
+                    //map.itemgrid[f.posx, f.posy] = null;
+          
+                //          }
                 //if (map.itemgrid[f.posx, f.posy] == null)
                  //   log.Printline("BUG: itemgrid null in mob death");
                         // Debug.Log("error map thing in mob dies thing");

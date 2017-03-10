@@ -11,10 +11,10 @@ public class mobarchetype
     public bool flies;
     public bool hostile_toplayer;
     public bool hostile_toenemies;
-    public bool undead;
+  //  public bool undead;
     public Etilesprite tile;
-    public Etilesprite tile_dead;
-    public Etilesprite tile_undead;
+   // public Etilesprite tile_dead;
+   // public Etilesprite tile_undead;
     public int hp;
     public bool heavy;
 
@@ -207,7 +207,7 @@ public class mob {
         tile = at.tile;
         hostile_toenemies_currently = at.hostile_toenemies;
         hostile_toplayer_currently = at.hostile_toplayer;
-        undead_currently = at.undead;
+        //undead_currently = at.undead;
         flies_currently = at.flies;
         skates_currently = at.skates;
 

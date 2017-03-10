@@ -96,17 +96,24 @@ public partial class RLMap  {
     public int firststepx, firststepy;                             //used by pathfinding
     public List<Cell> emptyspaces;                                 //free squares
 
-    public void killoffamob(mob f)
+    public void killoffamob(mob f,bool purgecityunitlist=false)
     {
+
+        //remove upkeep cost
+        f.citythatownsit.armycostperturn_food -= f.archetype.upkeepfood;
+        f.citythatownsit.armycostperturn_gold -= f.archetype.upkeepgold;
+
         f.tile = Etilesprite.EMPTY;         //this will make the processturn function garbage collect the mob from moblist
         passable[f.posx, f.posy] = true;    
         itemgrid[f.posx, f.posy] = null;
-        
 
+        if(purgecityunitlist)f.citythatownsit.unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);
     }
 
     public bool passablecheck(int x,int y,mob m)
     {
+        //you can freely move across your own city and addons but not across enemy ones. also no moving over mobs
+        if (itemgrid[x, y] != null) return false;
         if (m == player.mob) return true;
         else return passable[x,y];
         // return (passable[x, y] || displaychar[x, y] == Etilesprite.MAP_WATER && m.archetype.heavy);

@@ -270,8 +270,8 @@ public class Ccity  {
                 {
                     bust = true;
                     if (log != null) log.Printline(u.archetype.name + " leaves: " + name + " can't pay.", Color.red);
-                    armycostperturn_gold -= u.archetype.upkeepgold;
-                    armycostperturn_food -= u.archetype.upkeepfood;//remove the cost in both food and gold when mob leaves
+                   // armycostperturn_gold -= u.archetype.upkeepgold;
+                   // armycostperturn_food -= u.archetype.upkeepfood;//remove the cost in both food and gold when mob leaves
                     map.killoffamob(u);//mob leaves
                    
                 }
@@ -325,8 +325,8 @@ public class Ccity  {
                 {
                     bust = true;
                     if (log != null) log.Printline(u.archetype.name + " leaves: " + name + " can't feed.", Color.red);
-                    armycostperturn_gold -= u.archetype.upkeepgold;
-                    armycostperturn_food -= u.archetype.upkeepfood;
+                    //armycostperturn_gold -= u.archetype.upkeepgold;
+                    //armycostperturn_food -= u.archetype.upkeepfood;
                     map.killoffamob(u);//mob leaves
 
                 }
@@ -436,6 +436,7 @@ public class Ccity  {
         unitlist.Add(m);
         armycostperturn_food += m.archetype.upkeepfood;
         armycostperturn_gold += m.archetype.upkeepgold;
+        m.citythatownsit = this;
        // return m;
     }
     public void grabsquare(int eggs, int why)
