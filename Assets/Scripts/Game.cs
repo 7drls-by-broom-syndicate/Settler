@@ -688,6 +688,7 @@ public partial class Game : MonoBehaviour
                     {
                         if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION) s[2] = map.resource[mapx, mapy].nameofexploiter + " ";
                         else s[2]= Tilestuff.tilestring[(int)map.buildings[mapx,mapy]+2]+" ";
+                        if (map.addons[mapx, mapy] != null) s[2] += "(" + map.addons[mapx,mapy].owner.name+")";
                     }
                     s[2] += "[P:" + map.currentyield[mapx, mapy].production + " G:" + map.currentyield[mapx, mapy].gold + " F:" + map.currentyield[mapx, mapy].food + "]";
                     
@@ -695,9 +696,19 @@ public partial class Game : MonoBehaviour
                     {//x units use g:10 f:20 of [p:1 g:3 f:3]
                         Ccity cctv = map.citythathasinfluence[mapx, mapy];
                         s[3] += cctv.unitlist.Count + " units use G:" + cctv.armycostperturn_gold + " F:" + cctv.armycostperturn_food + " of [P:" + cctv.perturnyields.production + " G:" + cctv.perturnyields.gold + " F:" + cctv.perturnyields.food + "]";
-                        s[4] = "Growth " + cctv.growthcounter + "/" + cctv.arbitrary_growth_value;
+                        s[4] = "Growth " + cctv.growthcounter + "/" + cctv.arbitrary_growth_value+" HP:"+cctv.hp+"/"+cctv.hpmax+" DEF:"+cctv.defence;
                     }
+                    else if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_BARRACKS)
+                    {
+                        s[4] = "Building:";
+                        if (map.addons[mapx, mapy].mobtoproduce == null) s[4] += " nothing, idle.";
+                        else s[4] += map.addons[mapx, mapy].mobtoproduce.name +
+                                " P:" + map.addons[mapx, mapy].storedproduction + "/" + map.addons[mapx, mapy].mobtoproduce.buildcostproduction +
+                                " I:" + map.addons[mapx, mapy].storediron+ "/" + map.addons[mapx, mapy].mobtoproduce.buildcostiron+
+                        " H:" + map.addons[mapx, mapy].storedhorse + "/" + map.addons[mapx, mapy].mobtoproduce.buildcosthorses;
 
+
+                    }
                     //s[5] is for mob details
                     s[5] = "Mob:";
                     item_instance i = map.itemgrid[mapx, mapy];

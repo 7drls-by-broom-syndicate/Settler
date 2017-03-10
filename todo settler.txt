@@ -1,11 +1,15 @@
-change game over message
-put mobs on top of everything else on guidraw
-add mobs to tooltips
+you can't attack mobs
+need click to move to go anywhere regardless of passable
+"BUG: mob at"
 
-list of todo: today:
-interface for producing mobs
-producing them
-making them fight
+
+add a (city) to addons on tooltip so it's clear they belong to that city even if influ differnt
+
+if barracks on tooltip show what it's producing
+	like Barracks: Mounted Clubber P:341/1100 H:0/10 I:10/10. can show on the line normally for city info 
+show def and hp for cities
+city names shown on map with F3 toggle on and off
+
 
 a turn is like this:
 	all cities get to act, including letting mobs go they can't feed or pay
@@ -19,31 +23,24 @@ showing how many of the resources you have like:
 	SEND WHAT WHERE?
 	oranges to venice [0 on hand 0 per turn]
 	oil to vatican city [105 on hand, 2 per turn]
-add a (city) to addons on tooltip so it's clear they belong to that city even if influ differnt
-if barracks on tooltip show what it's producing
-	like Barracks: Mounted Clubber P:341/1100 H:0/10 I:10/10. can show on the line normally for city info 
-show def and hp for cities
-city names shown on map with F3 toggle on and off
 
 
-1 last line in tooltip for mobs
+
+
+
 
 
 
 
 if a mob dies remove its upkeep cost from city
 
-when you add an addon find its city by searching 9 way and add it to building list of that city
 
-finish list of units in archetypes, remembering to do enemy versions of the basic units
-make a 2nd menu, "produce". if you press action key when over a barracks you get taht menu. can pick any unit to create even if don't have the 
-resources yet.
+
 your mobs walk around randomly until they detect an enemy camp, citadel or mob, then they attack it until it's dead or they are.
 
 basic things not done:
 
 
-produce mobs
 
 hero or gold huts
 effect of city buildings (pretty easy except for trader and barracks)

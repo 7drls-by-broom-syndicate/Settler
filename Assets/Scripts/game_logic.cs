@@ -946,7 +946,8 @@ public partial class Game : MonoBehaviour
 
     void MobAttacksMob(mob attacker, mob target)
     {
-        int damage = attacker.speed - target.speed;
+        int damage = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh)//attacker.speed - target.speed;
+            - target.archetype.defence;//maybe lil.randi(0,target.archetype.defence)?
         if (damage < 1) damage = 1;
         FloatingDamage(target, attacker, -damage, attacker.archetype.weaponname);
     }

@@ -177,7 +177,8 @@ public class Ccity  {
 
     public int evilgold;//enemy cities don't spend gold. instead they accumulate it and it's given to player when they kill it
 
-    public int hp = 100;
+    public int hpmax = 100;
+    public int hp;
     public int defence = 2;
     public static int numcitiesevil=0;
 
@@ -187,6 +188,7 @@ public class Ccity  {
     public Ccity(bool frenz,int x,int y,RLMap m,Player p,MessageLog ml=null)
 
     {
+        hp = hpmax;
         //copy the static list of distances 
         spiral = new Spiral(m.width, m.height,x,y);
 
