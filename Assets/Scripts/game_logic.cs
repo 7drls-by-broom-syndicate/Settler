@@ -686,29 +686,29 @@ public partial class Game : MonoBehaviour
         
         //END DEBUGGING THING
 
-        bool dirty= false;
-        //wizard walls
-        foreach(var f in map.walllist)
-        {
-            f.bombcount--;
-            if (f.bombcount == 0)
-            {
-                dirty = true;
-                map.itemgrid[f.bombx, f.bomby] = null;
-                map.passable[f.bombx, f.bomby] = true;
-                map.blocks_sight[f.bombx, f.bomby] = false;
+        //bool dirty= false;
+        ////wizard walls
+        //foreach(var f in map.walllist)
+        //{
+        //    f.bombcount--;
+        //    if (f.bombcount == 0)
+        //    {
+        //        dirty = true;
+        //        map.itemgrid[f.bombx, f.bomby] = null;
+        //        map.passable[f.bombx, f.bomby] = true;
+        //        map.blocks_sight[f.bombx, f.bomby] = false;
 
-            }
-        }
+        //    }
+        //}
 
-        if (dirty)
-        {
-            map.walllist.RemoveAll(x => x.bombcount == 0);
-            //redo FoV
-            doplayerfovandlights();
+        //if (dirty)
+        //{
+        //    map.walllist.RemoveAll(x => x.bombcount == 0);
+        //    //redo FoV
+        //    doplayerfovandlights();
 
-            dirty = false;
-        }
+        //    dirty = false;
+        //}
 
         //city stuff
 

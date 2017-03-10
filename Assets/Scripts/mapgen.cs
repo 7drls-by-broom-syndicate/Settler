@@ -772,7 +772,8 @@ public void genlevelsettlerstyle()
                         if (resource[x, y] == null || lil.randi(1, 100) > 50)
                             resource[x, y] = tryresource(new List<Eresourcetype>
                             {
-                                Eresourcetype.iron,Eresourcetype.gems,Eresourcetype.copper,Eresourcetype.silver,Eresourcetype.gold
+                                Eresourcetype.iron,Eresourcetype.iron,Eresourcetype.iron,Eresourcetype.iron,Eresourcetype.iron,Eresourcetype.iron,
+                                Eresourcetype.gems,Eresourcetype.copper,Eresourcetype.silver,Eresourcetype.gold
                             });
                     }
                 }

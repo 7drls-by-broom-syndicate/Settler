@@ -260,9 +260,9 @@ public class Ccity  {
                     map.killoffamob(u);//mob leaves
                    
                 }
-                unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);//remove mobs that left from the unitlist for this city
+                
             }
-
+            unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);//remove mobs that left from the unitlist for this city
         }
 
         //food goes to standing army. any left over makes city grow!
@@ -315,9 +315,9 @@ public class Ccity  {
                     map.killoffamob(u);//mob leaves
 
                 }
-                unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);//remove mobs that left from the unitlist for this city
+               
             }
-
+ unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);//remove mobs that left from the unitlist for this city
         }
 
 
