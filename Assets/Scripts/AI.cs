@@ -9,6 +9,10 @@ public class AI
     public bool randomlywalking;
     public int direction;
 
+    public bool targetismob;
+    public mob target;
+    public Cell targetsquare;
+
     public AI()
     {
         randomlywalking = true;

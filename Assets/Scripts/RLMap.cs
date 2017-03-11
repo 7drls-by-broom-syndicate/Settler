@@ -427,7 +427,61 @@ public partial class RLMap  {
 
     }
 
-     public void FreeSpace(out int a, out int b){
+    static readonly int[] spiraldx = { 1, 0, -1, 0 };
+    static readonly int[] spiraldy = { 0, -1, 0, 1 };
+
+    public bool spiralscan(mob m)
+    {
+        int scanx = m.posx;
+        int scany = m.posy;
+        int targetx = scanx + 10;
+        int direction = 0; //right (up left down)
+        int which = 0; //0 is first time, 1 is 2nd
+
+        int length = 1;
+
+        while (scanx < targetx)
+        {
+            for (int sides = 0; sides < 2; sides++)
+            {
+                for (int rep = 0; rep < length; rep++)
+                {
+                    scanx += spiraldx[direction];
+                    scany += spiraldy[direction];
+                    direction++; if (direction == 4) direction = 0;
+                    //checksquare and if found fill and return
+                    if (scanx >= 0 && scany >= 0 && scanx < width && scany < height)
+                    {
+                        if (m.hostile_toenemies_currently && itemgrid[scanx, scany].mob.hostile_toplayer_currently
+                            || m.hostile_toplayer_currently && itemgrid[scanx, scany].mob.hostile_toenemies_currently)
+                        {
+                            m.AIformob.targetsquare = new Cell(scanx, scany);
+                            return true;
+                        }
+                        if(m.hostile_toplayer_currently && player.posx==scanx && player.posy==scany)
+                        {
+                            m.AIformob.targetsquare=new Cell(scanx, scany);
+                            return true;
+                        }
+                        if(m.hostile_toplayer_currently && buildings[scanx, scany] == Etilesprite.BUILDINGS_CITY)
+                        {
+                            m.AIformob.targetsquare=new Cell(scanx, scany);
+                            return true;
+                        }
+                        if(m.hostile_toenemies_currently && buildings[scanx,scany]==Etilesprite.BUILDINGS_BARBARIAN_CAMP
+                            || buildings[scanx, scany] == Etilesprite.BUILDINGS_BARBARIAN_CITADEL)
+                        {
+                            m.AIformob.targetsquare = new Cell(scanx, scany);
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+    public void FreeSpace(out int a, out int b){
          Cell c = emptyspaces.OneFromTheTop();
          a = c.x; b = c.y;
 		}

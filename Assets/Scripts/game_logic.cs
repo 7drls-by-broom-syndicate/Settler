@@ -902,8 +902,31 @@ public partial class Game : MonoBehaviour
     void MobGetsToAct(mob e)
     {
 
-        if (e.AIformob.randomlywalking)
+        if (e.AIformob.randomlywalking)//randomlywalking might as well be "bool haveatarget"
         {
+
+            //do a quickscan for targets
+            if (map.spiralscan(e))
+            {
+                //TARGET ACKWIERD. PRO-CEED. WE HAVE DIS-CO-VERED AN EN-EM-EH OF TEH DA-LECHS
+
+
+
+
+
+                map.passable[e.posx, e.posy] = true;//we need square the mob starts on to be passable, for pathfinding.
+                                                    //attempt to move 
+                if (map.PathfindAStar(e.posx, e.posy, player.posx, player.posy, false))
+                {
+                    int deltax = map.firststepx - e.posx;
+                    int deltay = map.firststepy - e.posy;
+                    trytomove(e, deltax, deltay);
+                    map.passable[e.posx, e.posy] = false;
+                    return;
+                }
+            }
+
+
             if (lil.randi(1, 100) < 5)
             {
                 e.AIformob.direction = lil.randi(0, 7); //randomly change direction for no reason
@@ -913,28 +936,17 @@ public partial class Game : MonoBehaviour
             return;
         }
 
-        //not used
-        // e.noticedyou is available to say if mob has noticed player. 
+     
 
-        if (e.IsAdjacentTo(player.mob) &&
-            e.hostile_toplayer_currently)
-
-        {
-            MobAttacksMob(e, player.mob);
-            return;
-        }
+        //if (e.IsAdjacentTo(player.mob) &&
+        //    e.hostile_toplayer_currently)
+        //{
+        //    MobAttacksMob(e, player.mob);
+        //    return;
+        //}
 
 
-        map.passable[e.posx, e.posy] = true;//we need square the mob starts on to be passable, for pathfinding.
-        //attempt to move 
-        if (map.PathfindAStar(e.posx, e.posy, player.posx, player.posy, false))
-        {          
-            int deltax = map.firststepx - e.posx;
-            int deltay = map.firststepy - e.posy;
-            trytomove(e, deltax, deltay);
-            map.passable[e.posx, e.posy] = false;
-            return;
-        }       
+            
     }
 
    

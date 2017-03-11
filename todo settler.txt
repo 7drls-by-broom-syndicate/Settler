@@ -1,22 +1,27 @@
 a day left
 ----------
+remove noticed you message for frenzlee players
 
+mobs moving onto you without attacking when randomly walking
 
-need to write code to destroy cities
-	log.printline( city was destroyed by mob)
-	map.citylist remove
-	buildings[x,y]=etilesprite.empty//wipe the city off the map!
-	
-	citythathasinfluence is none
-	influence is neutral (done as part of below)
-	list of influence set to neutral
-	if there's improvements on influence i think it's ok to leave them plus it's amusing becaues enemy could azorb them
-	kill all addons
-	kill orphaned units? yes in unitlist
-	
+what things should my mobs attack?
+		enemy mobs
+		enemy city
+		
+what things should enemy mobs attack?
+		my mobs
+		my cities
+		me
+		
+		
+		
+		
+		
+		tea at 22
+		
 
 	
-3 if barb citadel falls you win. print message. test this
+
 
 	
 5 make mobs walk randomly, scan for targets, set a target and attack it. mobgetstoact is key routine
