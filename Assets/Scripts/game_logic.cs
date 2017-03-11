@@ -297,6 +297,14 @@ public partial class Game : MonoBehaviour
         }
 
 
+        //if tentative spot has player and we are bad men, attack him!
+        if(m.hostile_toplayer_currently && player.posx == tentx && player.posy == tenty)
+        {
+            MobAttacksMob(m, player.mob);
+            didsomething = true;
+            goto okhadfun;
+        }
+
         //if spot is empty, move
         if (map.passablecheck(tentx, tenty, m))
         {
@@ -910,13 +918,9 @@ public partial class Game : MonoBehaviour
             {
                 //TARGET ACKWIERD. PRO-CEED. WE HAVE DIS-CO-VERED AN EN-EM-EH OF TEH DA-LECHS
 
-
-
-
-
                 map.passable[e.posx, e.posy] = true;//we need square the mob starts on to be passable, for pathfinding.
                                                     //attempt to move 
-                if (map.PathfindAStar(e.posx, e.posy, player.posx, player.posy, false))
+                if (map.PathfindAStar(e.posx, e.posy, e.AIformob.targetsquare.x,e.AIformob.targetsquare.y, false))
                 {
                     int deltax = map.firststepx - e.posx;
                     int deltay = map.firststepy - e.posy;
