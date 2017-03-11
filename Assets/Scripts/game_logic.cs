@@ -901,7 +901,8 @@ public partial class Game : MonoBehaviour
 
         //   if(e.h)
 
-        if (!e.noticedyou || e.dead_currently) return; //METAL MOOP SOLID
+        //   if (!e.noticedyou || e.dead_currently) return; //METAL MOOP SOLID
+
         if (e.IsAdjacentTo(player.mob) &&
             e.hostile_toplayer_currently)
 

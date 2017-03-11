@@ -420,9 +420,9 @@ public partial class RLMap  {
 
         buildings[x, y] = Etilesprite.EMPTY;//wipe city off the face of the map!
         citythathasinfluence[x, y] = null;
-        Debug.Log("citylist count before is " + citylist.Count);
-        citylist.RemoveAll(r => r == target);//untested
-        Debug.Log("citylist count after is " + citylist.Count);
+        //Debug.Log("citylist count before is " + citylist.Count);
+        citylist.RemoveAll(r => r == target);
+        //Debug.Log("citylist count after is " + citylist.Count);
 
 
     }

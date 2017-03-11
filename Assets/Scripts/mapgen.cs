@@ -815,7 +815,7 @@ public void genlevelsettlerstyle()
         resource[buildx, buildy] = null;
         buildings[buildx, buildy] = Etilesprite.BUILDINGS_BARBARIAN_CITADEL;
         var tt = new Ccity(false, buildx, buildy, this, player);
-        tt.hpmax = 200;//double hp for boss city!
+        tt.hpmax = tt.hp=200;//double hp for boss city!
 
         //goodie huts
         for (int f = 0; f < 4; f++)

@@ -65,6 +65,8 @@ public enum Emobtype { playersnake,trader,
     broom,moop,torkinspider,reginaldmarsby,chickadeemonserat,benzedreneESR,creepysalado,doctorbarnaby,pangopangolin
 }
 
+
+
 public class mob {
 
     public static mobarchetype[] archetypes =
@@ -176,6 +178,7 @@ public class mob {
     public bool reversesprite = false;
     public mobarchetype archetype;
     public int hp;
+    public AI AIformob;
     public int posx, posy;//maybe not needed
     public bool noticedyou = false;
     public Etilesprite tile;
@@ -201,7 +204,7 @@ public class mob {
 
 	public mob(Emobtype typ)
     {
-        
+        AIformob = new AI();
         mobarchetype at = archetypes[(int)typ];
         archetype = at;
         hp = at.hp;
