@@ -175,7 +175,7 @@ public class mob {
             1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
             ),
 
-            new mobarchetype(Emobtype.enemylord,"Lord Malprong","daikatana",80,true,false,Etilesprite.UNITS_BARBARIAN_CHAMPION,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            new mobarchetype(Emobtype.enemylord,"Lord Malprong","daikatana",80,true,false,Etilesprite.UNITS_BARBARIAN_LORD,//name,attackname, hp,hostile to player, hostile to enemy,tile
             0,0,// upkeep gold,food,
             500,10,10,// buildcost production,iron,horses
             3,10,4, //attacklow,high,defence

@@ -190,11 +190,12 @@ public class Ccity  {
     public int attackbonus = 0;
     public int defencebonus = 0;
 
-
+public  bool usedDEFthisturn;
     public Ccity(bool frenz,int x,int y,RLMap m,Player p,MessageLog ml=null)
 
     {
         poppedleader = false;
+       
         hp = hpmax;
         //copy the static list of distances 
         spiral = new Spiral(m.width, m.height,x,y);
@@ -250,6 +251,8 @@ public class Ccity  {
 
     public void takeaturn()
     {
+        this.usedDEFthisturn = false;
+
         if (!isfrenzleecity)
         {
             //randomly produce units. don't need resource. don't need upkeep. don't need production, just pop em out.

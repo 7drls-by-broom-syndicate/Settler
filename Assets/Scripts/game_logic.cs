@@ -876,15 +876,15 @@ public partial class Game : MonoBehaviour
 
 
     void MobAttacksMob(mob attacker, mob target)
-    {
-        //bool cappedatzero = false;
+    {       
         int attackroll = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh);
         int defroll = (target.usedDEFthisturn) ? 0 : (target.archetype.defence + target.defencebonus);
 
         
-
         log.Printline(attacker.archetype.name + " ATK " + attacker.archetype.attacklow + "-" + attacker.archetype.attackhigh +
             " +" + attacker.attackbonus + " rolls " + attackroll + " =" +(attackroll+attacker.attackbonus),Color.grey);
+
+
 
         if (target.usedDEFthisturn) log.Printline(target.archetype.name + " DEF 0 (already used this turn)", Color.grey);
         else log.Printline(target.archetype.name + " DEF " + target.archetype.defence + " +" + target.defencebonus);
@@ -898,14 +898,22 @@ public partial class Game : MonoBehaviour
 
     void MobAttacksCity(mob attacker, Ccity target)
     {
-        int damage = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh)//attacker.speed - target.speed;
-            + attacker.attackbonus
-            - (target.defence);//maybe lil.randi(0,target.archetype.defence)?
+        int attackroll = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh);
+        int defroll = (target.usedDEFthisturn) ? 0 : (target.defence);
+
+        log.Printline(attacker.archetype.name + " ATK " + attacker.archetype.attacklow + "-" + attacker.archetype.attackhigh +
+        " +" + attacker.attackbonus + " rolls " + attackroll + " =" + (attackroll + attacker.attackbonus), Color.grey);
+
+        if (target.usedDEFthisturn) log.Printline(target.name + " DEF 0 (already used this turn)", Color.grey);
+        else log.Printline(target.name + " DEF " + target.defence );
+
+        int damage = attackroll + attacker.attackbonus - defroll;
         if (damage < 1) damage = 0;
         FloatingDamagetoCity(target, attacker, -damage, attacker.archetype.weaponname);
-
+        target.usedDEFthisturn = true;
+        
+        
         //i think it's ok to actually kill the city at this point.
-
         if (target.hp <= 0)
         {
             log.Printline("The " + ((!target.isfrenzleecity) ? "barbarian ":"") + "city of " + target.name + " was destroyed", Color.red);
