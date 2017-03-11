@@ -392,6 +392,41 @@ public partial class RLMap  {
 		
 	}
 
+    public void CityKiller(int x,int y)
+    {
+        if(buildings[x,y]!=Etilesprite.BUILDINGS_CITY || buildings[x,y]!=Etilesprite.BUILDINGS_BARBARIAN_CITADEL || buildings[x,y]!=Etilesprite.BUILDINGS_BARBARIAN_CAMP)
+        { Debug.Log("CITY KILLER FAILED. NO CITY BUILDING HERE"); }
+   
+        Ccity target = citythathasinfluence[x, y];//acquire target
+        if (target == null) Debug.Log("CITY KILLER FAILED NO CCITY HERE");
+
+        foreach(var z in target.influenced)
+        {
+            influence[z.x, z.y] = null; //set all city influence back to neutral
+            //if there's improvements (farm,mine,exploit) on influence i think it's ok to leave them plus it's amusing becaues enemy could azorb them
+            //the benefits are basically in the map.currentyield
+        }
+        //kill addons
+        foreach(var z in target.thiscitysaddons)
+        {
+            buildings[z.x, z.y] = Etilesprite.EMPTY;//wipe city addon off face of map
+            currentyield[z.x, z.y] = yield[z.x, z.y];//set yield of square back to base tile yield, e.g. losing +10 production from factory
+        }
+        //kill orphaned units
+        foreach(var z in target.unitlist)
+        {
+            killoffamob(z);
+        }
+
+        buildings[x, y] = Etilesprite.EMPTY;//wipe city off the face of the map!
+        citythathasinfluence[x, y] = null;
+        Debug.Log("citylist count before is " + citylist.Count);
+        citylist.RemoveAll(r => r == target);//untested
+        Debug.Log("citylist count after is " + citylist.Count);
+
+
+    }
+
      public void FreeSpace(out int a, out int b){
          Cell c = emptyspaces.OneFromTheTop();
          a = c.x; b = c.y;

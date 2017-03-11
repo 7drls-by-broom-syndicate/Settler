@@ -1,16 +1,23 @@
 a day left
 ----------
 
-1 mobs only attack opposite mobs (and player if enemy)
-	test this
+
+need to write code to destroy cities
+	log.printline( city was destroyed by mob)
+	map.citylist remove
+	buildings[x,y]=etilesprite.empty//wipe the city off the map!
 	
-2 make it so you the player can attack cities
-	test this
+	citythathasinfluence is none
+	influence is neutral (done as part of below)
+	list of influence set to neutral
+	if there's improvements on influence i think it's ok to leave them plus it's amusing becaues enemy could azorb them
+	kill all addons
+	kill orphaned units? yes in unitlist
+	
+
 	
 3 if barb citadel falls you win. print message. test this
 
-4 make it so mobs can attack cities
-	test this
 	
 5 make mobs walk randomly, scan for targets, set a target and attack it. mobgetstoact is key routine
 
@@ -33,7 +40,7 @@ enemy mobs attack your city
 
 add explanation to buildings on menu
 
-need to write code to destroy cities and addons
+
 
 
 

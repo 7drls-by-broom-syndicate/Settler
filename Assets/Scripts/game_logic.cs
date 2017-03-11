@@ -873,6 +873,24 @@ public partial class Game : MonoBehaviour
             - (target.defence);//maybe lil.randi(0,target.archetype.defence)?
         if (damage < 1) damage = 0;
         FloatingDamagetoCity(target, attacker, -damage, attacker.archetype.weaponname);
+
+        //i think it's ok to actually kill the city at this point.
+
+        if (target.hp <= 0)
+        {
+            log.Printline("The " + ((!target.isfrenzleecity) ? "barbarian ":"") + "city of " + target.name + " was destroyed", Color.red);
+            log.Printline("by " + attacker.archetype.name,Color.red);
+
+
+            bool won = (map.buildings[target.posx, target.posy] == Etilesprite.BUILDINGS_BARBARIAN_CITADEL);
+            map.CityKiller(target.posx, target.posy);
+            if (won)
+            {
+                log.Printline("Peace has been brought to the land.", Color.yellow);
+                NextLevel();
+            }
+        }
+
     }
 
     void MobGetsToAct(mob e)

@@ -177,7 +177,7 @@ public class Ccity  {
 
     public int evilgold;//enemy cities don't spend gold. instead they accumulate it and it's given to player when they kill it
 
-    public int hpmax = 100;
+    public int hpmax = 10;
     public int hp;
     public int defence = 2;
     public static int numcitiesevil=0;
