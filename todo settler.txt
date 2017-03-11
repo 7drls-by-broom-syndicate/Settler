@@ -1,67 +1,31 @@
-a day left
-----------
-remove noticed you message for frenzlee players
-
-mobs moving onto you without attacking when randomly walking
-
-what things should my mobs attack?
-		enemy mobs
-		enemy city
-		
-what things should enemy mobs attack?
-		my mobs
-		my cities
-		me
-		
-		
-		
-		
-		
-		tea at 22
-		
-
-	
-
-
-	
-5 make mobs walk randomly, scan for targets, set a target and attack it. mobgetstoact is key routine
-
---
-
-
-(maybe you only get to use your def once a turn. this would mean you could make cities have so much def they are immune to damage from one mob but 
-vulnerable to 2 or more) in void mobattacksmob
-print more detailed combat info so we can debug
-
 stretch
 -------
+
 multi moves and attacks
 
 make hills confer a combat bonus
 	if attacker on hill and defender not=bonus
 	if defender in forest and attacker not=bonus
 
-enemy mobs attack your city
 
-add explanation to buildings on menu
-
-
-
-
-
+add explanation to buildings on menu  gamelogic 443 is where to add explanations	
+		
+if barb citadel<50% hp and not spawned boss, spawn boss
+same for normal barb city and barb champion
+		
+maybe you only get to use your def once a turn. this would mean you could make cities have so much def they are immune to damage from one mob but 
+vulnerable to 2 or more) in void mobattacksmob
+print more detailed combat info so we can debug
 	
-
-
-
-
 "BUG: mob at"
 
-
+	
 
 probably post 7drl:
 need click to move to go anywhere regardless of passable. kind of annoying to do
 city names shown on map with F3 toggle on and off. harder than i thought because need to wait until drawn all tiles then draw over top.
 
+fix auto auto key bug
 
 a turn is like this:
 	all cities get to act, including letting mobs go they can't feed or pay
@@ -75,23 +39,7 @@ showing how many of the resources you have like:
 	SEND WHAT WHERE?
 	oranges to venice [0 on hand 0 per turn]
 	oil to vatican city [105 on hand, 2 per turn]
-
-
-
-
-
-
-
-
-
-
-
-
-your mobs walk around randomly until they detect an enemy camp, citadel or mob, then they attack it until it's dead or they are.
-
-basic things not done:
-
-
+	
 
 hero or gold huts
 effect of city buildings (pretty easy except for trader and barracks)
@@ -100,12 +48,8 @@ effect of city buildings (pretty easy except for trader and barracks)
 eventually: pop up city list and mob list (per city)
 
 
-
-
 maybe we need to limit some city addons to 1 eg city hall. or rename it at least
 
-barracks at least needs a count of production horses and iron pumped into it. or just count up the production and when you have enough,
-check if you have the horses and iron
 
 if a city is destroyed there will still by citygrid links to it in map. set them to null.
 citygrid points to the city that has influence on that square. it's possible for there to be a city addon for a different city on that tile

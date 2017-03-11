@@ -26,11 +26,14 @@ public class Tcityaddons
 {
     
     public string name;
+    public string explain;
+
     public int cost;
     public Etilesprite tile;
 
-    public Tcityaddons(string _n, int _cost,Etilesprite _tile)
+    public Tcityaddons(string _e,string _n, int _cost,Etilesprite _tile)
     {
+        explain = _e;
         name = _n;
         cost = _cost;
         tile = _tile;
@@ -65,22 +68,22 @@ public class Ccity  {
 
     public static Tcityaddons[] addons =
     {
-        new Tcityaddons("city",1000,Etilesprite.BUILDINGS_CITY),
-        new Tcityaddons("farm",10,Etilesprite.BUILDINGS_IMPROVEMENTS_FARM),
-        new Tcityaddons("mine",20,Etilesprite.BUILDINGS_IMPROVEMENTS_MINE),
-        new Tcityaddons("resource exploiter",100,Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION),
+        new Tcityaddons("it all starts with this","city",1000,Etilesprite.BUILDINGS_CITY),
+        new Tcityaddons("+2 food for tile","farm",10,Etilesprite.BUILDINGS_IMPROVEMENTS_FARM),
+        new Tcityaddons("+1 production +2 gold for tile","mine",20,Etilesprite.BUILDINGS_IMPROVEMENTS_MINE),
+        new Tcityaddons("improves tile yield and grants resource","resource exploiter",100,Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION),
 
-        new Tcityaddons("town hall",100,Etilesprite.BUILDINGS_TOWN_HALL),//makes city grow faster
-        new Tcityaddons("factory",100,Etilesprite.BUILDINGS_FACTORY),//10 production
-        new Tcityaddons("trading post",100,Etilesprite.BUILDINGS_TRADING_POST),
-        new Tcityaddons("barracks",100,Etilesprite.BUILDINGS_BARRACKS),//produces units
-        new Tcityaddons("market",200,Etilesprite.BUILDINGS_MARKET),//10 gold
-        new Tcityaddons("allotments",200,Etilesprite.BUILDINGS_ALLOTMENTS),//10 food
-        new Tcityaddons("port and docks",200,Etilesprite.BUILDINGS_PORT_AND_DOCKS),
-        new Tcityaddons("guard post",350,Etilesprite.BUILDINGS_GUARD_POST),//ups city defence
-        new Tcityaddons("armourer",400,Etilesprite.BUILDINGS_ARMOURER),//+1 def for units produced
-        new Tcityaddons("blacksmith",400,Etilesprite.BUILDINGS_BLACKSMITH),//+1 atk for units produced
-        new Tcityaddons("teleporter",2000,Etilesprite.BUILDINGS_TELEPORTER)//telport between cities
+        new Tcityaddons("helps city grow faster","town hall",100,Etilesprite.BUILDINGS_TOWN_HALL),//makes city grow faster
+        new Tcityaddons("+10 production for square","factory",100,Etilesprite.BUILDINGS_FACTORY),//10 production
+        new Tcityaddons("<not implemented>","trading post",100,Etilesprite.BUILDINGS_TRADING_POST),
+        new Tcityaddons("used to produce units","barracks",100,Etilesprite.BUILDINGS_BARRACKS),//produces units
+        new Tcityaddons("+10 gold for square","market",200,Etilesprite.BUILDINGS_MARKET),//10 gold
+        new Tcityaddons("+10 food for square","allotments",200,Etilesprite.BUILDINGS_ALLOTMENTS),//10 food
+        new Tcityaddons("+6 each to production,gold,food","port and docks",200,Etilesprite.BUILDINGS_PORT_AND_DOCKS),
+        new Tcityaddons("ups city defence by 1","guard post",350,Etilesprite.BUILDINGS_GUARD_POST),//ups city defence
+        new Tcityaddons("+1 defence for mobs produced here","armourer",400,Etilesprite.BUILDINGS_ARMOURER),//+1 def for units produced
+        new Tcityaddons("+1 attack for mobs produced here","blacksmith",400,Etilesprite.BUILDINGS_BLACKSMITH),//+1 atk for units produced
+        new Tcityaddons("<not implemented>","teleporter",2000,Etilesprite.BUILDINGS_TELEPORTER)//telport between cities
       
     };
 

@@ -463,8 +463,8 @@ public partial class Game : MonoBehaviour
                             map.influence[player.posx, player.posy] != null))//can't build unless influence is neutral.
                    || ((i > 0 && i < 4) && !oninfluence)
                     )
-                    ls.Add("/" + x.name + " (" + x.cost + ")");
-                else ls.Add(x.name + " (" + x.cost + ")");
+                    ls.Add(("/" + x.name + " (" + x.cost + ")").PadRight(26)+x.explain);
+                else ls.Add((x.name + " (" + x.cost + ")").PadRight(26)+x.explain);
 
                 i++;
             }
