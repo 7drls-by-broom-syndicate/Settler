@@ -1,10 +1,21 @@
-you can't attack mobs
+just over a day left
+
+need to make barb cities produce mobs
+need to make mobs attack cities, player,other mobs
+need to write code to destroy cities and addons
+
+
+make hills confer a combat bonus
+	if attacker on hill and defender not=bonus
+	if defender in forest and attacker not=bonus
+	
+need to do city addons that aren't trader. 
+
 mobs need to walk randomly, select targets etc.
-remove old corpse code for death, just kill everything to disappear
+
 "BUG: mob at"
 
 
-if a mob dies remove its upkeep cost from city
 
 probably post 7drl:
 need click to move to go anywhere regardless of passable. kind of annoying to do

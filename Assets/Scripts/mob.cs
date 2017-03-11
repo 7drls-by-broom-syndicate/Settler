@@ -170,7 +170,8 @@ public class mob {
     };
 
     public Ccity citythatownsit;
-
+    public int attackbonus = 0;
+    public int defencebonus = 0;
     public bool isplayer=false;
     public bool reversesprite = false;
     public mobarchetype archetype;

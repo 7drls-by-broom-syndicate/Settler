@@ -184,6 +184,9 @@ public class Ccity  {
 
     public Spiral spiral;
 
+    public int attackbonus = 0;
+    public int defencebonus = 0;
+
 
     public Ccity(bool frenz,int x,int y,RLMap m,Player p,MessageLog ml=null)
 
@@ -239,10 +242,27 @@ public class Ccity  {
         perturnyields = y;
     }
 
-
+    
 
     public void takeaturn()
     {
+        if (!isfrenzleecity)
+        {
+            //randomly produce units. don't need resource. don't need upkeep. don't need production, just pop em out.
+            //enemy city is allowed a max number of mobs which is the 1 for each 7 squares it has on influence
+
+            if (unitlist.Count < (influenced.Count / 5) && lil.randi(1, 100) < 10) 
+            {
+                Cell papa = map.Random9way(posx, posy);
+                if (papa != null)
+                {
+                    int which = lil.randi(9,15);//any mob but not champion or lord (released after specific hp loss of city and citadel?)     
+                    CreateMob((Emobtype)which, papa.x, papa.y);
+
+                }
+            }
+
+        }
         //we need to do the yields and the resources and the growth
 
         //stored resources  
@@ -283,9 +303,9 @@ public class Ccity  {
         //food goes to standing army. any left over makes city grow!
 
         int FOOD = perturnyields.food;                     //let f be the amount of food we have on hand
-        if (FOOD >= armycostperturn_food)                  //if the food bill for standing army is exactly what we have or more....
+        if (FOOD >= armycostperturn_food || !isfrenzleecity)                  //if the food bill for standing army is exactly what we have or more....
         {
-            FOOD -= armycostperturn_food;                   //take the food for the army
+            if(isfrenzleecity)  FOOD -= armycostperturn_food;                   //take the food for the army
             if (growthboost) FOOD= (int)((float)FOOD * 1.25);//multiply excess food if you have growthboost addon
             growthcounter += FOOD;
 
@@ -429,6 +449,8 @@ public class Ccity  {
     void CreateMob(Emobtype t, int tentx, int tenty)
     {//copied from Game.CreateMob
         mob m = new mob(t);
+        m.attackbonus = attackbonus;
+        m.defencebonus = defencebonus;
         m.posx = tentx; m.posy = tenty;
         map.itemgrid[tentx, tenty] = new item_instance(m.tile, true, m);
         map.passable[tentx, tenty] = false;

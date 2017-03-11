@@ -692,7 +692,7 @@ public partial class Game : MonoBehaviour
                     }
                     s[2] += "[P:" + map.currentyield[mapx, mapy].production + " G:" + map.currentyield[mapx, mapy].gold + " F:" + map.currentyield[mapx, mapy].food + "]";
                     
-                    if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_CITY)
+                    if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_CITY || map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_BARBARIAN_CAMP || map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_BARBARIAN_CITADEL)
                     {//x units use g:10 f:20 of [p:1 g:3 f:3]
                         Ccity cctv = map.citythathasinfluence[mapx, mapy];
                         s[3] += cctv.unitlist.Count + " units use G:" + cctv.armycostperturn_gold + " F:" + cctv.armycostperturn_food + " of [P:" + cctv.perturnyields.production + " G:" + cctv.perturnyields.gold + " F:" + cctv.perturnyields.food + "]";
@@ -1143,13 +1143,55 @@ public partial class Game : MonoBehaviour
                                     //find owning city
                                     Ccity thecity = findcity9way(player.posx, player.posy);
                                     if (thecity == null) log.Printline("ERROR CITY ADDON CAN'T FIND CITY IT BELONGS TO!");
-                                    else {
+                                    else
+                                    {
                                         //make a new city addon owned by the city we found and of type according to menu option (they're in the right order)
-                                        addoninstance a = new addoninstance(thecity, Ccity.addons[Game.currentmenu.currently_selected_option],player.posx,player.posy);
+                                        addoninstance a = new addoninstance(thecity, Ccity.addons[Game.currentmenu.currently_selected_option], player.posx, player.posy);
                                         //add the city addon to the map's grid of them
                                         map.addons[player.posx, player.posy] = a;
-                                        log.Printline("You build a " + a.type.name+".", Color.yellow);
-                                            }
+                                        log.Printline("You build a " + a.type.name + ".", Color.yellow);
+
+                                        switch (a.type.tile)
+                                        {
+                                            case Etilesprite.BUILDINGS_FACTORY:
+                                                map.currentyield[player.posx, player.posy].production += 10;
+                                                break;
+                                            case Etilesprite.BUILDINGS_ALLOTMENTS:
+                                                map.currentyield[player.posx, player.posy].food += 10;
+                                                break;
+                                            case Etilesprite.BUILDINGS_MARKET:
+                                                map.currentyield[player.posx, player.posy].gold += 10;
+                                                break;
+                                            case Etilesprite.BUILDINGS_PORT_AND_DOCKS:
+                                                 map.currentyield[player.posx, player.posy].food += 6;
+                                                map.currentyield[player.posx, player.posy].production += 6;
+                                                    map.currentyield[player.posx, player.posy].gold += 6;
+                                                break;
+
+                                            case Etilesprite.BUILDINGS_GUARD_POST:
+                                                thecity.defence += 1;
+                                                break;
+
+                                            case Etilesprite.BUILDINGS_ARMOURER:
+                                                thecity.defencebonus++;
+                                                break;
+                                            case Etilesprite.BUILDINGS_BLACKSMITH:
+                                                thecity.attackbonus++;
+                                                break;
+                                            case Etilesprite.BUILDINGS_TOWN_HALL:
+                                                thecity.growthboost = true;
+                                                break;
+
+                                                //teleporter
+                                                //trader
+
+
+                                        }
+
+                                    }
+
+                                    
+
                                 }
 
 
@@ -1157,7 +1199,7 @@ public partial class Game : MonoBehaviour
 
 
 
-                            break;
+                                break;
                             //end of build menu
                             case Menu.Emenuidentity.unitproduce:
                                 if (Game.currentmenu.currently_selected_option == 0)

@@ -522,13 +522,14 @@ public partial class Game : MonoBehaviour
       
         if (map.buildings[player.posx, player.posy] != Etilesprite.EMPTY && map.buildings[player.posx, player.posy] == Etilesprite.BUILDINGS_BARRACKS)
         {
+            var sit = map.addons[player.posx, player.posy].owner;
             ls.Add("--HALT PRODUCTION--");
             for (int i = 2; i < 9; i++)
             {
                 var m = mob.archetypes[i];
                 string s = "[P:" + m.buildcostproduction.ToString("D3")+ " I:" + m.buildcostiron.ToString("D2") + " H:" + m.buildcosthorses.ToString("D2") + "] " + 
                     m.name.PadRight(15) +
-                    " (Atk:" + m.attacks + "@" + m.attacklow + "-" + m.attackhigh + " Def:" + m.defence + " Move:" + m.moves + " Upkeep:" + m.upkeepfood + "F," + m.upkeepgold + "G)";
+                    " (Atk:" + m.attacks + "@" + m.attacklow + "-" + m.attackhigh + "+"+sit.attackbonus+" Def:" + m.defence + "+"+sit.defencebonus+" Move:" + m.moves + " Upkeep:" + m.upkeepfood + "F," + m.upkeepgold + "G)";
                 ls.Add(s);
             }
 
@@ -951,7 +952,8 @@ public partial class Game : MonoBehaviour
     void MobAttacksMob(mob attacker, mob target)
     {
         int damage = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh)//attacker.speed - target.speed;
-            - target.archetype.defence;//maybe lil.randi(0,target.archetype.defence)?
+            + attacker.attackbonus 
+            - (target.archetype.defence + target.defencebonus);//maybe lil.randi(0,target.archetype.defence)?
         if (damage < 1) damage = 1;
         FloatingDamage(target, attacker, -damage, attacker.archetype.weaponname);
     }
