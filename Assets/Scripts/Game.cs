@@ -64,6 +64,7 @@ public partial class Game : MonoBehaviour
     byte[] statusline;
     int statusgold;
     int statushp;
+    int statuslevel;
 
     byte[] winstring = System.Text.Encoding.ASCII.GetBytes("A winner is you!Score is:");
     Color whiteblend = new Color(1f, 1f, 1f, 0.8f);
@@ -577,10 +578,11 @@ public partial class Game : MonoBehaviour
 
             
 
-                if (statusgold != player.gold || statushp != player.hp) {
-                    statusline = System.Text.Encoding.ASCII.GetBytes(("Gold: " + player.gold + " Hp: " + player.hp));
+                if (statusgold != player.gold || statushp != player.hp || statuslevel!=player.dunlevel) {
+                    statusline = System.Text.Encoding.ASCII.GetBytes(("Gold: " + player.gold + " Hp: " + player.hp+" Level:"+player.dunlevel));
                     statusgold = player.gold;
                     statushp = player.hp;
+                    statuslevel = player.dunlevel;
                         }
 
                 GUI.color = Color.white;
@@ -921,6 +923,7 @@ public partial class Game : MonoBehaviour
         //
         if (player.dunlevel == 10)
         {
+            log.Printline("Now it is safe to settle in these lands!", Color.white);
             gamestate = Egamestate.youwon;
             MyAudioSource.Stop();
             return;
