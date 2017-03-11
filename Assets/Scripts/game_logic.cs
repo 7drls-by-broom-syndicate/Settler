@@ -343,7 +343,10 @@ public partial class Game : MonoBehaviour
                 item_instance i = map.itemgrid[tentx, tenty]; //1.is there a mob there:
                 if (i != null)
                 {
-                    if (i.ismob)//mob crashes into mob! this could need changing
+                    if (i.ismob && 
+                        m.hostile_toenemies_currently && i.mob.hostile_toplayer_currently ||
+                        m.hostile_toplayer_currently && i.mob.hostile_toenemies_currently
+                        )//mob crashes into mob! this could need changing
                     {
                         //bumping into something attacks it. 
                         //might need to make this player only or mobs could attack twice?
@@ -967,7 +970,9 @@ public partial class Game : MonoBehaviour
      //   if(e.h)
 
         if (!e.noticedyou || e.dead_currently) return; //METAL MOOP SOLID
-        if (e.IsAdjacentTo(player.mob))
+        if (e.IsAdjacentTo(player.mob) &&
+            e.hostile_toplayer_currently)
+            
         {
             MobAttacksMob(e, player.mob);
            // e.speed = 0;//this is a hack. mobs should attack and coast. all combat is a hack at the moment though

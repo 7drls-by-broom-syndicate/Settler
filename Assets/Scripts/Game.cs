@@ -1129,10 +1129,10 @@ public partial class Game : MonoBehaviour
                                         map.citythathasinfluence[player.posx, player.posy].perturnyields.add(map.resource[player.posx, player.posy].yieldwhenworked);
                                         //add resources too, as in coffee, horses:
                                         map.citythathasinfluence[player.posx, player.posy].perturnresources[(int)map.resource[player.posx, player.posy].ert]++;
-                                        log.Printline("You build a "+map.resource[player.posx, player.posy].nameofexploiter
-                                            + ". [P:"+map.resource[player.posx, player.posy].yieldwhenworked.production
+                                        log.Printline("You build a " + map.resource[player.posx, player.posy].nameofexploiter
+                                            + ". [P:" + map.resource[player.posx, player.posy].yieldwhenworked.production
                                             + " G:" + map.resource[player.posx, player.posy].yieldwhenworked.gold
-                                            + " F:" + map.resource[player.posx, player.posy].yieldwhenworked.food
+                                            + " F:" + map.resource[player.posx, player.posy].yieldwhenworked.food + "]"
                                             , Color.yellow);
                                         //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
