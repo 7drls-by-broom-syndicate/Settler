@@ -876,20 +876,36 @@ public partial class Game : MonoBehaviour
 
 
     void MobAttacksMob(mob attacker, mob target)
-    {       
+    {   
+        //terrain mods for pango on pango combat only, not cities
+
+        bool terrainATKbonus = (map.hill[attacker.posx,attacker.posy] && !map.hill[target.posx,target.posy]);
+        bool terrainDEFbonus = (map.tree[target.posx, target.posy] && !map.tree[attacker.posx, target.posy]);
+
         int attackroll = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh);
         int defroll = (target.usedDEFthisturn) ? 0 : (target.archetype.defence + target.defencebonus);
 
+        int t_atk = (attackroll + attacker.attackbonus) / 4;
+        int t_def = defroll/4;
+
+        if (t_atk == 0) t_atk = 1;
+        if (t_def == 0) t_def = 1;
+
+        if (!terrainATKbonus) t_atk = 0;
+        if (!terrainDEFbonus) t_def = 0;
         
         log.Printline(attacker.archetype.name + " ATK " + attacker.archetype.attacklow + "-" + attacker.archetype.attackhigh +
-            " +" + attacker.attackbonus + " rolls " + attackroll + " =" +(attackroll+attacker.attackbonus),Color.grey);
+            " +" + attacker.attackbonus + " rolls " + attackroll + " =" +(attackroll+attacker.attackbonus)+" + "+t_atk+" TRN",Color.grey);
 
 
+      
 
         if (target.usedDEFthisturn) log.Printline(target.archetype.name + " DEF 0 (already used this turn)", Color.grey);
-        else log.Printline(target.archetype.name + " DEF " + target.archetype.defence + " +" + target.defencebonus);
+        else log.Printline(target.archetype.name + " DEF " + target.archetype.defence + " +" + target.defencebonus+" + "+t_def+" TRN");
 
-        int damage = attackroll + attacker.attackbonus - defroll;
+       
+
+        int damage = (attackroll + attacker.attackbonus) - defroll;
         if (damage < 1)  damage = 0;
         FloatingDamage(target, attacker, -damage, attacker.archetype.weaponname);
         target.usedDEFthisturn = true;
