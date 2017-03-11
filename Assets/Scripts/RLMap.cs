@@ -448,12 +448,12 @@ public partial class RLMap  {
                 {
                     scanx += spiraldx[direction];
                     scany += spiraldy[direction];
-                    direction++; if (direction == 4) direction = 0;
+                   
                     //checksquare and if found fill and return
                     if (scanx >= 0 && scany >= 0 && scanx < width && scany < height)
                     {
-                        if (m.hostile_toenemies_currently && itemgrid[scanx, scany].mob.hostile_toplayer_currently
-                            || m.hostile_toplayer_currently && itemgrid[scanx, scany].mob.hostile_toenemies_currently)
+                        if (m.hostile_toenemies_currently && itemgrid[scanx,scany]!=null && itemgrid[scanx, scany].mob.hostile_toplayer_currently
+                            || m.hostile_toplayer_currently && itemgrid[scanx, scany] != null && itemgrid[scanx, scany].mob.hostile_toenemies_currently)
                         {
                             m.AIformob.targetsquare = new Cell(scanx, scany);
                             return true;
@@ -476,7 +476,9 @@ public partial class RLMap  {
                         }
                     }
                 }
+                 direction++; if (direction == 4) direction = 0;
             }
+            length++;
 
         }
         return false;
