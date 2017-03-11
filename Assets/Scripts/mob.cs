@@ -166,10 +166,27 @@ public class mob {
             500,10,10,// buildcost production,iron,horses
             2,8,2, //attacklow,high,defence
             1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+
+            new mobarchetype(Emobtype.enemychampion,"Barb. Champion","dual kris",40,true,false,Etilesprite.UNITS_BARBARIAN_CHAMPION,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,0,// upkeep gold,food,
+            500,10,10,// buildcost production,iron,horses
+            1,10,3, //attacklow,high,defence
+            1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+
+            new mobarchetype(Emobtype.enemylord,"Lord Malprong","daikatana",80,true,false,Etilesprite.UNITS_BARBARIAN_CHAMPION,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            0,0,// upkeep gold,food,
+            500,10,10,// buildcost production,iron,horses
+            3,10,4, //attacklow,high,defence
+            1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
             )
 
             //still more mobs to do
     };
+
+    public int numattacksleft;
+    public int nummovesleft;
 
     public Ccity citythatownsit;
     public int attackbonus = 0;

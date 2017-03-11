@@ -151,7 +151,7 @@ public class Ccity  {
     };
 
     public bool isfrenzleecity;
-
+    public bool poppedleader;
     public List<mob> unitlist;
     public int armycostperturn_food=0;
     public int armycostperturn_gold = 0;
@@ -180,7 +180,7 @@ public class Ccity  {
 
     public int evilgold;//enemy cities don't spend gold. instead they accumulate it and it's given to player when they kill it
 
-    public int hpmax = 100;
+    public int hpmax = 20;//100
     public int hp;
     public int defence = 2;
     public static int numcitiesevil=0;
@@ -194,6 +194,7 @@ public class Ccity  {
     public Ccity(bool frenz,int x,int y,RLMap m,Player p,MessageLog ml=null)
 
     {
+        poppedleader = false;
         hp = hpmax;
         //copy the static list of distances 
         spiral = new Spiral(m.width, m.height,x,y);
@@ -254,6 +255,15 @@ public class Ccity  {
             //randomly produce units. don't need resource. don't need upkeep. don't need production, just pop em out.
             //enemy city is allowed a max number of mobs which is the 1 for each 7 squares it has on influence
 
+            if(hp<hpmax/2 && !poppedleader)
+            {
+                Cell ceebe = map.Random9waywithcentre(posx, posy);
+                if (ceebe != null)
+                {
+                    CreateMob((map.buildings[posx,posy]==Etilesprite.BUILDINGS_BARBARIAN_CAMP)?Emobtype.enemychampion:Emobtype.enemylord, ceebe.x, ceebe.y);
+                }
+            }
+            else
             if (unitlist.Count < (influenced.Count / 5) && lil.randi(1, 100) < 10) 
             {
                 Cell papa = map.Random9way(posx, posy);

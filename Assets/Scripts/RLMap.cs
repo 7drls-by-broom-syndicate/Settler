@@ -157,7 +157,25 @@ public partial class RLMap  {
             else return bob.randmember();
         
     }
+    public Cell Random9waywithcentre(int x, int y)
+    {
 
+        List<Cell> bob = new List<Cell>();
+        if (IsEmpty(x - 1, y)) bob.Add(new Cell(x - 1, y));
+        if (IsEmpty(x + 1, y)) bob.Add(new Cell(x + 1, y));
+        if (IsEmpty(x, y - 1)) bob.Add(new Cell(x, y - 1));
+        if (IsEmpty(x, y + 1)) bob.Add(new Cell(x, y + 1));
+
+        if (IsEmpty(x - 1, y - 1)) bob.Add(new Cell(x - 1, y - 1));
+        if (IsEmpty(x + 1, y + 1)) bob.Add(new Cell(x + 1, y + 1));
+        if (IsEmpty(x + 1, y - 1)) bob.Add(new Cell(x + 1, y - 1));
+        if (IsEmpty(x - 1, y + 1)) bob.Add(new Cell(x - 1, y + 1));
+
+        if (IsEmpty(x, y )) bob.Add(new Cell(x, y ));
+        if (bob.Count == 0) return null;
+        else return bob.randmember();
+
+    }
 
     public List<Cell> BresLine(int x0, int y0, int x1, int y1){
 

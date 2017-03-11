@@ -580,14 +580,14 @@ public partial class Game : MonoBehaviour
 
         //DEBUGGING THING
         //player.hp = 60; //HP CHEAT DEBUG
-        foreach (var debugMob in map.moblist)//there's a mob in the moblist
-        {
-            if (map.itemgrid[debugMob.posx, debugMob.posy] == null)//the map's itemlist at the mob's position is null
-            {
-                log.Printline("BUG: mob at " + debugMob.posx + " " + debugMob.posy + " " + debugMob.archetype.name);
-                log.Printline("where player at " + player.posx + " " + player.posy);
-            }
-        }
+        //foreach (var debugMob in map.moblist)//there's a mob in the moblist
+        //{
+        //    if (map.itemgrid[debugMob.posx, debugMob.posy] == null)//the map's itemlist at the mob's position is null
+        //    {
+        //        log.Printline("BUG: mob at " + debugMob.posx + " " + debugMob.posy + " " + debugMob.archetype.name);
+        //        log.Printline("where player at " + player.posx + " " + player.posy);
+        //    }
+        //}
 
         //END DEBUGGING THING
 
@@ -909,6 +909,9 @@ public partial class Game : MonoBehaviour
 
     void MobGetsToAct(mob e)
     {
+
+        e.numattacksleft = e.archetype.attacks;
+        e.nummovesleft= e.archetype.moves;
 
         if (e.AIformob.randomlywalking)//randomlywalking might as well be "bool haveatarget"
         {
