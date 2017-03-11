@@ -1157,7 +1157,7 @@ public partial class Game : MonoBehaviour
                                         switch (a.type.tile)
                                         {
                                             case Etilesprite.BUILDINGS_FACTORY:
-                                                map.currentyield[player.posx, player.posy].production += 10;
+                                                map.currentyield[player.posx, player.posy].production += 10;                                                
                                                 break;
                                             case Etilesprite.BUILDINGS_ALLOTMENTS:
                                                 map.currentyield[player.posx, player.posy].food += 10;
@@ -1190,6 +1190,7 @@ public partial class Game : MonoBehaviour
 
 
                                         }
+                                        thecity.recalcyield();
 
                                     }
 
