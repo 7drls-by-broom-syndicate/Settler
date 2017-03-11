@@ -660,6 +660,9 @@ public partial class Game : MonoBehaviour
 
 
         //mobs
+
+        player.mob.usedDEFthisturn = false;
+
         foreach (var f in map.moblist)
             MobGetsToAct(f);
 
@@ -874,11 +877,23 @@ public partial class Game : MonoBehaviour
 
     void MobAttacksMob(mob attacker, mob target)
     {
-        int damage = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh)//attacker.speed - target.speed;
-            + attacker.attackbonus
-            - (target.archetype.defence + target.defencebonus);//maybe lil.randi(0,target.archetype.defence)?
-        if (damage < 1) damage = 0;
+        //bool cappedatzero = false;
+        int attackroll = lil.randi(attacker.archetype.attacklow, attacker.archetype.attackhigh);
+        int defroll = (target.usedDEFthisturn) ? 0 : (target.archetype.defence + target.defencebonus);
+
+        
+
+        log.Printline(attacker.archetype.name + " ATK " + attacker.archetype.attacklow + "-" + attacker.archetype.attackhigh +
+            " +" + attacker.attackbonus + " rolls " + attackroll + " =" +(attackroll+attacker.attackbonus),Color.grey);
+
+        if (target.usedDEFthisturn) log.Printline(target.archetype.name + " DEF 0 (already used this turn)", Color.grey);
+        else log.Printline(target.archetype.name + " DEF " + target.archetype.defence + " +" + target.defencebonus);
+
+        int damage = attackroll + attacker.attackbonus - defroll;
+        if (damage < 1)  damage = 0;
         FloatingDamage(target, attacker, -damage, attacker.archetype.weaponname);
+        target.usedDEFthisturn = true;
+
     }
 
     void MobAttacksCity(mob attacker, Ccity target)
@@ -913,6 +928,8 @@ public partial class Game : MonoBehaviour
 
         e.numattacksleft = e.archetype.attacks;
         e.nummovesleft= e.archetype.moves;
+
+        e.usedDEFthisturn = false;
 
         if (e.AIformob.randomlywalking)//randomlywalking might as well be "bool haveatarget"
         {

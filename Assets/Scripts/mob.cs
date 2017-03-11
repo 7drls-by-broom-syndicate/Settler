@@ -188,6 +188,8 @@ public class mob {
     public int numattacksleft;
     public int nummovesleft;
 
+    public bool usedDEFthisturn;
+
     public Ccity citythatownsit;
     public int attackbonus = 0;
     public int defencebonus = 0;
