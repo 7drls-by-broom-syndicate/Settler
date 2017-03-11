@@ -394,7 +394,7 @@ public partial class RLMap  {
 
     public void CityKiller(int x,int y)
     {
-        if(buildings[x,y]!=Etilesprite.BUILDINGS_CITY || buildings[x,y]!=Etilesprite.BUILDINGS_BARBARIAN_CITADEL || buildings[x,y]!=Etilesprite.BUILDINGS_BARBARIAN_CAMP)
+        if(buildings[x,y]!=Etilesprite.BUILDINGS_CITY && buildings[x,y]!=Etilesprite.BUILDINGS_BARBARIAN_CITADEL && buildings[x,y]!=Etilesprite.BUILDINGS_BARBARIAN_CAMP)
         { Debug.Log("CITY KILLER FAILED. NO CITY BUILDING HERE"); }
    
         Ccity target = citythathasinfluence[x, y];//acquire target
