@@ -267,6 +267,7 @@ public partial class Game : MonoBehaviour
     }
     bool trytomove(mob m, int deltax, int deltay)//, int rotdir, bool coasting = false)
     {
+        bool didsomething = false;
 
         if (deltax == 1) m.reversesprite = false;
         else if (deltax == -1) m.reversesprite = true;
@@ -290,6 +291,7 @@ public partial class Game : MonoBehaviour
                 || m.hostile_toplayer_currently && cc.isfrenzleecity)
             {
                 MobAttacksCity(m, cc);
+                didsomething = true;
                 goto okhadfun;
             }
         }
@@ -299,6 +301,7 @@ public partial class Game : MonoBehaviour
         if (map.passablecheck(tentx, tenty, m))
         {
             movemob(m, tentx, tenty);
+            didsomething = true;
             goto okhadfun;
             }
 
@@ -307,13 +310,16 @@ public partial class Game : MonoBehaviour
         if (i != null && i.ismob &&
             (m.hostile_toenemies_currently && i.mob.hostile_toplayer_currently ||
                 m.hostile_toplayer_currently && i.mob.hostile_toenemies_currently))
+        {
             MobAttacksMob(m, i.mob);
+            didsomething = true;
+        }
 
 
         okhadfun:
 
-        if (m.isplayer) TimeEngine = CradleOfTime.player_is_done;
-        return true;
+        if (m.isplayer) { TimeEngine = CradleOfTime.player_is_done; return true; }
+        return didsomething;
     }
 
     public bool water4way(int x, int y)
@@ -896,421 +902,41 @@ public partial class Game : MonoBehaviour
     void MobGetsToAct(mob e)
     {
 
-        bool actcheck = false;
-        string actstring = "";
+        if (e.AIformob.randomlywalking)
+        {
+            if (lil.randi(1, 100) < 5)
+            {
+                e.AIformob.direction = lil.randi(0, 7); //randomly change direction for no reason
+            }
+            if (trytomove(e, lil.deltax[e.AIformob.direction], lil.deltay[e.AIformob.direction])) return;
+            e.AIformob.direction = lil.randi(0, 7);//change direction because couldn't move
+            return;
+        }
 
-        //   if(e.h)
-
-        //   if (!e.noticedyou || e.dead_currently) return; //METAL MOOP SOLID
+        //not used
+        // e.noticedyou is available to say if mob has noticed player. 
 
         if (e.IsAdjacentTo(player.mob) &&
             e.hostile_toplayer_currently)
 
         {
             MobAttacksMob(e, player.mob);
-            // e.speed = 0;//this is a hack. mobs should attack and coast. all combat is a hack at the moment though
             return;
         }
 
-        switch (e.tile)
-        {
-
-            //           case Etilesprite.ENEMY_KOBBY_BOMBER:
-            //               if (RLMap.Distance_ChevyChase(player.posx, player.posy, e.posx, e.posy) >= 4
-            //                   && RLMap.Distance_ChevyChase(player.posx, player.posy, e.posx, e.posy) <= 10)
-            //               {
-            //                   if (lil.randi(1, 1000) > 950)//950
-            //                   {
-            //                       int rotdir = player.mob.facing;
-            //                       int deltax = lil.rot_deltax[rotdir];
-            //                       int deltay = lil.rot_deltay[rotdir];
-            //                       int tentx = player.mob.posx + (deltax * 4);
-            //                       int tenty = player.mob.posy + (deltay * 4);
-            //                       Cell c = Random9way(tentx, tenty);
-            //                       if (c != null)
-            //                       {
-            //                           log.Printline(e.archetype.name + " lobs a bomb!", Color.green);
-            //                           BresLineColour(e.posx, e.posy, c.x, c.y, false, true, new Color(0.7f, 0.7f, 0.7f, 0.7f));
-            //                           map.itemgrid[c.x, c.y] = new item_instance(Etilesprite.ITEM_BOMB_LIT_1, false, null, 1);
-            //                           map.passable[c.x, c.y] = false;//invis mob bug
-            //                           map.itemgrid[c.x, c.y].bombx = c.x;
-            //                           map.itemgrid[c.x, c.y].bomby = c.y;
-            //                           map.bomblist.Add(map.itemgrid[c.x, c.y]);
-            //                           return;
-            //                       }
-            //                   }
-            //               }
-            //               break;
-            //           case Etilesprite.ENEMY_MAGE:
-
-
-
-            //               if (lil.randi(1, 1000) > 950)
-            //               {
-            //                   actcheck = false;
-
-            //                   //casting a spell:
-            //                   int which = lil.randi(1, 3);
-
-            //                   switch (which)
-            //                   {
-            //                       case 1://ice wall
-            //                           if (RLMap.Distance_ChevyChase(player.posx, player.posy, e.posx, e.posy) > 10)
-            //                               break;
-
-            //                           bool dirty = false;
-
-            //                           int length = lil.randi(3, 11);
-            //                           int startpos = lil.randi(-5, 5 - length);
-            //                           int fixedpos = lil.randi(2, 8);
-            //                           if (lil.coinflip()) fixedpos = -fixedpos;
-
-            //                           int drawxpos, drawypos;
-            //                           int drawxdelta, drawydelta;
-
-            //                           if (lil.coinflip())
-            //                           {
-            //                               drawxpos = player.posx + fixedpos;
-            //                               drawxdelta = 0;
-            //                               drawypos = player.posy + startpos;
-            //                               drawydelta = 1;
-            //                           } else
-            //                           {
-            //                               drawypos = player.posy + fixedpos;
-            //                               drawydelta = 0;
-            //                               drawxpos = player.posx + startpos;
-            //                               drawxdelta = 1;
-            //                           }
-
-            //                           int t = lil.randi(8, 16); //number of turns wall will stick around
-
-            //                           for (int d = 0; d < length; d++)
-            //                           {
-            //                               if (IsEmpty(drawxpos, drawypos))
-            //                               {
-            //                                   dirty = true;                 
-            //                                   var i=new item_instance(Etilesprite.ITEM_WIZARD_WALL,false,null,t);
-            //                                   map.itemgrid[drawxpos, drawypos] = i;
-            //                                   map.passable[drawxpos, drawypos] = false;
-            //                                   map.blocks_sight[drawxpos, drawypos] = true;
-            //                                   map.walllist.Add(i);
-            //                                   i.bombx = drawxpos;i.bomby = drawypos;
-            //                                   //map.wizwalltime[drawxpos, drawypos] = t;
-            //                               }
-            //                               drawxpos += drawxdelta; drawypos += drawydelta;
-
-            //                           }
-            //                           if (dirty)
-            //                           {
-            //                               actcheck = true;
-            //                               actstring = "Ice Wall.";
-            //                               doplayerfovandlights();
-            //                           }
-            //                           break;
-            //                       case 2://ice beam                           
-            //                           if (
-            //                               (RLMap.Distance_ChevyChase(player.posx, player.posy, e.posx, e.posy) <= 10)
-            //                               && (BresLineOfSight(e.posx, e.posy, player.posx, player.posy, false, false))
-            //                               )
-            //                           {
-            //                               BresLineColour(e.posx, e.posy, player.posx, player.posy, false, true, ice_beam);
-            //                               FloatingDamage(player.mob, e, -lil.randi(1, 4), "magic ice");
-            //                               actcheck = true;
-            //                               actstring = "Ice Beam.";
-            //                           } else
-            //                           {
-            //                               log.Printline(e.archetype.name + " can't see the target.", Color.blue);
-            //                           }
-            //                           break;
-            //                       case 3://summon golems
-            //                           actstring = "Create Ice Servants.";
-            //                           actcheck = true;
-            //                           int numgol = lil.randi(1, 3);
-            //                           for (int i = 0; i < numgol; i++)
-            //                           {
-            //                               Cell c = Random9way(e.posx, e.posy);
-            //                               if (c != null)
-            //                               {
-            //                                   CreateMob(Emobtype.golem,c.x, c.y);
-            //                               }
-
-            //                           }
-            //                           break;
-            //                   }//end of switch for which spell
-            //                   if (actcheck)
-            //                   {
-            //                       log.Printline(e.archetype.name + " casts ", Color.blue);
-            //                       e.magepointing = true;
-            //                       e.magepointing_timer = Time.time + 1.5f;
-            //                       log.Print(actstring, Color.blue);
-            //                   }
-
-            //return;
-            //               }//end of "if random chance means mage is casting a spell"
-
-            //           break;
-            //           case Etilesprite.ENEMY_NECROMANCER:
-            //               if (lil.randi(1, 1000) > 950)
-            //               {
-            //                   actcheck = false;
-
-            //                   //casting a spell:
-            //                   int which = lil.randi(1, 2);
-
-            //                   switch (which)
-            //                   {
-            //                       case 1:
-            //                           actstring = "Ignite Blood.";
-            //                           //log.Printline("debug: here in ignite blood");
-            //                           for(int x = e.posx - 10; x < e.posx + 10; x++)
-            //                           {
-            //                               for(int y = e.posy - 10; y < e.posy + 10; y++)
-            //                               {
-
-            //                                   if (map.onmap(x,y)&&map.bloodgrid[x, y] != null)
-            //                                   {
-            //                                       actcheck = true;
-            //                                       map.onfire[x, y] = lil.randi(10, 15);
-            //                                       map.firelist.Add(new Cell(x, y));
-            //                                   }
-            //                               }
-            //                           }
-
-
-
-
-            //                           break;
-            //                       case 2://explode corpse/raise dead to be animated and scary and chasing you
-
-
-            //                           List<Cell> candidates = new List<Cell>();//make a list of all possible corpses to explode
-            //                           for (int y = player.posy - 1; y < player.posy + 2; y++)//loop through moore neighbourhood round player
-            //                           {
-            //                               for(int x = player.posx - 1; x < player.posx + 2; x++)
-            //                               {
-            //                                   if (map.onmap(x, y) && map.itemgrid[x, y] != null && map.itemgrid[x,y].ismob &&
-            //                                       map.itemgrid[x, y].mob.dead_currently == true)
-            //                                   {
-            //                                       actcheck = true;
-            //                                       candidates.Add(new Cell(x, y));
-            //                                   }
-            //                               }
-            //                           }
-            //                           if (actcheck)
-            //                           {
-            //                               log.Printline(e.archetype.name + " casts Explode Corpse.", Color.blue);
-            //                               Cell c = candidates.randmember();
-            //                               BresLineColour(e.posx, e.posy, c.x, c.y, false, true, Color.red);
-            //                               map.itemgrid[c.x, c.y].mob.tile = Etilesprite.EMPTY;//force mob to get deleted from moblist after the foreach that calls mobgetstoact()
-            //                               map.itemgrid[c.x, c.y].tile = Etilesprite.EMPTY;
-            //                               map.itemgrid[c.x, c.y] = null;//nuke the itemgrid on map
-            //                               detonate(c.x, c.y);
-            //                               if (map.displaychar[c.x, c.y] != Etilesprite.MAP_WATER) map.passable[c.x, c.y] = true;
-            //                                   break;// finished with this mob IT NEEDS TO PRINT THE MESSAGE
-            //                           }
-            //                           //there was no candidate corpse to explode let's see if there's one to raise                   
-
-            //                           var filteredmoblist = System.Linq.Enumerable.Where(
-            //                               map.moblist,
-            //                               n => RLMap.Distance_ChevyChase(n.posx, n.posy, e.posx, e.posy) < 10 && n.dead_currently==true
-            //                               && n.tile!=Etilesprite.EMPTY
-            //                               ).ToList();
-
-
-            //                           if (filteredmoblist.Count()>0) //there's at least one corpse we could raise
-            //                           {
-            //                               actcheck = true;
-            //                               log.Printline(e.archetype.name + " casts Raise Dead.", Color.blue);
-            //                               mob m = filteredmoblist.randmember();//pick one
-            //                               //raise it 
-            //                               m.dead_currently = false;
-            //                               m.undead_currently = true;
-            //                               m.tile = m.archetype.tile_undead;
-            //                               map.itemgrid[m.posx, m.posy].tile = m.tile;
-            //                               m.hp = m.archetype.hp; //should it get its full normal hp when undead?
-            //                               //we may need a skipturn flag on mob if we don't want it acting the same turn it got up
-            //                               log.Printline("The " + m.archetype.name + " rises up!");//yeah this needs to go after spell line
-            //                           }
-
-
-            //                           break;
-
-            //                   }//end of switch on which spell to cast
-
-            //                   if (actcheck)
-            //                   {
-            //                      // log.Printline(e.archetype.name + " casts ", Color.blue);
-            //                       e.magepointing = true;
-            //                       e.magepointing_timer = Time.time + 1.5f;
-            //                      // log.Print(actstring, Color.blue);
-            //                   }
-
-
-            //                   return;
-            //               }//end of if rnd chance means it's casting a spell
-
-            //               break;
-            //           case Etilesprite.ENEMY_LICH:
-            //               if (lil.randi(1, 1000) > 950)
-            //               {
-            //                   actcheck = false;
-
-            //                   //casting a spell:
-            //                   int which = lil.randi(1, 4);
-
-            //                   switch (which)
-            //                   {
-            //                       case 1:
-            //                           actstring = "Ignite Blood.";
-            //                           //log.Printline("debug: here in ignite blood");
-            //                           for (int x = e.posx - 10; x < e.posx + 10; x++)
-            //                           {
-            //                               for (int y = e.posy - 10; y < e.posy + 10; y++)
-            //                               {
-
-            //                                   if (map.onmap(x, y) && map.bloodgrid[x, y] != null)
-            //                                   {
-            //                                       actcheck = true;
-            //                                       map.onfire[x, y] = lil.randi(10, 15);
-            //                                       map.firelist.Add(new Cell(x, y));
-            //                                   }
-            //                               }
-            //                           }
-
-
-
-
-            //                           break;
-            //                       case 2://Ishtar's Threat!                                              
-
-            //                           var filteredmoblist = System.Linq.Enumerable.Where(
-            //                               map.moblist,
-            //                               n => RLMap.Distance_ChevyChase(n.posx, n.posy, e.posx, e.posy) < 10 && n.dead_currently == true
-            //                               && n.tile != Etilesprite.EMPTY
-            //                               ).ToList();
-
-
-            //                           if (filteredmoblist.Count() > 0) //there's at least one corpse we could raise
-            //                           {
-            //                               actcheck = true;
-            //                               log.Printline(e.archetype.name + " casts Ishtar's Threat.", Color.blue);
-            //                               log.Printline("'I shall raise the dead and they shall eat the living!'", Color.magenta);
-
-            //                               foreach (mob m in filteredmoblist)
-            //                               {
-            //                                   //raise it 
-            //                                   m.dead_currently = false;
-            //                                   m.undead_currently = true;
-            //                                   m.tile = m.archetype.tile_undead;
-            //                                   map.itemgrid[m.posx, m.posy].tile = m.tile;
-            //                                   m.hp = m.archetype.hp; //should it get its full normal hp when undead?
-            //                                                          //we may need a skipturn flag on mob if we don't want it acting the same turn it got up
-            //                                   log.Printline("The " + m.archetype.name + " rises up!");//yeah this needs to go after spell line
-            //                               }
-            //                           }
-
-
-            //                           break;
-            //                       case 3: //Rain Blood
-            //                           actcheck = true;
-            //                           log.Printline(e.archetype.name + " casts Rain of Blood.", Color.blue);
-            //                           log.Printline("'My words have wounded heaven!'", Color.magenta);
-
-            //                           for (int x = e.posx - 10; x < e.posx + 10; x++)
-            //                           {
-            //                               for (int y = e.posy - 10; y < e.posy + 10; y++)
-            //                               {
-
-            //                                   if (map.onmap(x, y) && map.bloodgrid[x, y] == null && map.passable[x,y])
-            //                                   {                                       
-            //                                       if(lil.randi(0,100)>30)map.bloodgrid[x, y] = lil.randi(0,7);
-
-            //                                   }
-            //                               }
-            //                           }
-            //                           break;
-            //                       case 4: //drain life: BEEEEEM VERSION
-            //                           if (
-            //                             (RLMap.Distance_ChevyChase(player.posx, player.posy, e.posx, e.posy) <= 10)
-            //                             && (BresLineOfSight(e.posx, e.posy, player.posx, player.posy, false, false))
-            //                             )
-            //                           {
-            //                               BresLineColour(e.posx, e.posy, player.posx, player.posy, false, true, Color.magenta);
-            //                               int howmuchforyoursnakesir = lil.randi(1, 4);
-            //                               FloatingDamage(player.mob, e, -howmuchforyoursnakesir, "drain life");
-            //                               FloatingDamage(e, e, howmuchforyoursnakesir, "drain life") ;
-            //                               actcheck = true;
-            //                               log.Printline(e.archetype.name + " casts Drain Life Beam.", Color.blue);
-            //                           }
-            //                           else
-            //                           {
-            //                               log.Printline(e.archetype.name + " can't see the target.", Color.blue);
-            //                           }
-            //                           break;
-            //                   }//end of switch on which spell to cast
-
-            //                   if (actcheck)
-            //                   {
-            //                       // log.Printline(e.archetype.name + " casts ", Color.blue);
-            //                       e.magepointing = true;
-            //                       e.magepointing_timer = Time.time + 1.5f;
-            //                       // log.Print(actstring, Color.blue);
-            //                   }
-
-
-            //                   return;
-            //               }//end of if rnd chance means it's casting a spell
-
-            //               break;
-        }//end switch tile
 
         map.passable[e.posx, e.posy] = true;//we need square the mob starts on to be passable, for pathfinding.
-                                            //attempt to move 
+        //attempt to move 
         if (map.PathfindAStar(e.posx, e.posy, player.posx, player.posy, false))
-        {
-            //  int reldir = Speed.findrel(e.posx, e.posy, map.firststepx, map.firststepy);
+        {          
             int deltax = map.firststepx - e.posx;
             int deltay = map.firststepy - e.posy;
             trytomove(e, deltax, deltay);
             map.passable[e.posx, e.posy] = false;
             return;
-        }
-        //map.passable[e.posx, e.posy] = false;//we can't do this though- this hard sets the square to not passable. 
-        //or can we? is mob's new position... are we setting initial mob pos to not passable?
+        }       
     }
 
-    //void MoveMob(mob e, int newx, int newy)
-    // {
-    //     map.displaychar[e.posx, e.posy] = Etilesprite.FLOOR;
-    //     map.mobgrid[e.posx, e.posy] = null;
-    //     map.passable[e.posx, e.posy] = true;
-    //     e.posx = newx;
-    //     e.posy = newy;//
-
-    //map.passable[e.posx, e.posy] = false;
-
-    //        int m = (int)map.displaychar[e.posx, e.posy];
-    //      if (m > 30 && m < 44)
-    //    {
-    //      bool noeffect; int clicks;
-    //    string s = oscs[1].ApplyPatch(m - 30, out noeffect, out clicks);
-    //    if (noeffect) log.Printline("No effect", Color.red);
-    //    else {
-    //        log.Printline(s);
-    //        playknob(clicks);
-    //     }
-    //  }
-
-    // if ((int)map.displaychar[e.posx, e.posy] == 25)
-    // {
-    //     SS_overwroteexit();
-    //     log.Printline("A glitch overwrote the exit.", Color.red);
-    //     log.Printline("DELETE ALL GLITCHES!", Color.red);
-    // }
-
-    //  map.displaychar[e.posx, e.posy] = (Etilesprite)(13 + e.type);
-    //  map.mobgrid[e.posx, e.posy] = e;
-    //  return;
-    // }
+   
 
 }

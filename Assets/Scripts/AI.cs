@@ -6,8 +6,8 @@ public class AI
 {
     //by calling it AI maybe it will be cooler and deeper and more betterer (sic)
 
-    bool randomlywalking;
-    int direction;
+    public bool randomlywalking;
+    public int direction;
 
     public AI()
     {

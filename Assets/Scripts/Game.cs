@@ -456,7 +456,7 @@ public partial class Game : MonoBehaviour
                                     if (map.itemgrid[xx, yy].mob.noticedyou == false)
                                     {
                                         map.itemgrid[xx, yy].mob.noticedyou = true;
-                                        log.Printline(map.itemgrid[xx, yy].mob.archetype.name + " noticed you!");
+                                        if(map.itemgrid[xx,yy].mob.hostile_toplayer_currently)log.Printline(map.itemgrid[xx, yy].mob.archetype.name + " noticed you!");
                                     }
 
                                     if (!map.itemgrid[xx, yy].mob.magepointing)

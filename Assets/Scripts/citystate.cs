@@ -17,7 +17,7 @@ public class Citystate  {
 
     public Citystate(int x,int y)
     {
-        numcitystates++;
+        numcitystates++; 
         name = citystatenames[numcitystates];
         desiredresource = lil.randi(0, 13);
     }
