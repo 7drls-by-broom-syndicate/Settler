@@ -686,7 +686,8 @@ public partial class Game : MonoBehaviour
             if (f.dead_currently == false && f.hp <= 0)
             {
                 log.Printline("The " + f.archetype.name + " dies.", new Color(0.6f, 0, 0));
-                player.score++;
+                if(f.tile==Etilesprite.UNITS_BARBARIAN_CHAMPION)player.score+=10;
+                else if(f.tile==Etilesprite.UNITS_BARBARIAN_LORD)player.score+=50;
                 f.speed = 0;
                 f.dead_currently = true;
 
@@ -895,7 +896,7 @@ public partial class Game : MonoBehaviour
             log.Printline("The " + ((!target.isfrenzleecity) ? "barbarian ":"") + "city of " + target.name + " was destroyed", Color.red);
             log.Printline("by " + attacker.archetype.name,Color.red);
 
-
+            if (!target.isfrenzleecity) player.score += 100;
             bool won = (map.buildings[target.posx, target.posy] == Etilesprite.BUILDINGS_BARBARIAN_CITADEL);
             map.CityKiller(target.posx, target.posy);
             if (won)

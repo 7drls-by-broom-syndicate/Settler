@@ -65,6 +65,7 @@ public partial class Game : MonoBehaviour
     int statusgold;
     int statushp;
     int statuslevel;
+    int statusscore=45;
 
     byte[] winstring = System.Text.Encoding.ASCII.GetBytes("A winner is you!Score is:");
     Color whiteblend = new Color(1f, 1f, 1f, 0.8f);
@@ -578,10 +579,11 @@ public partial class Game : MonoBehaviour
 
             
 
-                if (statusgold != player.gold || statushp != player.hp || statuslevel!=player.dunlevel) {
-                    statusline = System.Text.Encoding.ASCII.GetBytes(("Gold: " + player.gold + " Hp: " + player.hp+" Level:"+player.dunlevel));
+                if (statusgold != player.gold || statushp != player.hp || statuslevel!=player.dunlevel|| statusscore!=player.score) {
+                    statusline = System.Text.Encoding.ASCII.GetBytes(("Gold: " + player.gold + " Hp: " + player.hp+" Level:"+player.dunlevel+" Score:"+player.score));
                     statusgold = player.gold;
                     statushp = player.hp;
+                    statusscore = player.score;
                     statuslevel = player.dunlevel;
                         }
 

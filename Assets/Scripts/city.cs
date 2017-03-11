@@ -180,7 +180,7 @@ public class Ccity  {
 
     public int evilgold;//enemy cities don't spend gold. instead they accumulate it and it's given to player when they kill it
 
-    public int hpmax = 20;//100
+    public int hpmax = 100;
     public int hp;
     public int defence = 2;
     public static int numcitiesevil=0;
@@ -261,6 +261,7 @@ public class Ccity  {
                 if (ceebe != null)
                 {
                     CreateMob((map.buildings[posx,posy]==Etilesprite.BUILDINGS_BARBARIAN_CAMP)?Emobtype.enemychampion:Emobtype.enemylord, ceebe.x, ceebe.y);
+                    poppedleader = true;
                 }
             }
             else
