@@ -920,12 +920,19 @@ public partial class Game : MonoBehaviour
 
                 map.passable[e.posx, e.posy] = true;//we need square the mob starts on to be passable, for pathfinding.
                                                     //attempt to move 
-                if (map.PathfindAStar(e.posx, e.posy, e.AIformob.targetsquare.x,e.AIformob.targetsquare.y, false))
+
+
+                bool whattargetwas = map.passable[e.AIformob.targetsquare.x, e.AIformob.targetsquare.y];
+
+                if (map.PathfindAStar(e.posx, e.posy, e.AIformob.targetsquare.x, e.AIformob.targetsquare.y, false))
                 {
                     int deltax = map.firststepx - e.posx;
                     int deltay = map.firststepy - e.posy;
                     trytomove(e, deltax, deltay);
                     map.passable[e.posx, e.posy] = false;
+
+                    map.passable[e.AIformob.targetsquare.x, e.AIformob.targetsquare.y] = whattargetwas;
+
                     return;
                 }
             }
