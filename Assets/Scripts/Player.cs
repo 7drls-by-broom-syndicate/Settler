@@ -22,6 +22,9 @@ public class Player {
     public Etilesprite held=Etilesprite.EMPTY;
 
     public int score=0;
+
+    public int herogoldupkeep = 0;
+
     public bool stealthed = false;
     //int charlevel = 0;
     public int dunlevel = 0;

@@ -281,6 +281,24 @@ public partial class Game : MonoBehaviour
             return false;
         }
 
+        //if tentative spot is goodie hut, let's open it
+        if(m==player.mob && map.buildings[tentx, tenty] == Etilesprite.BUILDINGS_GOODIE_HUT && map.itemgrid[tentx,tenty]==null)
+        {
+            if (!map.havewehadbroomyet && lil.randi(1, 100) <= 20)
+            {
+                log.Printline("o shit waddup, heer come dat broom!", Color.cyan);
+                log.Printline("Bristleboi is on the payroll nao. 10g/turn.", Color.cyan);
+                mob mmm=CreateMob(Emobtype.broom, tentx, tenty);
+                player.herogoldupkeep += mmm.archetype.upkeepgold;
+            } else
+            {
+                log.Printline("You find a bunch of gold", Color.yellow);
+                player.gold += 200;
+            }
+            map.buildings[tentx, tenty] = Etilesprite.EMPTY;
+        }
+
+
         //if tentative spot is enemy city, attack it
         if (map.buildings[tentx, tenty] == Etilesprite.BUILDINGS_CITY
             || map.buildings[tentx,tenty]==Etilesprite.BUILDINGS_BARBARIAN_CAMP
@@ -683,6 +701,19 @@ public partial class Game : MonoBehaviour
         //check for mob hp so dead
         foreach (var f in map.moblist)
         {
+
+            //if you can't afford heroes they have to go
+            if (f.citythatownsit == null) {
+                player.gold -= f.archetype.upkeepgold;
+                if (player.gold < 0)
+                {
+                    player.gold = 0;
+                    log.Printline("You can't afford to pay " + f.archetype.name + ".", Color.red);
+                    log.Printline(f.archetype.name + " sadly has to leave.");
+                    map.killoffamob(f);
+                    continue; 
+                }
+                    }
             //if(f.dead_currently==true && f.hp < -4)
             //{
             //    //corpse has taken enough damage. we remove it. this stops corpses blocking doors

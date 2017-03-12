@@ -180,7 +180,16 @@ public class mob {
             500,10,10,// buildcost production,iron,horses
             3,10,4, //attacklow,high,defence
             1,false,false,2,1//sightradius,tank?,parry?,#moves,#attacks
-            )
+            ),
+
+            new mobarchetype(Emobtype.broom,"Broom","bristle",40,false,true,Etilesprite.UNITS_PLAYER_HERO_BROOM,//name,attackname, hp,hostile to player, hostile to enemy,tile
+            10,0,// upkeep gold,food,
+            50,0,0,// buildcost production,iron,horses
+            1,10,1, //attacklow,high,defence
+            3,false,false,1,1//sightradius,tank?,parry?,#moves,#attacks
+            ),
+        
+
 
             //still more mobs to do
     };

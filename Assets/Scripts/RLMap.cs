@@ -55,7 +55,7 @@ public partial class RLMap  {
     public List<item_instance> walllist;
     public List<Cell> firelist;
     public Color[] minimapcolours;
-
+    public bool havewehadbroomyet = false;
     public Array2D<Etilesprite> buildings;
 
     public Texture2D minimap;
@@ -96,18 +96,27 @@ public partial class RLMap  {
     public int firststepx, firststepy;                             //used by pathfinding
     public List<Cell> emptyspaces;                                 //free squares
 
+    
+
     public void killoffamob(mob f,bool purgecityunitlist=false)
     {
 
         //remove upkeep cost
-        f.citythatownsit.armycostperturn_food -= f.archetype.upkeepfood;
-        f.citythatownsit.armycostperturn_gold -= f.archetype.upkeepgold;
+        if (f.citythatownsit != null)
+        {
+            f.citythatownsit.armycostperturn_food -= f.archetype.upkeepfood;
+            f.citythatownsit.armycostperturn_gold -= f.archetype.upkeepgold;
+        } else
+        {
+            //must be hero mob:
+            player.herogoldupkeep -= f.archetype.upkeepgold;
+        }
 
         f.tile = Etilesprite.EMPTY;         //this will make the processturn function garbage collect the mob from moblist
         passable[f.posx, f.posy] = true;    
         itemgrid[f.posx, f.posy] = null;
 
-        if(purgecityunitlist)f.citythatownsit.unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);
+        if(f.citythatownsit!=null)if(purgecityunitlist)f.citythatownsit.unitlist.RemoveAll(x => x.tile == Etilesprite.EMPTY);
     }
 
     public bool passablecheck(int x,int y,mob m)
