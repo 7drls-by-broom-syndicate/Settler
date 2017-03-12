@@ -954,12 +954,12 @@ public partial class Game : MonoBehaviour
 
       
 
-        if (target.usedDEFthisturn) log.Printline(target.archetype.name + " DEF 0 (already used this turn)", Color.grey);
+        if (target.usedDEFthisturn) log.Printline(target.archetype.name + " DEF 0 (already used this turn)", Color.blue);
         else log.Printline(target.archetype.name + " DEF " + target.archetype.defence + " +" + target.defencebonus+" + "+t_def+" TRN",Color.blue);
 
        
 
-        int damage = (attackroll + attacker.attackbonus) - defroll;
+        int damage = (attackroll + attacker.attackbonus + t_atk) - (defroll+t_def);
         if (damage < 1)  damage = 0;
         FloatingDamage(target, attacker, -damage, attacker.archetype.weaponname);
         target.usedDEFthisturn = true;

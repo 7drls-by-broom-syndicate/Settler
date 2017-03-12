@@ -1,0 +1,65 @@
+Settler 2017 7DRL
+By The Broom Institute
+
+Brief Instructions
+
+This is a roguelike inspired by old civilization games. Because it's a roguelike the focus is on your character. You can't do stuff with cities from wherever you want and scroll round the map and so on. Instead you have to physically go to the cities to do stuff with your character and you can fight enemies yourself alongside the mobs your cities produce. 
+
+Unlike regular civilization there are not multiple civs vying for dominance; instead there is just your civilization and the barbarian horde. The aim of each level is to wipe out the barbarian super citadel which is the boss of cities. There are also 4 normal barbarian cities on the map at the start. You can lose all your cities and still play on but if you die it's game over.
+
+Resolution: 
+The game is stupid and only works in 1280x720 though you can choose windowed or fullscreen. Don't choose other resolutions or it will break and I will cry a lot and Broom will squeakeriez.
+
+Default Keys: (can rebind them via unity launcher)
+
+numpad 12346789 to move your character and also 8 and 2 move selection in menus. 
+
+cursor keys substitute movement keys but no diagonals available. Also work in menus.
+
+numeric pad 5 skips a turn. (Wait).
+
+Enter or Return starts the game or restarts on game over, also confirms on menus.
+
+Escape cancels in menus.
+
+Space is "action" and opens a menu. Normally this will open the build menu but if you are over certain buildings (trading post and barracks) it will let you interact with them instead.
+
+F1 toggles visibility of resources (default on)
+F2 toggles visibility of tile yields (default off)
+
+Your character can move anywhere on the map without hindrance but mobs can't cross water of any kind or mountains. You can use the mouse to move by clicking the map but because I wrote it in a stupid way you can only mouse move from somewhere a mob could walk to somewhere else a mob could walk. Another thing about controls: the keys autorepeat if held down but sometimes there's a key up key down kind of bug and turns will auto proceed without you touching anything. If that happens just press a direction.
+
+ABOUT ACTUALLY DOING STUFF IN THE GAME AND STUFF LIKE THAT 
+
+When you start the game you have 1000 gold which is exactly enough to build a city. All you need to do is go somewhere, press space and press enter to build a city. Note it is possible to stymie yourself if you blow your initial gold on a city that won't produce more gold. If that happens try looking for goodie huts for more gold.
+
+Every tile has a yield: production, gold and food. Different biomes of the world have different base yields and the presence of hills, mountains and forests can change the yield too. You can quickly view the base yield of all surrounding tiles with the F2 key if you haven't redefined it. Note that if you have built tile improvements or are otherwise working a tile for better yields these will not show as icons here, only the base yield shows.
+
+When you plonk down (technical language sorry) a city, it immediately throws out a web of influence over the 9 squares which are it plus its immediate surroundings. Every turn the yield from the squares the city owns go to the city. Production is used to build mobs, excess is not stored; gold goes straight to the player; food is used to pay for the upkeep of the standing army (all units produced by that city). Excess food is used to grow the city, by which I mean more and more squares will fall under the influence of the city. The city can only grow into neutral tiles, you can't take over the squares influenced by barbarian cities (which work somewhat like yours). When a city is destroyed its influenced squares go back to neutral and are up for grabs again.(And all city addons are destroyed and all orphaned units leave. Tile improvements like farms stay but can be captured by the enemy if he expands into them).
+
+Building:
+
+You can build 3 types of tile improvement: farms, mines and resource exploiters. You can only build these on squares owned by a city of yours, in other words an influenced square. In addition there are some rules on what can be built where, for example you can't normally build a farm on a hill but you can if it's by water. Building the improvement will enhance the yield of the square: farms add 2 food, mines add 1 production and 2 gold while resource exploiters (which need to be built on top of a resource) both give you a nice yield bonus specific to that resource but they grant you access to that resource. Some resources are strategic and are needed to build better mobs: these are iron and horses. If you meet independent city states on your travels you can set up a trade route to exchange 50 stored resources for gold. And unlike modern civ games you don't have to keep setting up the trade routes over and over again! You can stop them if you want though.
+
+Unlike tile improvements, city addons are buildings that can only be built in the 8 squares surrounding a city. This is not to do with influence and in fact it's possible that an enemy or even one of your own other cities "owns" the square under a city addon. (Cities always "own" their own square though).
+
+Once you have built a city addon you can interact with it if it allows you to by walking on top of it and pressing space. The two addons you can interact with for now are trading posts and barracks.
+
+The barracks will allow you to select a mob type to churn out. The barracks will keep churning this mob out every time it can. All mobs cost production to produce but some cost iron and/or horses too. (If you want to know why a mounted knight takes more than one horse to produce, well it's a question of finding an animal with the right kind of temperament!) The barracks will even keep churning the mob out if you don't have enough food to feed it, which means you will produce a mob then it will immediately leave because it can't be fed. You can manually turn the production queue off if you want to focus on city growth.
+
+
+The trading post is interacted with in the same way as the barracks: walk over it and press action (default=space). You will see any city states you have met and what resource they requested. You can set up a trade route for a city state you have met even if you don't currently have access to the resource it needs. As soon as you have 50 of the required resource it will be sent and you will be immediately paid. It is not necessary for there to be an overland route to the city state from your supplying city. Resources are added to your stocks automatically after you have built a resource exploiter on top of a resource in your city's influenced area.
+
+Goodie Huts:
+
+You can find goodie huts on the map. They will *spoiler* grant you either gold or a hero unit. Hero units are not tied to a city like other units but are independent. They don't cost food to upkeep but gold which comes directly from the player. If the player can't pay the hero units they will leave just like the normal units tied to a city will leave if the city has no food for them. Hero units are better than normal units in strength and some of them get double turns like the mounted units do.
+
+Combat:
+
+All units including the player have an attack range, e.g. 1-6 from which a number will be randomly selected to count as damage. It is possible to have a number added on to this damage by building blacksmiths in the city that produces the unit. In addition you will get 25% extra damage if you are the attacker and you are on a tile with a hill and your opponent is not.
+
+Units also have a defence stat which is direct damage mitigation, i.e. incoming damage is 4, your def is 2, you take 2 damage. It is possible to have a number added to your defence of all units produced in a city if you build an armourer in that city. In addition you will get 25% extra defence if you are the defender and you are in a forest and your opponent is not.
+
+Winning:
+
+If you eliminate the barbarian citadel then you will win that level. Win 10 levels and you win the game.

@@ -467,6 +467,11 @@ public  bool usedDEFthisturn;
                 log.Printline("Supplied 50 " + ao.supplying.name + " to " + ao.supplyingto.name + " for 100 gold.", Color.yellow);
                 stored_resources[(int)ao.supplying.ert] -= 50;
                 player.gold += 100;
+                if (!ao.supplyingto.initialdelivery)
+                {
+                    ao.supplyingto.initialdelivery = true;
+                    player.score += 50;
+                }
             }
         }//end of for ao in addons
 
