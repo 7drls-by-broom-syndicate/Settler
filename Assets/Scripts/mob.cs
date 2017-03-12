@@ -188,6 +188,8 @@ public class mob {
     public int numattacksleft;
     public int nummovesleft;
 
+    public bool haveyoumovedthisgo;
+
     public bool usedDEFthisturn;
 
     public Ccity citythatownsit;

@@ -287,8 +287,8 @@ public partial class Game : MonoBehaviour
             || map.buildings[tentx,tenty]==Etilesprite.BUILDINGS_BARBARIAN_CITADEL)
         {
             Ccity cc = map.citythathasinfluence[tentx, tenty];
-            if (m.hostile_toenemies_currently && !cc.isfrenzleecity
-                || m.hostile_toplayer_currently && cc.isfrenzleecity)
+            if (cc!=null && (m.hostile_toenemies_currently && !cc.isfrenzleecity
+                || m.hostile_toplayer_currently && cc.isfrenzleecity))
             {
                 MobAttacksCity(m, cc);
                 didsomething = true;
@@ -664,7 +664,13 @@ public partial class Game : MonoBehaviour
         player.mob.usedDEFthisturn = false;
 
         foreach (var f in map.moblist)
-            MobGetsToAct(f);
+        {
+            for (int dodgynewbury = 0; dodgynewbury < f.archetype.moves;dodgynewbury++)
+            {
+                MobGetsToAct(f);
+            }
+
+        }
 
         //add any new mobs created this turn.
         if (map.newmoblist.Count > 0)
@@ -955,6 +961,11 @@ public partial class Game : MonoBehaviour
 
         e.usedDEFthisturn = false;
 
+        //new kludge for horsies
+        e.haveyoumovedthisgo = false;
+
+        haveanothergofrederick:
+
         if (e.AIformob.randomlywalking)//randomlywalking might as well be "bool haveatarget"
         {
 
@@ -978,6 +989,11 @@ public partial class Game : MonoBehaviour
 
                     map.passable[e.AIformob.targetsquare.x, e.AIformob.targetsquare.y] = whattargetwas;
 
+                    //dodgy newbury
+                   // if (e.haveyoumovedthisgo) { return; }
+                  //  else { e.haveyoumovedthisgo = true; log.Printline("frederick"); goto haveanothergofrederick; }
+                    //end dodgy newbury
+
                     return;
                 }
             }
@@ -989,6 +1005,12 @@ public partial class Game : MonoBehaviour
             }
             if (trytomove(e, lil.deltax[e.AIformob.direction], lil.deltay[e.AIformob.direction])) return;
             e.AIformob.direction = lil.randi(0, 7);//change direction because couldn't move
+
+                    //dodgy newbury
+                  //  if (e.haveyoumovedthisgo) { return; }
+                  //  else { e.haveyoumovedthisgo = true; log.Printline("frederick"); goto haveanothergofrederick; }
+                    //end dodgy newbury
+
             return;
         }
 

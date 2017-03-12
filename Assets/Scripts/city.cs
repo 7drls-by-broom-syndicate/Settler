@@ -493,7 +493,7 @@ public  bool usedDEFthisturn;
             {
                 int tx =posx + zz;
                 int ty = posy + ff;
-                if (tx > 0 && ty > 0 && tx < map.width && ty < map.height)
+                if (tx >= 0 && ty >= 0 && tx < map.width && ty < map.height)
                 {
                     if (map.influence[tx, ty] == null)
                     {
