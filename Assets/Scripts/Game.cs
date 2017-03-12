@@ -912,7 +912,7 @@ public partial class Game : MonoBehaviour
 
         log = new MessageLog(50, 15);
         log.Printline("Settler by The Broom Institute: 7DRL 2017");
-        log.Printline("This is the 7DRL work in progress.");
+        log.Printline("This is the 7DRL 168 hour version.");
       
         //log.Printline("Resolution is " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
         lil.seednow();
@@ -1228,6 +1228,22 @@ public partial class Game : MonoBehaviour
                                     map.addons[player.posx, player.posy].mobtoproduce = mob.archetypes[which];
                                 }
                                 break;
+                            case Menu.Emenuidentity.trader:
+                                if (Game.currentmenu.currently_selected_option == 0)
+                                {
+                                    log.Printline("You cancel the trade route.", Color.yellow);
+                                    map.addons[player.posx, player.posy].supplying = null;
+                                }
+                                else
+                                {
+                                    int which = Game.currentmenu.currently_selected_option - 1;                                    
+                                    map.addons[player.posx, player.posy].supplying = Cresource.resourcetypes[map.citystatelist[which].desiredresource];
+                                    map.addons[player.posx, player.posy].supplyingto = map.citystatelist[which];
+                                    log.Printline("Now supplying " + map.addons[player.posx, player.posy].supplying.name + " to " + map.citystatelist[which].name + ".", Color.yellow);
+
+                                }
+                                break;
+                                //end of trader menu
 
                                 //end of unitproduce menu
                         }

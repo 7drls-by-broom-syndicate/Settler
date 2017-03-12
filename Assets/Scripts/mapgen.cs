@@ -799,7 +799,9 @@ public void genlevelsettlerstyle()
             FreeSpace(out buildx, out buildy);
             resource[buildx, buildy] = null;
             buildings[buildx, buildy] = Etilesprite.BUILDINGS_CITY_STATE;
-            citystates[buildx, buildy] = new Citystate(buildx, buildy);
+            Citystate bobthegaffer = new Citystate(buildx, buildy);
+            citystates[buildx, buildy] = bobthegaffer;
+            citystatelist.Add(bobthegaffer);
         }
         
         // barbarian camps

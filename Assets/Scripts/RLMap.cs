@@ -70,6 +70,7 @@ public partial class RLMap  {
     public Array2D<bool?> influence;
     public Array2D<Ccity> citythathasinfluence;
     public List<Ccity> citylist;
+    public List<Citystate> citystatelist;
     public Array2D<Citystate> citystates;
     public Array2D<addoninstance> addons;
     //public Array2D<int?> wizwalltime;
@@ -362,6 +363,7 @@ public partial class RLMap  {
 
         citythathasinfluence = new Array2D<Ccity>(width, height, null);
         citylist = new List<Ccity>();
+        citystatelist = new List<Citystate>();
         citystates = new Array2D<Citystate>(width, height, null);
         addons = new Array2D<addoninstance>(width, height, null);
 

@@ -16,7 +16,7 @@ public class Citystate  {
     public int desiredresource;
 
     public bool metyet = false;
-
+    public bool initialdelivery = false;
     public Citystate(int x,int y)
     {
         numcitystates++; 

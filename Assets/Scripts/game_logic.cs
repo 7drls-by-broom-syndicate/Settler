@@ -424,6 +424,23 @@ public partial class Game : MonoBehaviour
     {
         List<string> ls = new List<string>();
 
+        if(map.buildings[player.posx,player.posy]!=Etilesprite.EMPTY && map.buildings[player.posx, player.posy] == Etilesprite.BUILDINGS_TRADING_POST)
+        {
+            ls.Add("Cancel Trade Route");
+
+            foreach (var teddy in map.citystatelist)
+            {
+                if (!teddy.metyet) ls.Add("/You have not met this city state yet.");
+                else
+                {
+                    ls.Add(Cresource.resourcetypes[teddy.desiredresource].name + " to " + teddy.name + ". " +
+                        map.addons[player.posx, player.posy].owner.stored_resources[teddy.desiredresource] + " on hand, " +
+                        map.addons[player.posx, player.posy].owner.perturnresources[teddy.desiredresource] + " per turn.");
+                }
+            }
+            Game.currentmenu = new Menu(Menu.Emenuidentity.trader, "Select Trade Route", ls);
+        }
+        else
         if (map.buildings[player.posx, player.posy] != Etilesprite.EMPTY && map.buildings[player.posx, player.posy] == Etilesprite.BUILDINGS_BARRACKS)
         {
             var sit = map.addons[player.posx, player.posy].owner;

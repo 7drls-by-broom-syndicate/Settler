@@ -47,6 +47,8 @@ public class addoninstance
     public int storedproduction,storediron,storedhorse;
     public mobarchetype mobtoproduce;
     public int x, y;
+    public Tresource supplying=null;
+    public Citystate supplyingto = null;
     public addoninstance(Ccity _owner,Tcityaddons _type,int _x,int _y)
     {
         x = _x;
@@ -75,7 +77,7 @@ public class Ccity  {
 
         new Tcityaddons("helps city grow faster","town hall",100,Etilesprite.BUILDINGS_TOWN_HALL),//makes city grow faster
         new Tcityaddons("+10 production for square","factory",100,Etilesprite.BUILDINGS_FACTORY),//10 production
-        new Tcityaddons("<not implemented>","trading post",100,Etilesprite.BUILDINGS_TRADING_POST),
+        new Tcityaddons("trade resources to citystates","trading post",100,Etilesprite.BUILDINGS_TRADING_POST),
         new Tcityaddons("used to produce units","barracks",100,Etilesprite.BUILDINGS_BARRACKS),//produces units
         new Tcityaddons("+10 gold for square","market",200,Etilesprite.BUILDINGS_MARKET),//10 gold
         new Tcityaddons("+10 food for square","allotments",200,Etilesprite.BUILDINGS_ALLOTMENTS),//10 food
@@ -288,6 +290,7 @@ public  bool usedDEFthisturn;
             stored_resources[i] += perturnresources[i];
         }
 
+
         //gold goes to standing army. any left over goes to player. evil city: all gold goes to pot for player when they defeat it
 
         int GOLD = perturnyields.gold;                     //let g be the amount of gold we have on hand 
@@ -459,6 +462,12 @@ public  bool usedDEFthisturn;
 
 
             }//end of if barracks
+            if(ao.type.tile == Etilesprite.BUILDINGS_TRADING_POST && ao.supplying!=null && stored_resources[(int)ao.supplying.ert]>=50)
+            {
+                log.Printline("Supplied 50 " + ao.supplying.name + " to " + ao.supplyingto.name + " for 100 gold.", Color.yellow);
+                stored_resources[(int)ao.supplying.ert] -= 50;
+                player.gold += 100;
+            }
         }//end of for ao in addons
 
 

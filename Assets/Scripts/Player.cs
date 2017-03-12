@@ -29,7 +29,7 @@ public class Player {
     //int charlevel = 0;
     public int dunlevel = 0;
 
-    public int gold = 2000;
+    public int gold = 1000;
     //char stasis = 0;
     //bool devcheat = false;
 

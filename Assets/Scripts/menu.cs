@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Menu  {
 
-    public enum Emenuidentity { build,unitproduce }
+    public enum Emenuidentity { build,unitproduce,trader }
 
     public List<byte[]> optionstrings;
     public List<bool> optiondisabled;
