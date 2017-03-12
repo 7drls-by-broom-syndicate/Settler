@@ -421,8 +421,16 @@ public partial class Game : MonoBehaviour
 
                             //draw building
                             if (map.buildings[xx, yy] != Etilesprite.EMPTY)
+                            {
                                 DrawSprite(screenx, screeny, (int)map.buildings[xx, yy]);
+                                if (map.citystates[xx,yy]!=null && map.citystates[xx, yy].metyet == false)
+                                {
+                                    map.citystates[xx, yy].metyet = true;
+                                    log.Printline("Greetings from the City State of " + map.citystates[xx, yy].name+".",Color.yellow);
+                                    log.Printline("If you desire to trade we need " + Cresource.resourcetypes[map.citystates[xx,yy].desiredresource].name+".",Color.yellow);
 
+                                }
+                            }
 
                             //draw influence. is this the right order in the layer chain? :D
                             if (map.influence[xx, yy] == true)

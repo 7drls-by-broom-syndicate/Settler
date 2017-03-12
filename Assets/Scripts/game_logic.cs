@@ -932,13 +932,13 @@ public partial class Game : MonoBehaviour
         if (!terrainDEFbonus) t_def = 0;
         
         log.Printline(attacker.archetype.name + " ATK " + attacker.archetype.attacklow + "-" + attacker.archetype.attackhigh +
-            " +" + attacker.attackbonus + " rolls " + attackroll + " =" +(attackroll+attacker.attackbonus)+" + "+t_atk+" TRN",Color.grey);
+            " +" + attacker.attackbonus + " rolls " + attackroll + " =" +(attackroll+attacker.attackbonus)+" + "+t_atk+" TRN",Color.blue);
 
 
       
 
         if (target.usedDEFthisturn) log.Printline(target.archetype.name + " DEF 0 (already used this turn)", Color.grey);
-        else log.Printline(target.archetype.name + " DEF " + target.archetype.defence + " +" + target.defencebonus+" + "+t_def+" TRN");
+        else log.Printline(target.archetype.name + " DEF " + target.archetype.defence + " +" + target.defencebonus+" + "+t_def+" TRN",Color.blue);
 
        
 
@@ -955,9 +955,9 @@ public partial class Game : MonoBehaviour
         int defroll = (target.usedDEFthisturn) ? 0 : (target.defence);
 
         log.Printline(attacker.archetype.name + " ATK " + attacker.archetype.attacklow + "-" + attacker.archetype.attackhigh +
-        " +" + attacker.attackbonus + " rolls " + attackroll + " =" + (attackroll + attacker.attackbonus), Color.grey);
+        " +" + attacker.attackbonus + " rolls " + attackroll + " =" + (attackroll + attacker.attackbonus), Color.blue);
 
-        if (target.usedDEFthisturn) log.Printline(target.name + " DEF 0 (already used this turn)", Color.grey);
+        if (target.usedDEFthisturn) log.Printline(target.name + " DEF 0 (already used this turn)", Color.blue);
         else log.Printline(target.name + " DEF " + target.defence );
 
         int damage = attackroll + attacker.attackbonus - defroll;

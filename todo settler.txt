@@ -1,19 +1,6 @@
 stretch
 -------
 
-multi moves and attacks. think about how they will work.
-
-make hills confer a combat bonus
-	if attacker on hill and defender not=bonus
-	if defender in forest and attacker not=bonus
-
-		
-
-		
-maybe you only get to use your def once a turn. this would mean you could make cities have so much def they are immune to damage from one mob but 
-vulnerable to 2 or more) in void mobattacksmob
-print more detailed combat info so we can debug
-	
 
 
 ------------------------------------------------------------------------------------------------------------------------	
@@ -38,8 +25,6 @@ showing how many of the resources you have like:
 	oil to vatican city [105 on hand, 2 per turn]
 	
 
-hero or gold huts
-effect of city buildings (pretty easy except for trader and barracks)
 
 
 eventually: pop up city list and mob list (per city)

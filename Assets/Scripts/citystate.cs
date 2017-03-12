@@ -11,9 +11,11 @@ public class Citystate  {
     };
 
     public string name;
-    public int numcitystates=-1;
+    public static int numcitystates=-1;
 
     public int desiredresource;
+
+    public bool metyet = false;
 
     public Citystate(int x,int y)
     {
