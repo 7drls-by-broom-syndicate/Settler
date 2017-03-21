@@ -996,6 +996,7 @@ public partial class Game : MonoBehaviour
     float firerate = 0.2f;
     float initialdelay = 0.5f;
     int currentcommand = -1;
+   // string buttstring;
     bool keydown = false;
     bool firstpress = false;
     bool mauswalking = false;
@@ -1379,17 +1380,35 @@ public partial class Game : MonoBehaviour
                     if (firstpress) { nextfire += initialdelay; firstpress = false; }
                 }
 
-                if ((Input.GetButtonUp("up")) ||
-                (Input.GetButtonUp("down")) ||
-                (Input.GetButtonUp("left")) ||
-              (Input.GetButtonUp("right")) ||
-                 (Input.GetButtonUp("use")) ||
-                 (Input.GetButton("action")) || //notice it's GetButton not GetButtonUp, so this doesn't work and "action" doesn't repeat
-                (Input.GetButtonUp("wait")) ||
-                 (Input.GetButtonUp("upleft")) ||
-                (Input.GetButtonUp("upright")) ||
-                 (Input.GetButtonUp("downleft")) ||
-                (Input.GetButtonUp("downright"))) { currentcommand = -1; }
+                switch (currentcommand)
+                {
+
+                    case 0: if (!Input.GetButton("up")) currentcommand = -1;break;
+                    case 1:if (!Input.GetButton("down")) currentcommand = -1; break;
+                    case 2: if (!Input.GetButton("left")) currentcommand = -1; break;
+                    case 3: if (!Input.GetButton("right")) currentcommand = -1; break;
+                    case 4: currentcommand = -1;break;
+                    case 5: if (!Input.GetButton("wait")) currentcommand = -1; break;
+                    case 6: if (!Input.GetButton("upleft")) currentcommand = -1; break;
+                    case 7: if (!Input.GetButton("upright")) currentcommand = -1; break;
+                    case 8: if (!Input.GetButton("downleft")) currentcommand = -1; break;
+                        case 9: if (!Input.GetButton("downright")) currentcommand = -1; break;
+                        case 10: if (!Input.GetButton("action")) currentcommand = -1; break;
+                        
+                }
+              
+
+                //if ((Input.GetButtonUp("up")) ||
+                //(Input.GetButtonUp("down")) ||
+                //(Input.GetButtonUp("left")) ||
+                //(Input.GetButtonUp("right")) ||
+                // (Input.GetButtonUp("use")) ||
+                // (Input.GetButton("action")) || //notice it's GetButton not GetButtonUp, so this doesn't work and "action" doesn't repeat
+                //(Input.GetButtonUp("wait")) ||
+                // (Input.GetButtonUp("upleft")) ||
+                //(Input.GetButtonUp("upright")) ||
+                // (Input.GetButtonUp("downleft")) ||
+                //(Input.GetButtonUp("downright"))) { currentcommand = -1; }
 
                 break;
         }

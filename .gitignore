@@ -78,3 +78,31 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.zip
+built versions/linux/settler.x86
+built versions/linux/settler_Data/Mono/x86/libmono.so
+built versions/linux/settler_Data/Mono/x86_64/libMonoPosixHelper.so
+built versions/linux/settler_Data/Plugins/x86/ScreenSelector.so
+built versions/linux/settler_Data/Resources/unity default resources
+built versions/linux/settler_Data/sharedassets0.assets.resS
+built versions/linux/settler_Data/sharedassets0.resource
+built versions/linux/settler_Data/sharedassets0.assets
+built versions/linux/settler_Data/Resources/unity_builtin_extra
+built versions/linux/settler_Data/Plugins/x86_64/ScreenSelector.so
+built versions/linux/settler_Data/Mono/x86_64/libmono.so
+built versions/linux/settler_Data/Mono/x86/libMonoPosixHelper.so
+built versions/linux/settler_Data/Mono/etc/mono/mconfig/config.xml
+built versions/linux/settler_Data/Mono/etc/mono/config
+built versions/linux/settler_Data/Mono/etc/mono/browscap.ini
+built versions/linux/settler_Data/Mono/etc/mono/2.0/web.config
+built versions/linux/settler_Data/Mono/etc/mono/2.0/settings.map
+built versions/linux/settler_Data/Mono/etc/mono/2.0/machine.config
+built versions/linux/settler_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx
+built versions/linux/settler_Data/Mono/etc/mono/2.0/Browsers/Compat.browser
+built versions/linux/settler_Data/Mono/etc/mono/1.0/machine.config
+built versions/linux/settler_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx
+built versions/linux/settler_Data/Managed/UnityEngine.dll.mdb
+built versions/linux/settler_Data/level0
+built versions/linux/settler_Data/globalgamemanagers.assets
+built versions/linux/settler_Data/globalgamemanagers
+built versions/linux/settler.x86_64
