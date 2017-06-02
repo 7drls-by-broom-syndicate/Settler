@@ -44,7 +44,7 @@ class Pangotimer
     }
 }
 
-public enum Egamestate : int { initializing, titlescreen, playing, gameover,youwon }
+public enum Egamestate : int { initializing, titlescreen, playing, gameover, youwon }
 
 public enum CradleOfTime { dormant, ready_to_process_turn, waiting_for_player, player_is_done, processing_other_actors }
 
@@ -65,7 +65,7 @@ public partial class Game : MonoBehaviour
     int statusgold;
     int statushp;
     int statuslevel;
-    int statusscore=45;
+    int statusscore = 45;
 
     byte[] winstring = System.Text.Encoding.ASCII.GetBytes("A winner is you!Score is:");
     Color whiteblend = new Color(1f, 1f, 1f, 0.8f);
@@ -147,7 +147,7 @@ public partial class Game : MonoBehaviour
 #endif
 
 
-    public static Menu currentmenu=null;
+    public static Menu currentmenu = null;
     public static bool menuup = false;
     public static bool menucommandwaiting = false;
 
@@ -155,21 +155,21 @@ public partial class Game : MonoBehaviour
     {
         Action<int, int, byte> PrintOneChar = (int xx, int yy, byte c) =>
         {
-           // for (int x = 0; x < b.Length; x++)
-           // {
-                int y = 0;
-               // byte c = b[x];
-                int xpos = c % 32;
-                int ypos = 7 - (c / 32);
-                r.x = (xx + (0 * 6)) * zoomfactor;
-                r.y = yy * zoomfactor;
+            // for (int x = 0; x < b.Length; x++)
+            // {
+            int y = 0;
+            // byte c = b[x];
+            int xpos = c % 32;
+            int ypos = 7 - (c / 32);
+            r.x = (xx + (0 * 6)) * zoomfactor;
+            r.y = yy * zoomfactor;
 
-                r2.x = xratio * xpos;
-                r2.y = yratio * ypos;
+            r2.x = xratio * xpos;
+            r2.y = yratio * ypos;
 
-                GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2);
+            GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2);
 
-          //  }
+            //  }
         };
         Action<int, int, byte[]> PrintString = (int xx, int yy, byte[] b) =>
         {
@@ -192,22 +192,22 @@ public partial class Game : MonoBehaviour
 
         Action<int, int, int> PrintNumber = (int xx, int yy, int value) =>
         {
-         //   Action<int, int, int> DrawSprite_pixelaccurate = (int x, int y, int s) => {
-         //       r3.x = x * zoomfactor;
-         //       r3.y = y * zoomfactor;
-         //       r4.x = spriteratio * s;
-         //       GUI.DrawTextureWithTexCoords(r3, sprites, r4);
-         //   };
+            //   Action<int, int, int> DrawSprite_pixelaccurate = (int x, int y, int s) => {
+            //       r3.x = x * zoomfactor;
+            //       r3.y = y * zoomfactor;
+            //       r4.x = spriteratio * s;
+            //       GUI.DrawTextureWithTexCoords(r3, sprites, r4);
+            //   };
 
             for (int x = 0; x < 3; x++)
             {//48 is 0
                 int y = 0;
-                byte c = 0; 
+                byte c = 0;
                 switch (x)
                 {
-                    case 0:c = (value<0)?(byte)45:(byte)(48+(value / 100)); break;
-                    case 1:c= (value < 0) ? (byte)45 : (byte)(48+((value%100)/10)); break;
-                    case 2:c = (value < 0) ? (byte)45 : (byte)(48 + (value % 10)); break;
+                    case 0: c = (value < 0) ? (byte)45 : (byte)(48 + (value / 100)); break;
+                    case 1: c = (value < 0) ? (byte)45 : (byte)(48 + ((value % 100) / 10)); break;
+                    case 2: c = (value < 0) ? (byte)45 : (byte)(48 + (value % 10)); break;
                 }
                 int xpos = c % 32;
                 int ypos = 7 - (c / 32);
@@ -219,9 +219,9 @@ public partial class Game : MonoBehaviour
 
                 GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2);
 
-              //  DrawSprite_pixelaccurate(x, y, 3 + (value / 100));
-               // DrawSprite_pixelaccurate(x + 16, y, 3 + ((value % 100) / 10));
-               // DrawSprite_pixelaccurate(x + 32, y, 3 + (value % 10));
+                //  DrawSprite_pixelaccurate(x, y, 3 + (value / 100));
+                // DrawSprite_pixelaccurate(x + 16, y, 3 + ((value % 100) / 10));
+                // DrawSprite_pixelaccurate(x + 32, y, 3 + (value % 10));
             }
         };
 
@@ -308,13 +308,13 @@ public partial class Game : MonoBehaviour
                     r3c.x = x * zoomfactor;
                     r3c.y = y * zoomfactor;
 
-                  //  r5.x = spriteratio * ((int)Etilesprite.EFFECT_FULLSQUARE-1);           //s
+                    //  r5.x = spriteratio * ((int)Etilesprite.EFFECT_FULLSQUARE-1);           //s
                     r5.y = (1f / 16f) * 10f;
                     r5.width = spriteratio3;
                     r5.height = (1f / 16f) * 3f;//0.5f;
                     GUI.DrawTextureWithTexCoords(r3c, sprites, r5);
                 };
-            
+
                 originx = (player.posx < XHALF) ? 0 : player.posx - XHALF;
                 originy = (player.posy < YHALF) ? 0 : player.posy - YHALF;
 
@@ -356,7 +356,7 @@ public partial class Game : MonoBehaviour
                     {
 
                         // if (map.in_FOV.AtGet(xx, yy))
-                        if(!map.fogofwar.AtGet(xx, yy))
+                        if (!map.fogofwar.AtGet(xx, yy))
                         {
 
 #if FLICKERING_LANTERN
@@ -398,9 +398,9 @@ public partial class Game : MonoBehaviour
                             //draw hill,mountain,trees
 
                             if (map.mountain[xx, yy]) DrawSprite(screenx, screeny, (int)Etilesprite.MOUNTAIN_OVERLAY);
-                            else if(map.hill[xx, yy]) DrawSprite(screenx, screeny, (int)Etilesprite.HILL_OVERLAY);
+                            else if (map.hill[xx, yy]) DrawSprite(screenx, screeny, (int)Etilesprite.HILL_OVERLAY);
 
-                            if(map.tree[xx, yy]) DrawSprite(screenx, screeny,(int)map.treechar[xx,yy]);
+                            if (map.tree[xx, yy]) DrawSprite(screenx, screeny, (int)map.treechar[xx, yy]);
 
                             //draw yields
                             if (showyield)
@@ -410,7 +410,7 @@ public partial class Game : MonoBehaviour
                                 if (map.yield[xx, yy].gold > 0)
                                     DrawSprite(screenx, screeny, -1 + map.yield[xx, yy].gold + (int)Etilesprite.YIELD_GOLD_1);
                                 if (map.yield[xx, yy].food > 0)
-                                    DrawSprite(screenx,screeny, -1 + map.yield[xx, yy].food + (int)Etilesprite.YIELD_FOOD_1);
+                                    DrawSprite(screenx, screeny, -1 + map.yield[xx, yy].food + (int)Etilesprite.YIELD_FOOD_1);
                             }
 
                             //draw resources
@@ -423,11 +423,11 @@ public partial class Game : MonoBehaviour
                             if (map.buildings[xx, yy] != Etilesprite.EMPTY)
                             {
                                 DrawSprite(screenx, screeny, (int)map.buildings[xx, yy]);
-                                if (map.citystates[xx,yy]!=null && map.citystates[xx, yy].metyet == false)
+                                if (map.citystates[xx, yy] != null && map.citystates[xx, yy].metyet == false)
                                 {
                                     map.citystates[xx, yy].metyet = true;
-                                    log.Printline("Greetings from the City State of " + map.citystates[xx, yy].name+".",Color.yellow);
-                                    log.Printline("If you desire to trade we need " + Cresource.resourcetypes[map.citystates[xx,yy].desiredresource].name+".",Color.yellow);
+                                    log.Printline("Greetings from the City State of " + map.citystates[xx, yy].name + ".", Color.yellow);
+                                    log.Printline("If you desire to trade we need " + Cresource.resourcetypes[map.citystates[xx, yy].desiredresource].name + ".", Color.yellow);
 
                                 }
                             }
@@ -465,7 +465,7 @@ public partial class Game : MonoBehaviour
                                     if (map.itemgrid[xx, yy].mob.noticedyou == false)
                                     {
                                         map.itemgrid[xx, yy].mob.noticedyou = true;
-                                        if(map.itemgrid[xx,yy].mob.hostile_toplayer_currently)log.Printline(map.itemgrid[xx, yy].mob.archetype.name + " noticed you!");
+                                        if (map.itemgrid[xx, yy].mob.hostile_toplayer_currently) log.Printline(map.itemgrid[xx, yy].mob.archetype.name + " noticed you!");
                                     }
 
                                     if (!map.itemgrid[xx, yy].mob.magepointing)
@@ -474,21 +474,22 @@ public partial class Game : MonoBehaviour
                                             DrawSpriteReverse(screenx, screeny, (int)map.itemgrid[xx, yy].tile);
                                         else
                                             DrawSprite(screenx, screeny, (int)map.itemgrid[xx, yy].tile);
-                                    } else
+                                    }
+                                    else
                                     {
                                         if (map.itemgrid[xx, yy].mob.reversesprite)
-                                            DrawSpriteReverse(screenx, screeny, 1+(int)map.itemgrid[xx, yy].tile);
+                                            DrawSpriteReverse(screenx, screeny, 1 + (int)map.itemgrid[xx, yy].tile);
                                         else
-                                            DrawSprite(screenx, screeny, 1+(int)map.itemgrid[xx, yy].tile);
+                                            DrawSprite(screenx, screeny, 1 + (int)map.itemgrid[xx, yy].tile);
 
                                         if (Time.time > map.itemgrid[xx, yy].mob.magepointing_timer)
                                             map.itemgrid[xx, yy].mob.magepointing = false;
 
-                                        
+
                                     }
 
 
-                               //    if(!map.itemgrid[xx,yy].mob.dead_currently) DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + map.itemgrid[xx, yy].mob.facing);
+                                    //    if(!map.itemgrid[xx,yy].mob.dead_currently) DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + map.itemgrid[xx, yy].mob.facing);
                                 }
                                 else DrawSprite(screenx, screeny, (int)map.itemgrid[xx, yy].tile);
                             }
@@ -502,7 +503,7 @@ public partial class Game : MonoBehaviour
                                 else DrawSprite(screenx, screeny, (int)player.mob.tile);
 
                                 //draw facing
-                               // DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + player.mob.facing);
+                                // DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_DIRECTION_INDICATOR_1 + player.mob.facing);
                             }
 
                             //smoke/cloud/gas
@@ -521,7 +522,7 @@ public partial class Game : MonoBehaviour
                             //{
                             //    int i = (int)(Time.time * 3.0f) % 3;
                             //    DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_FIRE_ANIM_1 + i);
-                                    
+
 
                             //}
 
@@ -541,7 +542,7 @@ public partial class Game : MonoBehaviour
                         if (map.gridflashtime[xx, yy] > Time.time)
                         {
                             GUI.color = map.gridflashcolour[xx, yy];
-                            DrawSprite(screenx, screeny,(int) Etilesprite.EFFECT_FULLSQUARE);
+                            DrawSprite(screenx, screeny, (int)Etilesprite.EFFECT_FULLSQUARE);
                         }
 
 
@@ -554,7 +555,7 @@ public partial class Game : MonoBehaviour
                     screeny++; screenx = 0;
                 }//end of screen loop
 
-              
+
 
 
                 //floating text
@@ -585,15 +586,16 @@ public partial class Game : MonoBehaviour
 
                 //statusline
 
-            
 
-                if (statusgold != player.gold || statushp != player.hp || statuslevel!=player.dunlevel|| statusscore!=player.score) {
-                    statusline = System.Text.Encoding.ASCII.GetBytes(("Gold: " + player.gold + " Hp: " + player.hp+" Level:"+player.dunlevel+" Score:"+player.score));
+
+                if (statusgold != player.gold || statushp != player.hp || statuslevel != player.dunlevel || statusscore != player.score)
+                {
+                    statusline = System.Text.Encoding.ASCII.GetBytes(("Gold: " + player.gold + " Hp: " + player.hp + " Level:" + player.dunlevel + " Score:" + player.score));
                     statusgold = player.gold;
                     statushp = player.hp;
                     statusscore = player.score;
                     statuslevel = player.dunlevel;
-                        }
+                }
 
                 GUI.color = Color.white;
                 PrintString(0, 359 - 12, statusline);
@@ -618,26 +620,26 @@ public partial class Game : MonoBehaviour
                 //    PrintNumber(17 * 16, 14+(21 * 16), player.mob.defenseuptimer);
                 //}
                 //later: def down and attack down too
-               // DrawSprite(20, 21, (int)Etilesprite.INVENTORY_HAND);
+                // DrawSprite(20, 21, (int)Etilesprite.INVENTORY_HAND);
                 //if (player.held != Etilesprite.EMPTY) DrawSprite(19, 21, (int)player.held);
                 //experimental snow
                 //GUI.color = new Color(255, 255, 255, 0.5f);
                 //for (int f = 0; f < number_snow_particles; f++)
                 //{
-                    //       float tx = (StoredNoise[(screenx * 16) + f] + 1.0f) * 4.5f;
-                    //       float ty = (StoredNoise[(screeny * 16) + f + 8] + 1.0f) * 4.5f;
-                    //
-                   // int sxf = (int)snowx[f];
-                   // int syf = (int)snowy[f];
-                   // if (sxf < 0) sxf = 0;if (syf < 0) syf = 0;
-                   // if (sxf > 639) sxf = 639;if (syf > 479) syf = 479;
-                   // snowx[f] += StoredNoise[sxf];
-                   // snowy[f] += (StoredNoise[syf]+1)*2f;
-                   // if (snowy[f] > 479) { snowy[f] = 0;snowx[f]= lil.randf(0, 21*16); }
-                  //  DrawSprite3x3((int)snowx[f], (int)snowy[f]);
+                //       float tx = (StoredNoise[(screenx * 16) + f] + 1.0f) * 4.5f;
+                //       float ty = (StoredNoise[(screeny * 16) + f + 8] + 1.0f) * 4.5f;
+                //
+                // int sxf = (int)snowx[f];
+                // int syf = (int)snowy[f];
+                // if (sxf < 0) sxf = 0;if (syf < 0) syf = 0;
+                // if (sxf > 639) sxf = 639;if (syf > 479) syf = 479;
+                // snowx[f] += StoredNoise[sxf];
+                // snowy[f] += (StoredNoise[syf]+1)*2f;
+                // if (snowy[f] > 479) { snowy[f] = 0;snowx[f]= lil.randf(0, 21*16); }
+                //  DrawSprite3x3((int)snowx[f], (int)snowy[f]);
 
-                        //_Particle((screenx * 16 * zoomfactor) + zoomfactor * (int)tx, (screeny * 16 * zoomfactor) + zoomfactor * (int)ty, 13);
-                    //}               
+                //_Particle((screenx * 16 * zoomfactor) + zoomfactor * (int)tx, (screeny * 16 * zoomfactor) + zoomfactor * (int)ty, 13);
+                //}               
                 //end snow 
 
 
@@ -681,7 +683,7 @@ public partial class Game : MonoBehaviour
                     s[0] += " [P:" + map.yield[mapx, mapy].production + " G:" + map.yield[mapx, mapy].gold + " F:" + map.yield[mapx, mapy].food + "]";
 
                     //line 2 Resource: oranges Infl: player (Biscuit)
-                    s[1] = "Resource: " + ((map.resource[mapx, mapy] != null) ? map.resource[mapx, mapy].name : "none")+" Owner: ";
+                    s[1] = "Resource: " + ((map.resource[mapx, mapy] != null) ? map.resource[mapx, mapy].name : "none") + " Owner: ";
                     if (map.citystates[mapx, mapy] != null) s[1] += map.citystates[mapx, mapy].name;
 
                     else
@@ -699,16 +701,16 @@ public partial class Game : MonoBehaviour
                     if (map.buildings[mapx, mapy] != Etilesprite.EMPTY)
                     {
                         if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_IMPROVEMENTS_GENERIC_RESOURCE_EXPLOITATION) s[2] = map.resource[mapx, mapy].nameofexploiter + " ";
-                        else s[2]= Tilestuff.tilestring[(int)map.buildings[mapx,mapy]+2]+" ";
-                        if (map.addons[mapx, mapy] != null) s[2] += "(" + map.addons[mapx,mapy].owner.name+")";
+                        else s[2] = Tilestuff.tilestring[(int)map.buildings[mapx, mapy] + 2] + " ";
+                        if (map.addons[mapx, mapy] != null) s[2] += "(" + map.addons[mapx, mapy].owner.name + ")";
                     }
                     s[2] += "[P:" + map.currentyield[mapx, mapy].production + " G:" + map.currentyield[mapx, mapy].gold + " F:" + map.currentyield[mapx, mapy].food + "]";
-                    
+
                     if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_CITY || map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_BARBARIAN_CAMP || map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_BARBARIAN_CITADEL)
                     {//x units use g:10 f:20 of [p:1 g:3 f:3]
                         Ccity cctv = map.citythathasinfluence[mapx, mapy];
                         s[3] += cctv.unitlist.Count + " units use G:" + cctv.armycostperturn_gold + " F:" + cctv.armycostperturn_food + " of [P:" + cctv.perturnyields.production + " G:" + cctv.perturnyields.gold + " F:" + cctv.perturnyields.food + "]";
-                        s[4] = "Growth " + cctv.growthcounter + "/" + cctv.arbitrary_growth_value+" HP:"+cctv.hp+"/"+cctv.hpmax+" DEF:"+cctv.defence;
+                        s[4] = "Growth " + cctv.growthcounter + "/" + cctv.arbitrary_growth_value + " HP:" + cctv.hp + "/" + cctv.hpmax + " DEF:" + cctv.defence;
                     }
                     else if (map.buildings[mapx, mapy] == Etilesprite.BUILDINGS_BARRACKS)
                     {
@@ -716,7 +718,7 @@ public partial class Game : MonoBehaviour
                         if (map.addons[mapx, mapy].mobtoproduce == null) s[4] += " nothing, idle.";
                         else s[4] += map.addons[mapx, mapy].mobtoproduce.name +
                                 " P:" + map.addons[mapx, mapy].storedproduction + "/" + map.addons[mapx, mapy].mobtoproduce.buildcostproduction +
-                                " I:" + map.addons[mapx, mapy].storediron+ "/" + map.addons[mapx, mapy].mobtoproduce.buildcostiron+
+                                " I:" + map.addons[mapx, mapy].storediron + "/" + map.addons[mapx, mapy].mobtoproduce.buildcostiron +
                         " H:" + map.addons[mapx, mapy].storedhorse + "/" + map.addons[mapx, mapy].mobtoproduce.buildcosthorses;
 
 
@@ -726,11 +728,11 @@ public partial class Game : MonoBehaviour
                     item_instance i = map.itemgrid[mapx, mapy];
                     if (i != null)
                     {
-                        s[5]+= Tilestuff.tilestring[(int)i.tile + 2];
+                        s[5] += Tilestuff.tilestring[(int)i.tile + 2];
 
                         if (i.ismob)// && !i.mob.dead_currently)
                         {
-                            s[5] += " HP: " + i.mob.hp + "/" + i.mob.archetype.hp;                      
+                            s[5] += " HP: " + i.mob.hp + "/" + i.mob.archetype.hp;
                         }
 
                     }
@@ -758,8 +760,8 @@ public partial class Game : MonoBehaviour
 
                             for (int x = 0; x < bstr.Length; x++)
                             {
-                                int y =(12*ii)+ (0 + (16 * mausysubst)) + 2;//- 12 - 12;
-                               // if (y + (6 * 12) > 359) y = 359 - (6 * 12);
+                                int y = (12 * ii) + (0 + (16 * mausysubst)) + 2;//- 12 - 12;
+                                                                                // if (y + (6 * 12) > 359) y = 359 - (6 * 12);
                                 byte c = bstr[x];
                                 int xpos = c % 32;
                                 int ypos = 7 - (c / 32);
@@ -778,13 +780,13 @@ public partial class Game : MonoBehaviour
                                 GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, false);
                                 GUI.color = Color.white;
                                 GUI.DrawTextureWithTexCoords(r, wednesdayfont, r2, true);
-                               
+
 
                             }
                         }
                     }
-               
-                    
+
+
 
                 }
                 //end tooltips
@@ -843,16 +845,16 @@ public partial class Game : MonoBehaviour
             PrintString(currentmenu.titlepos, currentmenu.locy, currentmenu.title);
             //draw choices
             //GUI.color = currentmenu.colText;
-            for(int upto = 0; upto < currentmenu.number_of_options; upto++)
+            for (int upto = 0; upto < currentmenu.number_of_options; upto++)
             {
                 if (currentmenu.optiondisabled[upto]) GUI.color = currentmenu.colDisabled;
                 else GUI.color = currentmenu.colText;
-                PrintString(currentmenu.locx+12,currentmenu.locy+((upto+2)*12),currentmenu.optionstrings[upto]);
+                PrintString(currentmenu.locx + 12, currentmenu.locy + ((upto + 2) * 12), currentmenu.optionstrings[upto]);
             }
             //draw selector
             GUI.color = currentmenu.colTitle;
-            PrintOneChar(currentmenu.locx + 6, currentmenu.locy + (currentmenu.currently_selected_option+2)*12, 16);
-            
+            PrintOneChar(currentmenu.locx + 6, currentmenu.locy + (currentmenu.currently_selected_option + 2) * 12, 16);
+
         }
 
     }
@@ -866,7 +868,7 @@ public partial class Game : MonoBehaviour
         //music 
         MyAudioSource = GetComponent<AudioSource>();
 
-        
+
 
         //experimental snow
         //for (int i = 0; i < number_snow_particles; i++)
@@ -879,12 +881,12 @@ public partial class Game : MonoBehaviour
         pressstartx = (640 - (bstrPressStart.Length * 6)) / 2;
         bool wtf = PlayerPrefs.GetInt("Screenmanager Is Fullscreen mode") == 1 ? true : false;
 
-       // Debug.Log("width and height are " + Screen.currentResolution.width + " " + Screen.currentResolution.height);
+        // Debug.Log("width and height are " + Screen.currentResolution.width + " " + Screen.currentResolution.height);
 
         // Screen.SetResolution(640 * zoomfactor, 360 * zoomfactor, fullscreenp);
 
         spriteratio = 1f / (float)(sprites.width / 16);
-   spriteratio3=(spriteratio / 16) * 3;
+        spriteratio3 = (spriteratio / 16) * 3;
         r4.width = spriteratio;
         r4reverse.width = -spriteratio;
         particle = new Texture2D(1, 1, TextureFormat.ARGB32, false, false);//zoomfactor by zoomfactor
@@ -903,17 +905,17 @@ public partial class Game : MonoBehaviour
 
     void StartAGame()
     {
-        
+
 
         //MyAudioSource.Stop();
-        MyAudioSource.clip =backmusic;
+        MyAudioSource.clip = backmusic;
         MyAudioSource.loop = true;
         MyAudioSource.Play();
 
         log = new MessageLog(50, 15);
         log.Printline("Settler by The Broom Institute: 7DRL 2017");
-        log.Printline("This is the 7DRL 168 hour version.");
-      
+        log.Printline("Version of 29.04.2017 Unity 5.5.0.");
+
         //log.Printline("Resolution is " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
         lil.seednow();
         player = new Player(0);
@@ -939,7 +941,7 @@ public partial class Game : MonoBehaviour
             return;
         }
         map = new RLMap(player, DungeonGenType.Settler2017);
-        
+
         r_minimap = new Rect(336 * zoomfactor, 0, map.width * 2 * zoomfactor, map.height * 2 * zoomfactor);//was 339
 
         //map.fillminimap();
@@ -970,11 +972,11 @@ public partial class Game : MonoBehaviour
         gamestate = Egamestate.playing;
         TimeEngine = CradleOfTime.ready_to_process_turn;
 
-        for (int y = 0; y <map.height; y++)
+        for (int y = 0; y < map.height; y++)
         {
-            for (int x = 0; x <map.width; x++)
+            for (int x = 0; x < map.width; x++)
             {
-                map.gridflashcolour[x,y] = new Color(lil.randf(0f, 1f), lil.randf(0f, 1f), lil.randf(0f, 1f),0.2f);
+                map.gridflashcolour[x, y] = new Color(lil.randf(0f, 1f), lil.randf(0f, 1f), lil.randf(0f, 1f), 0.2f);
                 map.gridflashtime[x, y] = Time.time + lil.randf(0f, 1f);
             }
         }
@@ -989,14 +991,14 @@ public partial class Game : MonoBehaviour
     {
         //map.do_fov_rec_shadowcast(player.posx, player.posy, 11);
         doplayerfovandlights();
-        
+
     }
 
     float nextfire = 0.0f;
     float firerate = 0.2f;
     float initialdelay = 0.5f;
     int currentcommand = -1;
-   // string buttstring;
+    // string buttstring;
     bool keydown = false;
     bool firstpress = false;
     bool mauswalking = false;
@@ -1055,7 +1057,7 @@ public partial class Game : MonoBehaviour
                     ProcessTurn();
 
                 //RIGHT CLICK
-                if (gamestate == Egamestate.gameover||gamestate==Egamestate.youwon)
+                if (gamestate == Egamestate.gameover || gamestate == Egamestate.youwon)
                 {
                     if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("start"))
                     {
@@ -1076,7 +1078,7 @@ public partial class Game : MonoBehaviour
                     if (Input.GetButtonDown("up"))
                     {
                         currentmenu.currently_selected_option--;
-                        if (currentmenu.currently_selected_option == -1) currentmenu.currently_selected_option = currentmenu.number_of_options-1;
+                        if (currentmenu.currently_selected_option == -1) currentmenu.currently_selected_option = currentmenu.number_of_options - 1;
 
                     }
                     else
@@ -1087,7 +1089,7 @@ public partial class Game : MonoBehaviour
 
                     }
                     else
-                         if (Input.GetButtonDown("start")&&!Game.currentmenu.optiondisabled[currentmenu.currently_selected_option])
+                         if (Input.GetButtonDown("start") && !Game.currentmenu.optiondisabled[currentmenu.currently_selected_option])
                     {
                         Game.menuup = false;
                         Game.menucommandwaiting = true;
@@ -1100,14 +1102,15 @@ public partial class Game : MonoBehaviour
 
                     return;//skipping the rest of the stuff in this function (maus walking, commands etc.) is it ok?
                     //tell meh if it's ok, barnabeh. ah need to know, barnabeh! hold meh, barnabeh!
-                } else
+                }
+                else
                 {
                     //menu is not up. maybe a command is waiting
                     if (Game.menucommandwaiting)
                     {
                         switch (Game.currentmenu.type)
                         {
-                            
+
                             case Menu.Emenuidentity.build:
                                 //take the money, place the building, alter yields, do city stuff if city
 
@@ -1115,7 +1118,7 @@ public partial class Game : MonoBehaviour
                                 map.buildings[player.posx, player.posy] = Ccity.addons[Game.currentmenu.currently_selected_option].tile;
 
                                 //building on a tile destroys resources unless they are deep in the earth. deep! beyond the touch of bristle. that meanz joo, broomster.
-                                if (Game.currentmenu.currently_selected_option != 3 && map.resource[player.posx,player.posy]!=null && map.resource[player.posx,player.posy].destroyedbybuilding) map.resource[player.posx, player.posy] = null;
+                                if (Game.currentmenu.currently_selected_option != 3 && map.resource[player.posx, player.posy] != null && map.resource[player.posx, player.posy].destroyedbybuilding) map.resource[player.posx, player.posy] = null;
 
                                 Ccity citeh;
 
@@ -1123,7 +1126,7 @@ public partial class Game : MonoBehaviour
                                 switch (Game.currentmenu.currently_selected_option)
                                 {
                                     case 0://city
-                                        citeh = new Ccity(true,player.posx, player.posy,map,player,log);
+                                        citeh = new Ccity(true, player.posx, player.posy, map, player, log);
                                         log.Printline("The city of " + citeh.name + " was founded!", Color.magenta);
                                         break;
                                     case 1://farm
@@ -1134,7 +1137,7 @@ public partial class Game : MonoBehaviour
                                         break;
                                     case 2://mine
                                         map.currentyield[player.posx, player.posy].add(1, 2, 0);
-                                        map.citythathasinfluence[player.posx, player.posy].perturnyields.add(1,2,0);
+                                        map.citythathasinfluence[player.posx, player.posy].perturnyields.add(1, 2, 0);
                                         log.Printline("You build a mine. [+1 prod +2 gold]", Color.yellow);
                                         //map.citythathasinfluence[player.posx, player.posy].recalcyield();
                                         break;
@@ -1168,7 +1171,7 @@ public partial class Game : MonoBehaviour
                                         switch (a.type.tile)
                                         {
                                             case Etilesprite.BUILDINGS_FACTORY:
-                                                map.currentyield[player.posx, player.posy].production += 10;                                                
+                                                map.currentyield[player.posx, player.posy].production += 10;
                                                 break;
                                             case Etilesprite.BUILDINGS_ALLOTMENTS:
                                                 map.currentyield[player.posx, player.posy].food += 10;
@@ -1177,9 +1180,9 @@ public partial class Game : MonoBehaviour
                                                 map.currentyield[player.posx, player.posy].gold += 10;
                                                 break;
                                             case Etilesprite.BUILDINGS_PORT_AND_DOCKS:
-                                                 map.currentyield[player.posx, player.posy].food += 6;
+                                                map.currentyield[player.posx, player.posy].food += 6;
                                                 map.currentyield[player.posx, player.posy].production += 6;
-                                                    map.currentyield[player.posx, player.posy].gold += 6;
+                                                map.currentyield[player.posx, player.posy].gold += 6;
                                                 break;
 
                                             case Etilesprite.BUILDINGS_GUARD_POST:
@@ -1205,7 +1208,7 @@ public partial class Game : MonoBehaviour
 
                                     }
 
-                                    
+
 
                                 }
 
@@ -1237,7 +1240,7 @@ public partial class Game : MonoBehaviour
                                 }
                                 else
                                 {
-                                    int which = Game.currentmenu.currently_selected_option - 1;                                    
+                                    int which = Game.currentmenu.currently_selected_option - 1;
                                     map.addons[player.posx, player.posy].supplying = Cresource.resourcetypes[map.citystatelist[which].desiredresource];
                                     map.addons[player.posx, player.posy].supplyingto = map.citystatelist[which];
                                     log.Printline("Now supplying " + map.addons[player.posx, player.posy].supplying.name + " to " + map.citystatelist[which].name + ".", Color.yellow);
@@ -1253,10 +1256,10 @@ public partial class Game : MonoBehaviour
                         return;
                     }//end game command waiting
                 }
-                
-                
 
-                    if (Input.GetMouseButtonDown(0))
+
+
+                if (Input.GetMouseButtonDown(0))
                 {
                     int fx = (int)Input.mousePosition.x; int fy = (int)((360 * zoomfactor) - 1 - Input.mousePosition.y);
                     //log.Printline("x = " + fx.ToString() + " y = " + fy.ToString());
@@ -1268,7 +1271,7 @@ public partial class Game : MonoBehaviour
                         x = originx + x; y = originy + y;
                         if (map.passablecheck(x, y, player.mob) && !(x == player.posx && y == player.posy))//change this to check moop
                         {
-                            bool worked = map.PathfindAStar(player.posx, player.posy, x, y, true, true,player.mob.archetype.heavy);
+                            bool worked = map.PathfindAStar(player.posx, player.posy, x, y, true, true, player.mob.archetype.heavy);
                             if (worked)
                             {
                                 mauswalking = true;
@@ -1276,7 +1279,8 @@ public partial class Game : MonoBehaviour
                             } //else log.Printline("didn't work");
                         } //else log.Printline("not passable or clicked player");
                     }
-                    else {//outside viewport
+                    else
+                    {//outside viewport
                         int mmx = ((fx / zoomfactor) - 336) / 2;
                         int mmy = ((fy / zoomfactor) / 2);
                         //log.Printline(mmx.ToString() + " " + mmy.ToString() + " ");
@@ -1284,7 +1288,7 @@ public partial class Game : MonoBehaviour
                         {
                             if (map.passablecheck(x, y, player.mob) && !(mmx == player.posx && mmy == player.posy))//change this to check moop
                             {
-                                bool worked = map.PathfindAStar(player.posx, player.posy, mmx, mmy, true, true,player.mob.archetype.heavy);
+                                bool worked = map.PathfindAStar(player.posx, player.posy, mmx, mmy, true, true, player.mob.archetype.heavy);
                                 if (worked)
                                 {
                                     mauswalking = true;
@@ -1308,7 +1312,8 @@ public partial class Game : MonoBehaviour
                         mauswalking = false;
                         currentcommand = -1;
                     }
-                    else {
+                    else
+                    {
                         Cell next = map.lastpath.Dequeue();
                         if (next.x == player.posx && next.y < player.posy) { currentcommand = 0; nextfire = 0.0f; firstpress = false; } //up
                         else if (next.x == player.posx && next.y > player.posy) { currentcommand = 1; nextfire = 0.0f; firstpress = false; }//down
@@ -1320,7 +1325,8 @@ public partial class Game : MonoBehaviour
                         else if (next.x > player.posx && next.y > player.posy) { currentcommand = 9; nextfire = 0.0f; firstpress = false; }//downright
                     }
                 }//end if mauswalking
-                else {
+                else
+                {
                     if (Input.GetButtonDown("up")) { currentcommand = 0; nextfire = 0.0f; firstpress = true; }
                     else if (Input.GetButtonDown("down")) { currentcommand = 1; nextfire = 0.0f; firstpress = true; }
                     else if (Input.GetButtonDown("left")) { currentcommand = 2; nextfire = 0.0f; firstpress = true; }
@@ -1339,40 +1345,40 @@ public partial class Game : MonoBehaviour
                     switch (currentcommand)
                     {
                         case 0:
-                            trytomove(player.mob,0,-1);//trytomove(0, -1);//N
+                            trytomove(player.mob, 0, -1);//trytomove(0, -1);//N
                             break;
                         case 1:
-                            trytomove(player.mob, 0,1);// trytomove(0, 1);//S
+                            trytomove(player.mob, 0, 1);// trytomove(0, 1);//S
                             break;
                         case 2:
-                            trytomove(player.mob, -1,0);// trytomove(-1, 0);//W
+                            trytomove(player.mob, -1, 0);// trytomove(-1, 0);//W
                             break;
                         case 3:
-                            trytomove(player.mob, 1,0);// trytomove(1, 0);//E
+                            trytomove(player.mob, 1, 0);// trytomove(1, 0);//E
                             break;
                         case 4://was 4
                             //from when command 4 was lantern. now it's "use"
                             //{ player.lantern = !player.lantern; moveplayer(); }
-                            useobject(); 
-                           
+                            useobject();
+
                             break;
 
                         case 5:
-                            log.Printline((player.mob.speed>0)?"You coast.":"You wait.");trytomove(player.mob, 0,0);
+                            log.Printline((player.mob.speed > 0) ? "You coast." : "You wait."); trytomove(player.mob, 0, 0);
                             break;
                         case 6:
-                            trytomove(player.mob, -1,-1);//trytomove(-1, -1);// NW
+                            trytomove(player.mob, -1, -1);//trytomove(-1, -1);// NW
                             break;
                         case 7:
-                            trytomove(player.mob, 1,-1);//trytomove(1, -1);//NE
+                            trytomove(player.mob, 1, -1);//trytomove(1, -1);//NE
                             break;
                         case 8:
-                            trytomove(player.mob, -1,1);// trytomove(-1, 1);//SW
+                            trytomove(player.mob, -1, 1);// trytomove(-1, 1);//SW
                             break;
                         case 9:
-                            trytomove(player.mob, 1,1);// trytomove(1, 1);//SE
+                            trytomove(player.mob, 1, 1);// trytomove(1, 1);//SE
                             break;
-                        case 10://was 10
+                        case 10://was 10                            
                             doaction();
                             break;
                     }
@@ -1383,20 +1389,21 @@ public partial class Game : MonoBehaviour
                 switch (currentcommand)
                 {
 
-                    case 0: if (!Input.GetButton("up")) currentcommand = -1;break;
-                    case 1:if (!Input.GetButton("down")) currentcommand = -1; break;
+                    case 0: if (!Input.GetButton("up")) currentcommand = -1; break;
+                    case 1: if (!Input.GetButton("down")) currentcommand = -1; break;
                     case 2: if (!Input.GetButton("left")) currentcommand = -1; break;
                     case 3: if (!Input.GetButton("right")) currentcommand = -1; break;
-                    case 4: currentcommand = -1;break;
+                    case 4: currentcommand = -1; break;
                     case 5: if (!Input.GetButton("wait")) currentcommand = -1; break;
                     case 6: if (!Input.GetButton("upleft")) currentcommand = -1; break;
                     case 7: if (!Input.GetButton("upright")) currentcommand = -1; break;
                     case 8: if (!Input.GetButton("downleft")) currentcommand = -1; break;
-                        case 9: if (!Input.GetButton("downright")) currentcommand = -1; break;
-                        case 10: if (!Input.GetButton("action")) currentcommand = -1; break;
-                        
+                    case 9: if (!Input.GetButton("downright")) currentcommand = -1; break;
+                    case 10: currentcommand = -1; break;
+                        //  case 10: if (!Input.GetButton("action")) currentcommand = -1; break;
+
                 }
-              
+
 
                 //if ((Input.GetButtonUp("up")) ||
                 //(Input.GetButtonUp("down")) ||
